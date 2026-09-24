@@ -9,6 +9,11 @@ const router = createRouter({
     { path: '/', name: 'home', component: HomeView },
     { path: '/debug', name: 'debug', component: DebugView },
   ],
+  scrollBehavior(to) {
+    if (to.hash) return { el: to.hash }
+
+    return { top: 0 }
+  },
 })
 
 export default router

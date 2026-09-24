@@ -1,18 +1,22 @@
 <script setup lang="ts">
+import { HeroView } from '@/components/home'
+import { SiteHeader } from '@/components/layout'
 import { useTheme } from '@/composables/useTheme'
-import { ThemeSelector, UiBox, UiLink } from '@/components/shared'
+import { heroContent, homeBrandLabel, homeNavigation } from '@/content/home'
 
 const { theme, setTheme } = useTheme()
-
-const updateTheme = (value: 'light' | 'dark'): void => setTheme(value)
-
-
 </script>
 
 <template>
-
+  <div class="home-view">
+    <SiteHeader
+      :theme="theme"
+      :items="homeNavigation"
+      :brand-label="homeBrandLabel"
+      @update:theme="setTheme"
+    />
+    <main id="main-content">
+      <HeroView :content="heroContent" />
+    </main>
+  </div>
 </template>
-
-<style scoped>
-
-</style>

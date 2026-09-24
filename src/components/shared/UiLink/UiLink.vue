@@ -2,12 +2,12 @@
 import { computed, onMounted, useAttrs } from 'vue'
 import { RouterLink } from 'vue-router'
 
-import type { UiLinkProps } from './UiLink'
+import type { UiLinkRuntimeProps } from './UiLink'
 import { isExternalHref } from './UiLink'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<UiLinkProps>(), {
+const props = withDefaults(defineProps<UiLinkRuntimeProps>(), {
   variant: 'inline',
   external: undefined,
   newTab: false,
@@ -18,8 +18,18 @@ const attrs = useAttrs()
 const inferredExternal = computed(() => props.external ?? isExternalHref(props.href))
 const hasValidDestination = computed(() => (props.to !== undefined) !== (props.href !== undefined))
 const isRouterLink = computed(() => hasValidDestination.value && props.to !== undefined)
-const target = computed(() => (props.newTab ? '_blank' : undefined))
-const rel = computed(() => (props.newTab ? 'noopener noreferrer' : undefined))
+const destinationAttrs = computed(() => {
+  if (props.disabled || !hasValidDestination.value) return {}
+  if (isRouterLink.value) return { to: props.to }
+
+  return {
+    href: props.href,
+    target: props.newTab ? '_blank' : undefined,
+    rel: props.newTab ? 'noopener noreferrer' : undefined,
+    download: props.download || undefined,
+  }
+})
+const componentAttrs = computed(() => ({ ...attrs, ...destinationAttrs.value }))
 
 onMounted(() => {
   if (!hasValidDestination.value && import.meta.env.DEV) {
@@ -30,15 +40,10 @@ onMounted(() => {
 
 <template>
   <component
-    :is="isRouterLink ? RouterLink : 'a'"
-    v-bind="attrs"
+    :is="isRouterLink && !disabled ? RouterLink : 'a'"
+    v-bind="componentAttrs"
     class="ui-link"
     :class="[`ui-link--${variant}`, { 'ui-link--disabled': disabled }]"
-    :to="isRouterLink && hasValidDestination && !disabled ? to : undefined"
-    :href="!isRouterLink && hasValidDestination && !disabled ? href : undefined"
-    :target="target"
-    :rel="rel"
-    :download="download || undefined"
     :aria-disabled="disabled || undefined"
     :tabindex="disabled ? -1 : undefined"
   >

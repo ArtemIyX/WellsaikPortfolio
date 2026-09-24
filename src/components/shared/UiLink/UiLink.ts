@@ -11,6 +11,11 @@ interface UiLinkCommonProps {
   disabled?: boolean
 }
 
+export interface UiLinkRuntimeProps extends UiLinkCommonProps {
+  to?: RouteLocationRaw
+  href?: string
+}
+
 export type UiLinkProps = UiLinkCommonProps &
   ({ to: RouteLocationRaw; href?: never } | { to?: never; href: string })
 

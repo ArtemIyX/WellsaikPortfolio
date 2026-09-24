@@ -5,7 +5,7 @@ import { ThemeSelector, UiBox, UiButton, UiLink, UiSection, UiText } from '@/com
 
 describe('shared portfolio components', () => {
   it('renders UiButton defaults, attrs, pressed state, and loading protection', async () => {
-    const onClick = vi.fn()
+    const onClick = vi.fn<() => void>()
     const wrapper = mount(UiButton, {
       props: { onClick },
       attrs: { name: 'action', 'data-test': 'button' },
