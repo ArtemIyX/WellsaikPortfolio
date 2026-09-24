@@ -22,6 +22,7 @@ export interface HeroContent {
   summary: string
   availability: string
   imageSrc: string
+  imageLightSrc: string
   imageAlt: string
   imageWidth: number
   imageHeight: number
@@ -84,19 +85,39 @@ export interface ProjectImage {
   height: number
 }
 
+export interface ProjectDetailLabels {
+  problem: string
+  role: string
+  outcome: string
+  technologies: string
+}
+
+export interface ProjectDetailContent {
+  text?: string
+  items?: readonly string[]
+}
+
 export interface ProjectContent {
   id: string
   number: string
   category: string
   title: string
   summary: string
-  problem: string
-  role: string
-  outcome: string
+  problem: ProjectDetailContent
+  role: ProjectDetailContent
+  outcome: ProjectDetailContent
   technologies: readonly string[]
+  labels?: Partial<ProjectDetailLabels>
   image: ProjectImage
   liveAction: NavigationItem
-  sourceAction: NavigationItem
+  sourceAction?: NavigationItem
+}
+
+export const defaultProjectDetailLabels: ProjectDetailLabels = {
+  problem: 'Problem',
+  role: 'Role',
+  outcome: 'Outcome',
+  technologies: 'Technologies',
 }
 
 export interface FeaturedProjectsContent {
@@ -151,6 +172,7 @@ export const heroContent: HeroContent = {
     'I develop games in Unreal Engine, with a primary focus on client-side optimization and pushing the engine to its practical limits. I also build bespoke full-stack applications for clients, using Vue.js with C# or Rust backends.',
   availability: 'Employed full-time',
   imageSrc: '/images/portrait.webp',
+  imageLightSrc: '/images/portrait_light.webp',
   imageAlt: `Portrait of ${homeBrandLabel}`,
   imageWidth: 1200,
   imageHeight: 1600,
@@ -171,38 +193,52 @@ export const heroContent: HeroContent = {
 // Development placeholder content. Replace every value and demonstration link before launch.
 export const featuredProjectsContent: FeaturedProjectsContent = {
   eyebrow: '',
-  title: 'A few projects that show how I approach product development.',
+  title: 'A few projects that show how I turn complex ideas into working systems',
   introduction:
-    'Placeholder introduction explaining that these projects were selected to demonstrate problem solving, technical decisions, and delivery.',
+    'A selection of projects that show how I turn game ideas into working products - from early concepts and gameplay systems to technical implementation, iteration, and delivery.',
   projects: [
     {
-      id: 'project-alpha',
+      id: 'endless-war-mmo-rpg',
       number: '01',
-      category: 'Product application',
-      title: 'Project Alpha',
-      summary: 'Placeholder summary of a web product created for a specific user need.',
-      problem: 'Placeholder problem describing the user or business challenge.',
-      role: "Placeholder role describing the developer's direct ownership and collaboration.",
-      outcome:
-        'Placeholder outcome describing a result without presenting an invented metric as fact.',
-      technologies: ['TypeScript', 'Vue', 'API integration', 'Testing'],
+      category: 'MMO RPG Game',
+      title: 'Endless War',
+      summary: 'Client for an MMO RPG game targeting the Chinese market.',
+      problem: {
+        items: [
+          'ECS',
+          'Multithreaded custom TCP networking',
+          'Moving asynchronous physics',
+          'Unique skeletal-mesh batch GPU rendering',
+        ],
+      },
+      role: { text: 'Lead Unreal Engine Client Developer' },
+      outcome: {
+        text: 'Delivered a fully functional, smooth gameplay client while coordinating closely with 3D content creators to integrate assets into a cohesive player experience.',
+      },
+      technologies: [
+        'Unreal Engine',
+        'Vue',
+        'JS',
+        'CSS',
+        'C++',
+        'ECS/MASS',
+        'Networking/TCP',
+        'Multithreading',
+      ],
+      labels: {
+        problem: '10k entities',
+        outcome: 'User experience',
+      },
       image: {
-        src: '/images/projects/project-alpha-placeholder.svg',
-        alt: 'Placeholder interface preview for Project Alpha',
+        src: '/images/projects/endless-war.webp',
+        alt: 'Gameplay preview from Endless War',
         width: 1200,
         height: 750,
       },
       liveAction: {
-        label: 'Preview placeholder',
+        label: 'Visit game',
         kind: 'href',
-        href: 'https://example.com',
-        external: true,
-        newTab: true,
-      },
-      sourceAction: {
-        label: 'Source placeholder',
-        kind: 'href',
-        href: 'https://example.com',
+        href: 'https://newjourney.online/en/',
         external: true,
         newTab: true,
       },
@@ -213,9 +249,9 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       category: 'Platform engineering',
       title: 'Project Beta',
       summary: 'Placeholder summary of a reliable service or internal platform.',
-      problem: 'Placeholder problem describing a workflow, scale, or reliability constraint.',
-      role: 'Placeholder role describing architecture and implementation responsibility.',
-      outcome: 'Placeholder outcome describing the intended operational improvement.',
+      problem: { text: 'Placeholder problem describing a workflow, scale, or reliability constraint.' },
+      role: { text: 'Placeholder role describing architecture and implementation responsibility.' },
+      outcome: { text: 'Placeholder outcome describing the intended operational improvement.' },
       technologies: ['Node.js', 'PostgreSQL', 'Observability', 'CI/CD'],
       image: {
         src: '/images/projects/project-beta-placeholder.svg',
@@ -244,9 +280,9 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       category: 'Developer experience',
       title: 'Project Gamma',
       summary: 'Placeholder summary of a reusable system that improves consistency or delivery.',
-      problem: 'Placeholder problem describing fragmented UI or development workflows.',
-      role: 'Placeholder role describing component, documentation, and adoption work.',
-      outcome: 'Placeholder outcome describing the intended quality or productivity benefit.',
+      problem: { text: 'Placeholder problem describing fragmented UI or development workflows.' },
+      role: { text: 'Placeholder role describing component, documentation, and adoption work.' },
+      outcome: { text: 'Placeholder outcome describing the intended quality or productivity benefit.' },
       technologies: ['Vue', 'TypeScript', 'Accessibility', 'Documentation'],
       image: {
         src: '/images/projects/project-gamma-placeholder.svg',

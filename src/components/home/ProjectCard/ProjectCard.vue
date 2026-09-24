@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import { UiBox, UiLink, UiText } from '@/components/shared'
+import { defaultProjectDetailLabels } from '@/content/home'
 
 import type { ProjectCardProps } from './ProjectCard'
 
 const props = withDefaults(defineProps<ProjectCardProps>(), { mediaSide: 'start' })
 
 const titleId = `project-card-title-${props.project.id}`
+const detailLabels = computed(() => ({ ...defaultProjectDetailLabels, ...props.project.labels }))
 </script>
 
 <template>
@@ -40,24 +44,55 @@ const titleId = `project-card-title-${props.project.id}`
 
       <dl class="project-card__details">
         <div>
-          <UiText as="dt" role="label" tone="subtle" weight="medium">Problem</UiText>
-          <UiText as="dd">{{ project.problem }}</UiText>
+          <UiText as="dt" role="label" tone="subtle" weight="medium">{{
+            detailLabels.problem
+          }}</UiText>
+          <dd>
+            <slot name="problem" :detail="project.problem">
+              <UiText v-if="project.problem.text">{{ project.problem.text }}</UiText>
+              <ul v-if="project.problem.items" class="project-card__detail-list">
+                <li v-for="item in project.problem.items" :key="item">{{ item }}</li>
+              </ul>
+            </slot>
+          </dd>
         </div>
         <div>
-          <UiText as="dt" role="label" tone="subtle" weight="medium">Role</UiText>
-          <UiText as="dd">{{ project.role }}</UiText>
+          <UiText as="dt" role="label" tone="subtle" weight="medium">{{
+            detailLabels.role
+          }}</UiText>
+          <dd>
+            <slot name="role" :detail="project.role">
+              <UiText v-if="project.role.text">{{ project.role.text }}</UiText>
+              <ul v-if="project.role.items" class="project-card__detail-list">
+                <li v-for="item in project.role.items" :key="item">{{ item }}</li>
+              </ul>
+            </slot>
+          </dd>
         </div>
         <div>
-          <UiText as="dt" role="label" tone="subtle" weight="medium">Outcome</UiText>
-          <UiText as="dd">{{ project.outcome }}</UiText>
+          <UiText as="dt" role="label" tone="subtle" weight="medium">{{
+            detailLabels.outcome
+          }}</UiText>
+          <dd>
+            <slot name="outcome" :detail="project.outcome">
+              <UiText v-if="project.outcome.text">{{ project.outcome.text }}</UiText>
+              <ul v-if="project.outcome.items" class="project-card__detail-list">
+                <li v-for="item in project.outcome.items" :key="item">{{ item }}</li>
+              </ul>
+            </slot>
+          </dd>
         </div>
       </dl>
 
       <div class="project-card__technologies">
-        <UiText as="h4" role="label" tone="subtle" weight="medium">Technologies</UiText>
-        <ul>
-          <li v-for="technology in project.technologies" :key="technology">{{ technology }}</li>
-        </ul>
+        <UiText as="h4" role="label" tone="subtle" weight="medium">{{
+          detailLabels.technologies
+        }}</UiText>
+        <slot name="technologies" :technologies="project.technologies">
+          <ul>
+            <li v-for="technology in project.technologies" :key="technology">{{ technology }}</li>
+          </ul>
+        </slot>
       </div>
 
       <div class="project-card__actions" aria-label="Project actions">
@@ -77,22 +112,24 @@ const titleId = `project-card-title-${props.project.id}`
         >
           {{ project.liveAction.label }}
         </UiLink>
-        <UiLink
-          v-if="project.sourceAction.kind === 'route'"
-          :to="project.sourceAction.to"
-          variant="button-secondary"
-        >
-          {{ project.sourceAction.label }}
-        </UiLink>
-        <UiLink
-          v-else
-          :href="project.sourceAction.href"
-          :external="project.sourceAction.external"
-          :new-tab="project.sourceAction.newTab"
-          variant="button-secondary"
-        >
-          {{ project.sourceAction.label }}
-        </UiLink>
+        <template v-if="project.sourceAction">
+          <UiLink
+            v-if="project.sourceAction.kind === 'route'"
+            :to="project.sourceAction.to"
+            variant="button-secondary"
+          >
+            {{ project.sourceAction.label }}
+          </UiLink>
+          <UiLink
+            v-else
+            :href="project.sourceAction.href"
+            :external="project.sourceAction.external"
+            :new-tab="project.sourceAction.newTab"
+            variant="button-secondary"
+          >
+            {{ project.sourceAction.label }}
+          </UiLink>
+        </template>
       </div>
     </div>
   </UiBox>

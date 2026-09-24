@@ -87,14 +87,23 @@
 }
 
 .hero-view__portrait :deep(.ui-box__media) {
+  position: relative;
   overflow: hidden;
+  aspect-ratio: 4 / 5;
 }
 
-.hero-view__portrait img {
+.hero-view__portrait-image {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 5;
+  height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 300ms var(--ease-standard);
+}
+
+.hero-view__portrait-image--visible {
+  opacity: 1;
 }
 
 @media (max-width: 52rem) {

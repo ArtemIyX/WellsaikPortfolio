@@ -14,7 +14,7 @@ describe('FeaturedProjectsView', () => {
     expect(wrapper.findAll('h1')).toHaveLength(0)
     expect(wrapper.findAll('article')).toHaveLength(3)
     expect(wrapper.findAll('article h3').map((heading) => heading.text())).toEqual([
-      'Project Alpha',
+      featuredProjectsContent.projects[0]?.title,
       'Project Beta',
       'Project Gamma',
     ])
@@ -22,6 +22,9 @@ describe('FeaturedProjectsView', () => {
       expect.arrayContaining(['project-card--media-start']),
       expect.arrayContaining(['project-card--media-end']),
       expect.arrayContaining(['project-card--media-start']),
+    ])
+    expect(wrapper.findAll('article')[0]?.findAll('a').map((link) => link.attributes('href'))).toEqual([
+      'https://newjourney.online/en/',
     ])
   })
 

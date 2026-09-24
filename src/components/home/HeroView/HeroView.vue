@@ -98,11 +98,24 @@ defineProps<HeroViewProps>()
           variant="outline"
           padding="none"
           radius="none"
+          :aria-label="content.imageAlt"
         >
           <template #media>
             <img
+              class="hero-view__portrait-image hero-view__portrait-image--dark"
+              :class="{ 'hero-view__portrait-image--visible': theme === 'dark' }"
               :src="content.imageSrc"
-              :alt="content.imageAlt"
+              alt=""
+              aria-hidden="true"
+              :width="content.imageWidth"
+              :height="content.imageHeight"
+            />
+            <img
+              class="hero-view__portrait-image hero-view__portrait-image--light"
+              :class="{ 'hero-view__portrait-image--visible': theme === 'light' }"
+              :src="content.imageLightSrc"
+              alt=""
+              aria-hidden="true"
               :width="content.imageWidth"
               :height="content.imageHeight"
             />

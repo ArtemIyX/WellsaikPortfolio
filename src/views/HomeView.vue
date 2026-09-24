@@ -26,7 +26,7 @@ const { theme, setTheme } = useTheme()
       @update:theme="setTheme"
     />
     <main id="main-content">
-      <HeroView :content="heroContent" />
+      <HeroView :content="heroContent" :theme="theme" />
       <FeaturedProjectsView :content="featuredProjectsContent" />
       <ExperienceSkillsView :content="experienceSkillsContent" />
       <AboutView :content="aboutContent" />

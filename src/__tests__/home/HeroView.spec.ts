@@ -6,7 +6,7 @@ import { email, github, heroContent } from '@/content/home'
 
 describe('HeroView', () => {
   it('connects the hero landmark to its only page-level heading', () => {
-    const wrapper = mount(HeroView, { props: { content: heroContent } })
+    const wrapper = mount(HeroView, { props: { content: heroContent, theme: 'dark' } })
 
     expect(wrapper.get('section').attributes()).toMatchObject({
       id: 'hero',
@@ -17,7 +17,7 @@ describe('HeroView', () => {
   })
 
   it('renders supplied copy and both navigation destinations', () => {
-    const wrapper = mount(HeroView, { props: { content: heroContent } })
+    const wrapper = mount(HeroView, { props: { content: heroContent, theme: 'dark' } })
     const links = wrapper.findAll('.hero-view__actions a')
 
     expect(wrapper.text()).toContain(heroContent.eyebrow)
@@ -32,26 +32,40 @@ describe('HeroView', () => {
   })
 
   it('renders an intrinsically sized local placeholder portrait', () => {
-    const image = mount(HeroView, { props: { content: heroContent } }).get('img')
+    const wrapper = mount(HeroView, { props: { content: heroContent, theme: 'dark' } })
+    const image = wrapper.get('.hero-view__portrait-image--dark')
 
     expect(image.attributes()).toMatchObject({
       src: heroContent.imageSrc,
-      alt: heroContent.imageAlt,
+      alt: '',
+      'aria-hidden': 'true',
       width: String(heroContent.imageWidth),
       height: String(heroContent.imageHeight),
     })
-    expect(image.attributes('alt')).not.toBe('')
     expect(image.attributes('src')).not.toMatch(/^https?:/)
+    expect(wrapper.get('.hero-view__portrait').attributes('aria-label')).toBe(heroContent.imageAlt)
+    expect(image.classes()).toContain('hero-view__portrait-image--visible')
+  })
+
+  it('uses the light portrait in light theme', () => {
+    const wrapper = mount(HeroView, { props: { content: heroContent, theme: 'light' } })
+    const image = wrapper.get('.hero-view__portrait-image--light')
+
+    expect(image.attributes('src')).toBe(heroContent.imageLightSrc)
+    expect(image.classes()).toContain('hero-view__portrait-image--visible')
+    expect(wrapper.get('.hero-view__portrait-image--dark').classes()).not.toContain(
+      'hero-view__portrait-image--visible',
+    )
   })
 
   it('renders the supplied professional summary', () => {
-    const wrapper = mount(HeroView, { props: { content: heroContent } })
+    const wrapper = mount(HeroView, { props: { content: heroContent, theme: 'dark' } })
 
     expect(wrapper.text()).toContain(heroContent.summary)
   })
 
   it('adds a decorative email icon to the primary action', () => {
-    const wrapper = mount(HeroView, { props: { content: heroContent } })
+    const wrapper = mount(HeroView, { props: { content: heroContent, theme: 'dark' } })
 
     expect(wrapper.get('.hero-view__actions a:first-child .hero-view__email-icon').attributes()).toMatchObject({
       'aria-hidden': 'true',
@@ -60,7 +74,7 @@ describe('HeroView', () => {
   })
 
   it('adds a decorative GitHub icon to the secondary action', () => {
-    const wrapper = mount(HeroView, { props: { content: heroContent } })
+    const wrapper = mount(HeroView, { props: { content: heroContent, theme: 'dark' } })
 
     const codeProfileAction = wrapper.get('.hero-view__actions a:nth-child(2)')
 
