@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import { createMemoryHistory, createRouter } from 'vue-router'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 
 import { SiteHeader } from '@/components/layout'
 import { UiLink } from '@/components/shared'
@@ -22,8 +23,13 @@ const mountHeader = async () => {
   return mount(SiteHeader, {
     props: { theme: 'light', items, brandLabel: 'Developer Name' },
     global: { plugins: [router] },
+    attachTo: document.body,
   })
 }
+
+afterEach(() => {
+  document.body.classList.remove('site-header-menu-open')
+})
 
 describe('SiteHeader', () => {
   it('renders a semantic header with labelled primary navigation', async () => {
@@ -31,6 +37,9 @@ describe('SiteHeader', () => {
 
     expect(wrapper.element.tagName).toBe('HEADER')
     expect(wrapper.get('nav').attributes('aria-label')).toBe('Primary navigation')
+    expect(wrapper.classes()).toContain('site-header')
+
+    wrapper.unmount()
   })
 
   it('routes the brand home and renders exactly the supplied navigation items', async () => {
@@ -45,6 +54,8 @@ describe('SiteHeader', () => {
     expect(componentLinks[2]?.props('to')).toEqual({ name: 'home', hash: '#hero' })
     expect(navigationLinks[0]?.attributes('href')).toBe('/#hero')
     expect(navigationLinks[1]?.attributes('href')).toBe('mailto:developer@example.com')
+
+    wrapper.unmount()
   })
 
   it('emits theme updates from an accessibly labelled control', async () => {
@@ -53,5 +64,46 @@ describe('SiteHeader', () => {
     expect(wrapper.get('[role="group"]').attributes('aria-label')).toBe('Color theme')
     await wrapper.get('[aria-label="Color theme: Dark"]').trigger('click')
     expect(wrapper.emitted('update:theme')).toEqual([['dark']])
+
+    wrapper.unmount()
+  })
+
+  it('opens an accessible mobile navigation panel and locks page scrolling', async () => {
+    const wrapper = await mountHeader()
+    const trigger = wrapper.get('.site-header__menu-trigger')
+
+    expect(trigger.attributes('aria-expanded')).toBe('false')
+    expect(wrapper.find('#mobile-navigation-panel').exists()).toBe(false)
+
+    await trigger.trigger('click')
+    await nextTick()
+
+    expect(trigger.attributes('aria-expanded')).toBe('true')
+    expect(wrapper.get('#mobile-navigation-panel').attributes()).toMatchObject({
+      role: 'dialog',
+      'aria-modal': 'true',
+      'aria-labelledby': 'mobile-navigation-title',
+    })
+    expect(document.body.classList).toContain('site-header-menu-open')
+    expect(document.activeElement).toBe(wrapper.get('.site-header__panel-close').element)
+
+    wrapper.unmount()
+  })
+
+  it('closes the mobile panel with Escape and restores focus to its trigger', async () => {
+    const wrapper = await mountHeader()
+    const trigger = wrapper.get<HTMLButtonElement>('.site-header__menu-trigger')
+
+    await trigger.trigger('click')
+    await nextTick()
+    await wrapper.get('#mobile-navigation-panel').trigger('keydown', { key: 'Escape' })
+    await nextTick()
+
+    expect(wrapper.find('#mobile-navigation-panel').exists()).toBe(false)
+    expect(trigger.attributes('aria-expanded')).toBe('false')
+    expect(document.activeElement).toBe(trigger.element)
+    expect(document.body.classList).not.toContain('site-header-menu-open')
+
+    wrapper.unmount()
   })
 })
