@@ -1,7 +1,6 @@
 :root {
   color-scheme: light;
-  --font-body: 'IBM Plex Mono', 'Cascadia Mono', Consolas, monospace;
-  --font-mono: 'IBM Plex Mono', 'Cascadia Mono', Consolas, monospace;
+  --font-body: 'Mona Sans Variable', 'Mona Sans', 'Segoe UI', sans-serif;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 650;

@@ -182,7 +182,7 @@ const projects = [
   color: var(--color-text);
   font-weight: var(--font-weight-bold);
   text-decoration: none;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
 }
 .wordmark__mark {
   display: grid;
@@ -242,8 +242,8 @@ p {
 h1 {
   max-width: 15ch;
   margin-bottom: var(--space-6);
-  font-size: clamp(2.8rem, 7vw, 6.4rem);
-  letter-spacing: -0.08em;
+  font-size: clamp(2.8rem, 6vw, 5.6rem);
+  letter-spacing: -0.055em;
 }
 .hero__intro {
   max-width: 58ch;
@@ -332,7 +332,7 @@ h1 {
   max-width: 14ch;
   margin-bottom: 0;
   font-size: clamp(2rem, 4vw, 3.5rem);
-  letter-spacing: -0.07em;
+  letter-spacing: -0.04em;
 }
 .section-heading .eyebrow {
   flex: 0 0 12rem;
@@ -399,7 +399,7 @@ h1 {
   max-width: 34ch;
   font-size: clamp(1.4rem, 2.5vw, 2rem);
   line-height: 1.35;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
 }
 .capabilities {
   border-top: var(--border-width) solid var(--color-border);
@@ -434,7 +434,7 @@ h1 {
   max-width: 14ch;
   margin-bottom: var(--space-8);
   font-size: clamp(2.5rem, 6vw, 5.5rem);
-  letter-spacing: -0.08em;
+  letter-spacing: -0.05em;
 }
 .contact-link {
   font-size: clamp(1.2rem, 3vw, 2rem);

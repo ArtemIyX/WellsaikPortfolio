@@ -9,6 +9,7 @@ html {
   color: var(--color-text);
   font-family: var(--font-body);
   font-synthesis: none;
+  font-optical-sizing: auto;
   text-rendering: optimizeLegibility;
 }
 body {
