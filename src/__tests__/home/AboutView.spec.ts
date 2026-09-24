@@ -11,7 +11,6 @@ const customContent: AboutContent = {
   title: 'Custom title',
   paragraphs: ['First custom paragraph', 'Second custom paragraph'],
   facts: [{ label: 'Custom fact', value: 'Custom value' }],
-  skills: ['Custom skill'],
   personalNote: 'Custom personal note',
   contactAction: { label: 'Custom contact', kind: 'href', href: 'mailto:custom@example.com' },
 }
@@ -30,7 +29,8 @@ describe('AboutView', () => {
     expect(wrapper.findAll('p')).toHaveLength(aboutContent.paragraphs.length + 2)
     expect(wrapper.findAll('dl dt')).toHaveLength(aboutContent.facts.length)
     expect(wrapper.findAll('dl dd')).toHaveLength(aboutContent.facts.length)
-    expect(wrapper.findAll('ul li')).toHaveLength(aboutContent.skills.length)
+    expect(wrapper.find('h3').text()).toBe('Profile summary')
+    expect(wrapper.text()).not.toContain('Selected capabilities')
     expect(wrapper.text()).toContain(aboutContent.personalNote)
   })
 
@@ -41,7 +41,7 @@ describe('AboutView', () => {
     expect(wrapper.text()).toContain('First custom paragraph')
     expect(wrapper.text()).toContain('Second custom paragraph')
     expect(wrapper.text()).toContain('Custom fact')
-    expect(wrapper.text()).toContain('Custom skill')
+    expect(wrapper.text()).not.toContain('Selected capabilities')
     expect(contact.attributes()).toMatchObject({
       href: 'mailto:custom@example.com',
       class: expect.stringContaining('ui-link--button-primary'),

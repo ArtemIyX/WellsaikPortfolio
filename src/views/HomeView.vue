@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { AboutView, FeaturedProjectsView, HeroView } from '@/components/home'
+import { AboutView, ExperienceSkillsView, FeaturedProjectsView, HeroView } from '@/components/home'
 import { SiteHeader } from '@/components/layout'
 import { useTheme } from '@/composables/useTheme'
 import {
   aboutContent,
+  experienceSkillsContent,
   featuredProjectsContent,
   heroContent,
   homeBrandLabel,
@@ -24,6 +25,7 @@ const { theme, setTheme } = useTheme()
     <main id="main-content">
       <HeroView :content="heroContent" />
       <FeaturedProjectsView :content="featuredProjectsContent" />
+      <ExperienceSkillsView :content="experienceSkillsContent" />
       <AboutView :content="aboutContent" />
     </main>
   </div>

@@ -59,12 +59,6 @@ defineProps<AboutViewProps>()
             <UiText as="dd" role="data" weight="medium">{{ fact.value }}</UiText>
           </template>
         </dl>
-        <UiText as="h3" role="heading">Selected capabilities</UiText>
-        <ul class="about-view__skills">
-          <li v-for="skill in content.skills" :key="skill">
-            <UiText as="span" role="label">{{ skill }}</UiText>
-          </li>
-        </ul>
       </UiBox>
     </div>
   </UiSection>

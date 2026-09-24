@@ -6,3 +6,7 @@ export { default as FeaturedProjectsView } from './FeaturedProjectsView/Featured
 export type * from './FeaturedProjectsView/FeaturedProjectsView'
 export { default as ProjectCard } from './ProjectCard/ProjectCard.vue'
 export type * from './ProjectCard/ProjectCard'
+export { default as ExperienceCard } from './ExperienceCard/ExperienceCard.vue'
+export type * from './ExperienceCard/ExperienceCard'
+export { default as ExperienceSkillsView } from './ExperienceSkillsView/ExperienceSkillsView.vue'
+export type * from './ExperienceSkillsView/ExperienceSkillsView'

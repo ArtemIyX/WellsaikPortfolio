@@ -1,0 +1,81 @@
+.experience-skills-view {
+  scroll-margin-top: calc(4.5rem + var(--space-4));
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.experience-skills-view :deep(.ui-section__inner) {
+  width: min(100% - (2 * var(--layout-gutter)), var(--layout-content-max));
+}
+
+.experience-skills-view :deep(.ui-section__intro) {
+  max-width: var(--measure);
+}
+
+.experience-skills-view__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(17rem, 1fr);
+  gap: clamp(var(--space-8), 6vw, var(--space-12));
+  align-items: start;
+  margin-top: var(--space-8);
+}
+
+.experience-skills-view__layout h3 {
+  margin: 0;
+}
+
+.experience-skills-view__experience-list,
+.experience-skills-view__groups {
+  display: grid;
+  gap: var(--space-5);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+}
+
+.experience-skills-view__experience-list {
+  list-style: none;
+}
+
+.experience-skills-view__experience-list > li,
+.experience-skills-view__group {
+  min-width: 0;
+}
+
+.experience-skills-view__skills {
+  min-width: 0;
+}
+
+.experience-skills-view__group {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.experience-skills-view__group h4 {
+  margin: 0;
+}
+
+.experience-skills-view__group ul {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+@media (max-width: 60rem) {
+  .experience-skills-view__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-skills-view__groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 42rem) {
+  .experience-skills-view__layout {
+    margin-top: var(--space-6);
+  }
+
+  .experience-skills-view__groups {
+    grid-template-columns: 1fr;
+  }
+}

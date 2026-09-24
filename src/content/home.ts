@@ -39,9 +39,41 @@ export interface AboutContent {
   title: string
   paragraphs: readonly string[]
   facts: readonly AboutFact[]
-  skills: readonly string[]
   personalNote: string
   contactAction: NavigationItem
+}
+
+export interface ExperiencePeriod {
+  label: string
+  startDate?: string
+  endDate?: string
+}
+
+export interface ExperienceEntry {
+  id: string
+  period: ExperiencePeriod
+  organization: string
+  role: string
+  location: string
+  summary: string
+  achievements: readonly string[]
+  technologies: readonly string[]
+}
+
+export interface SkillGroup {
+  id: string
+  title: string
+  items: readonly string[]
+}
+
+export interface ExperienceSkillsContent {
+  eyebrow: string
+  title: string
+  introduction: string
+  experienceHeading: string
+  skillsHeading: string
+  entries: readonly ExperienceEntry[]
+  skillGroups: readonly SkillGroup[]
 }
 
 export interface ProjectImage {
@@ -78,6 +110,7 @@ export const homeBrandLabel = 'Developer Name'
 export const homeNavigation: readonly NavigationItem[] = [
   { label: 'Home', kind: 'route', to: { name: 'home', hash: '#hero' } },
   { label: 'Projects', kind: 'route', to: { name: 'home', hash: '#projects' } },
+  { label: 'Experience', kind: 'route', to: { name: 'home', hash: '#experience' } },
   { label: 'About', kind: 'route', to: { name: 'home', hash: '#about' } },
   { label: 'Contact', kind: 'href', href: 'mailto:developer@example.com' },
 ]
@@ -210,6 +243,87 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
   ],
 }
 
+export const experienceSkillsContent: ExperienceSkillsContent = {
+  eyebrow: 'Experience & skills',
+  title: 'A placeholder record of responsibilities, growth, and technical focus.',
+  introduction:
+    'Placeholder introduction explaining how professional experience and practical skills will be summarized here.',
+  experienceHeading: 'Experience',
+  skillsHeading: 'Skills',
+  entries: [
+    {
+      id: 'placeholder-experience-a',
+      period: { label: '20XX — Present' },
+      organization: 'Placeholder Organization A',
+      role: 'Role Title One',
+      location: 'City, Country · Work arrangement',
+      summary: "Placeholder summary of the role's purpose and scope.",
+      achievements: [
+        'Placeholder achievement describing ownership of a meaningful engineering outcome.',
+        'Placeholder achievement describing collaboration or technical decision-making.',
+        'Placeholder achievement describing an improvement without inventing a metric.',
+      ],
+      technologies: ['Technology A', 'Technology B', 'Practice A'],
+    },
+    {
+      id: 'placeholder-experience-b',
+      period: { label: '20XX — 20XX' },
+      organization: 'Placeholder Organization B',
+      role: 'Role Title Two',
+      location: 'City, Country · Work arrangement',
+      summary: "Placeholder summary of the role's responsibilities and product area.",
+      achievements: [
+        'Placeholder achievement describing contribution to a product or service outcome.',
+        'Placeholder achievement describing a thoughtful technical implementation.',
+        'Placeholder achievement describing collaboration across a delivery process.',
+      ],
+      technologies: ['Technology C', 'Technology D', 'Practice B'],
+    },
+    {
+      id: 'placeholder-experience-c',
+      period: { label: '20XX — 20XX' },
+      organization: 'Placeholder Organization C',
+      role: 'Role Title Three',
+      location: 'City, Country · Work arrangement',
+      summary:
+        'Placeholder summary of an earlier role, internship, freelance period, or equivalent experience.',
+      achievements: [
+        'Placeholder achievement describing an early contribution to a useful outcome.',
+        'Placeholder achievement describing learning through practical delivery and feedback.',
+      ],
+      technologies: ['Technology E', 'Tool A', 'Practice C'],
+    },
+  ],
+  skillGroups: [
+    { id: 'languages', title: 'Languages', items: ['Language A', 'Language B', 'Language C'] },
+    {
+      id: 'frontend',
+      title: 'Frontend',
+      items: ['Framework A', 'UI architecture', 'Accessibility'],
+    },
+    {
+      id: 'backend-data',
+      title: 'Backend & data',
+      items: ['Runtime A', 'Database A', 'API design'],
+    },
+    {
+      id: 'quality',
+      title: 'Quality',
+      items: ['Unit testing', 'Integration testing', 'Code review'],
+    },
+    {
+      id: 'delivery',
+      title: 'Delivery',
+      items: ['CI/CD', 'Cloud platform', 'Observability'],
+    },
+    {
+      id: 'collaboration',
+      title: 'Collaboration',
+      items: ['Technical planning', 'Documentation', 'Mentoring placeholder'],
+    },
+  ],
+}
+
 export const aboutContent: AboutContent = {
   eyebrow: 'About',
   title: 'A developer focused on useful, carefully made software.',
@@ -221,16 +335,6 @@ export const aboutContent: AboutContent = {
     { label: 'Based in', value: 'City, Country' },
     { label: 'Primary focus', value: 'Product development' },
     { label: 'Currently', value: 'Open to selected opportunities' },
-  ],
-  skills: [
-    'Frontend systems',
-    'Backend services',
-    'Accessible interfaces',
-    'Design systems',
-    'Testing strategy',
-    'Performance',
-    'Developer experience',
-    'Technical collaboration',
   ],
   personalNote:
     'Outside of development, this placeholder can introduce one or two interests that add personality without becoming a full biography.',

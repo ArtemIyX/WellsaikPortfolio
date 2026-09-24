@@ -39,9 +39,23 @@ const update = (value: string): void => {
       :title="option.label"
       @click="update(option.value)"
     >
-      <svg v-if="option.value === 'light'" class="theme-selector__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
-      <svg v-else class="theme-selector__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.4A8.5 8.5 0 0 1 8.6 3.5 8.5 8.5 0 1 0 20.5 15.4Z" /></svg>
-      <span v-if="!compact || presentation === 'segmented'" class="theme-selector__text"><slot :name="option.value">{{ option.label }}</slot></span>
+      <svg
+        v-if="option.value === 'light'"
+        class="theme-selector__icon"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="4" />
+        <path
+          d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+        />
+      </svg>
+      <svg v-else class="theme-selector__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.5 15.4A8.5 8.5 0 0 1 8.6 3.5 8.5 8.5 0 1 0 20.5 15.4Z" />
+      </svg>
+      <span v-if="!compact || presentation === 'segmented'" class="theme-selector__text"
+        ><slot :name="option.value">{{ option.label }}</slot></span
+      >
     </button>
   </div>
 </template>
