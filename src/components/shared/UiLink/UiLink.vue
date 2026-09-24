@@ -11,6 +11,7 @@ const props = withDefaults(defineProps<UiLinkRuntimeProps>(), {
   variant: 'inline',
   external: undefined,
   newTab: false,
+  showExternalIndicator: true,
   download: false,
   disabled: false,
 })
@@ -55,7 +56,7 @@ onMounted(() => {
       ><slot name="trailing"
     /></span>
     <span
-      v-if="!$slots.trailing && (inferredExternal || newTab)"
+      v-if="showExternalIndicator && !$slots.trailing && (inferredExternal || newTab)"
       class="ui-link__indicator"
       aria-hidden="true"
       >↗</span

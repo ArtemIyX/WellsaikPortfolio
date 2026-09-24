@@ -7,6 +7,7 @@ interface UiLinkCommonProps {
   variant?: UiLinkVariant
   external?: boolean
   newTab?: boolean
+  showExternalIndicator?: boolean
   download?: UiLinkDownload
   disabled?: boolean
 }

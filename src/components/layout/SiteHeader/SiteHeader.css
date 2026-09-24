@@ -36,6 +36,7 @@
 }
 
 .site-header__desktop-controls {
+  justify-self: end;
   gap: var(--space-4);
 }
 

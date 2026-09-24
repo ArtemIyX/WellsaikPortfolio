@@ -12,6 +12,7 @@ const customContent: AboutContent = {
   paragraphs: ['First custom paragraph', 'Second custom paragraph'],
   facts: [{ label: 'Custom fact', value: 'Custom value' }],
   personalNote: 'Custom personal note',
+  availability: 'Custom availability',
   contactAction: { label: 'Custom contact', kind: 'href', href: 'mailto:custom@example.com' },
 }
 
@@ -32,6 +33,8 @@ describe('AboutView', () => {
     expect(wrapper.find('h3').text()).toBe('Profile summary')
     expect(wrapper.text()).not.toContain('Selected capabilities')
     expect(wrapper.text()).toContain(aboutContent.personalNote)
+    expect(wrapper.text()).toContain(aboutContent.availability)
+    expect(wrapper.find('.about-view__email').exists()).toBe(false)
   })
 
   it('renders supplied content and contact action without remote assets', () => {
@@ -41,12 +44,14 @@ describe('AboutView', () => {
     expect(wrapper.text()).toContain('First custom paragraph')
     expect(wrapper.text()).toContain('Second custom paragraph')
     expect(wrapper.text()).toContain('Custom fact')
+    expect(wrapper.text()).toContain('Custom availability')
     expect(wrapper.text()).not.toContain('Selected capabilities')
     expect(contact.attributes()).toMatchObject({
       href: 'mailto:custom@example.com',
       class: expect.stringContaining('ui-link--button-primary'),
     })
+    expect(wrapper.find('.about-view__email').exists()).toBe(false)
     expect(wrapper.find('img').exists()).toBe(false)
-    expect(wrapper.findAll('button')).toHaveLength(0)
+    expect(wrapper.find('form, input, textarea, select, button').exists()).toBe(false)
   })
 })

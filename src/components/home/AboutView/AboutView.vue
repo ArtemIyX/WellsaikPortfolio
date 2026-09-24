@@ -17,7 +17,7 @@ defineProps<AboutViewProps>()
   >
     <div class="about-view__layout">
       <div class="about-view__story">
-        <UiText as="p" role="label" tone="accent" weight="medium">
+        <UiText v-if="content.eyebrow" as="p" role="label" tone="accent" weight="medium">
           {{ content.eyebrow }}
         </UiText>
         <UiText id="about-title" as="h2" role="heading" max-width="none">
@@ -30,6 +30,10 @@ defineProps<AboutViewProps>()
         </div>
         <UiText class="about-view__personal-note" tone="subtle">
           {{ content.personalNote }}
+        </UiText>
+        <UiText class="about-view__availability" role="label" tone="positive" weight="medium">
+          <span class="about-view__status" aria-hidden="true"></span>
+          {{ content.availability }}
         </UiText>
         <div class="about-view__actions">
           <UiLink

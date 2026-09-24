@@ -40,24 +40,8 @@ export interface AboutContent {
   paragraphs: readonly string[]
   facts: readonly AboutFact[]
   personalNote: string
-  contactAction: NavigationItem
-}
-
-export interface ContactFact {
-  label: string
-  value: string
-}
-
-export interface ContactContent {
-  eyebrow: string
-  title: string
-  introduction: string
   availability: string
-  email: string
-  primaryAction: NavigationItem
-  expectationNote: string
-  facts: readonly ContactFact[]
-  profileActions: readonly NavigationItem[]
+  contactAction: NavigationItem
 }
 
 export interface ExperiencePeriod {
@@ -122,35 +106,63 @@ export interface FeaturedProjectsContent {
   projects: readonly ProjectContent[]
 }
 
-export const homeBrandLabel = 'Developer Name'
+export const homeBrandLabel = 'Artem Podorozhko'
+export const homeFooterName = 'Name Surname'
+export const homeFooterOccupation = 'Unreal Engine & C++ Engineer · Riga, Latvia'
+export const email = 'artem.podorozhko@outlook.com'
+export const github = 'https://github.com/ArtemIyX'
 
 export const homeNavigation: readonly NavigationItem[] = [
   { label: 'Home', kind: 'route', to: { name: 'home', hash: '#hero' } },
   { label: 'Projects', kind: 'route', to: { name: 'home', hash: '#projects' } },
   { label: 'Experience', kind: 'route', to: { name: 'home', hash: '#experience' } },
   { label: 'About', kind: 'route', to: { name: 'home', hash: '#about' } },
-  { label: 'Contact', kind: 'route', to: { name: 'home', hash: '#contact' } },
+]
+
+export const homeFooterActions: readonly NavigationItem[] = [
+  { label: 'Email', kind: 'href', href: `mailto:${email}` },
+  {
+    label: 'GitHub',
+    kind: 'href',
+    href: github,
+    external: true,
+    newTab: true,
+  },
+  {
+    label: 'LinkedIn',
+    kind: 'href',
+    href: 'https://example.com',
+    external: true,
+    newTab: true,
+  },
+  {
+    label: 'Steam',
+    kind: 'href',
+    href: 'https://example.com',
+    external: true,
+    newTab: true,
+  },
 ]
 
 export const heroContent: HeroContent = {
-  eyebrow: 'Software Developer · City, Country',
-  title: 'I build thoughtful digital products for people and businesses.',
+  eyebrow: 'Unreal Engine & C++ Engineer · Riga, Latvia',
+  title: 'Nothing can stop an idea whose time has come',
   summary:
-    "Placeholder introduction describing the developer's focus, approach, and the value their work creates.",
-  availability: 'Available for selected opportunities',
-  imageSrc: '/images/portrait-placeholder.svg',
-  imageAlt: `Placeholder portrait for ${homeBrandLabel}`,
-  imageWidth: 800,
-  imageHeight: 1000,
+    'I develop games in Unreal Engine, with a primary focus on client-side optimization and pushing the engine to its practical limits. I also build bespoke full-stack applications for clients, using Vue.js with C# or Rust backends.',
+  availability: 'Employed full-time',
+  imageSrc: '/images/portrait.webp',
+  imageAlt: `Portrait of ${homeBrandLabel}`,
+  imageWidth: 1200,
+  imageHeight: 1600,
   primaryAction: {
     label: 'Get in touch',
     kind: 'href',
-    href: 'mailto:developer@example.com',
+    href: `mailto:${email}`,
   },
   secondaryAction: {
     label: 'View code profile',
     kind: 'href',
-    href: 'https://example.com',
+    href: github,
     external: true,
     newTab: true,
   },
@@ -158,7 +170,7 @@ export const heroContent: HeroContent = {
 
 // Development placeholder content. Replace every value and demonstration link before launch.
 export const featuredProjectsContent: FeaturedProjectsContent = {
-  eyebrow: 'Selected work',
+  eyebrow: '',
   title: 'A few projects that show how I approach product development.',
   introduction:
     'Placeholder introduction explaining that these projects were selected to demonstrate problem solving, technical decisions, and delivery.',
@@ -261,7 +273,7 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
 }
 
 export const experienceSkillsContent: ExperienceSkillsContent = {
-  eyebrow: 'Experience & skills',
+  eyebrow: '',
   title: 'A placeholder record of responsibilities, growth, and technical focus.',
   introduction:
     'Placeholder introduction explaining how professional experience and practical skills will be summarized here.',
@@ -342,60 +354,25 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
 }
 
 export const aboutContent: AboutContent = {
-  eyebrow: 'About',
+  eyebrow: '',
   title: 'A developer focused on useful, carefully made software.',
   paragraphs: [
     "Placeholder biography describing the developer's current focus and the kinds of products they enjoy building.",
     'Placeholder explanation of how the developer approaches collaboration, accessibility, maintainability, and thoughtful delivery.',
   ],
-  facts: [
-    { label: 'Based in', value: 'City, Country' },
-    { label: 'Primary focus', value: 'Product development' },
-    { label: 'Currently', value: 'Open to selected opportunities' },
-  ],
   personalNote:
     'Outside of development, this placeholder can introduce one or two interests that add personality without becoming a full biography.',
+  availability: 'Placeholder availability status',
   contactAction: {
     label: 'Start a conversation',
     kind: 'href',
-    href: 'mailto:developer@example.com',
+    href: `mailto:${email}`,
   },
-}
-
-export const contactContent: ContactContent = {
-  eyebrow: 'Contact',
-  title: "Have a project or opportunity in mind? Let's talk.",
-  introduction:
-    'Placeholder invitation describing the kinds of conversations, projects, or roles the developer welcomes.',
-  availability: 'Placeholder availability status',
-  email: 'developer@example.com',
-  primaryAction: {
-    label: 'Email developer',
-    kind: 'href',
-    href: 'mailto:developer@example.com',
-  },
-  expectationNote:
-    'Placeholder note describing the preferred contact method and expected response window.',
   facts: [
     { label: 'Based in', value: 'City, Country' },
+    { label: 'Primary focus', value: 'Product development' },
     { label: 'Work preference', value: 'Placeholder work preference' },
     { label: 'Time zone', value: 'UTC±00:00 placeholder' },
     { label: 'Response', value: 'Placeholder response expectation' },
-  ],
-  profileActions: [
-    {
-      label: 'Code profile',
-      kind: 'href',
-      href: 'https://example.com',
-      external: true,
-      newTab: true,
-    },
-    {
-      label: 'Professional network',
-      kind: 'href',
-      href: 'https://example.com',
-      external: true,
-      newTab: true,
-    },
   ],
 }

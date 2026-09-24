@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 
 import { HeroView } from '@/components/home'
-import { heroContent } from '@/content/home'
+import { email, github, heroContent } from '@/content/home'
 
 describe('HeroView', () => {
   it('connects the hero landmark to its only page-level heading', () => {
@@ -23,9 +23,9 @@ describe('HeroView', () => {
     expect(wrapper.text()).toContain(heroContent.eyebrow)
     expect(wrapper.text()).toContain(heroContent.summary)
     expect(wrapper.text()).toContain(heroContent.availability)
-    expect(links[0]?.attributes('href')).toBe('mailto:developer@example.com')
+    expect(links[0]?.attributes('href')).toBe(`mailto:${email}`)
     expect(links[1]?.attributes()).toMatchObject({
-      href: 'https://example.com',
+      href: github,
       target: '_blank',
       rel: 'noopener noreferrer',
     })
@@ -44,10 +44,30 @@ describe('HeroView', () => {
     expect(image.attributes('src')).not.toMatch(/^https?:/)
   })
 
-  it('uses explicitly generic placeholder identity content', () => {
+  it('renders the supplied professional summary', () => {
     const wrapper = mount(HeroView, { props: { content: heroContent } })
 
-    expect(wrapper.text()).toContain('Placeholder introduction')
-    expect(wrapper.text().toLowerCase()).not.toContain('wellsaik')
+    expect(wrapper.text()).toContain(heroContent.summary)
+  })
+
+  it('adds a decorative email icon to the primary action', () => {
+    const wrapper = mount(HeroView, { props: { content: heroContent } })
+
+    expect(wrapper.get('.hero-view__actions a:first-child .hero-view__email-icon').attributes()).toMatchObject({
+      'aria-hidden': 'true',
+      viewBox: '0 0 24 24',
+    })
+  })
+
+  it('adds a decorative GitHub icon to the secondary action', () => {
+    const wrapper = mount(HeroView, { props: { content: heroContent } })
+
+    const codeProfileAction = wrapper.get('.hero-view__actions a:nth-child(2)')
+
+    expect(codeProfileAction.get('.hero-view__github-icon').attributes()).toMatchObject({
+      'aria-hidden': 'true',
+      viewBox: '0 0 24 24',
+    })
+    expect(codeProfileAction.find('.ui-link__indicator').exists()).toBe(false)
   })
 })

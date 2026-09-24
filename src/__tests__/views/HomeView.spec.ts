@@ -29,11 +29,11 @@ describe('HomeView', () => {
 
     expect(wrapper.get('.home-view').element.children[0]?.tagName).toBe('HEADER')
     expect(wrapper.get('.home-view').element.children[1]?.tagName).toBe('MAIN')
+    expect(wrapper.get('.home-view').element.children[2]?.tagName).toBe('FOOTER')
     expect(wrapper.get('main').find('#hero').exists()).toBe(true)
     expect(wrapper.get('main').find('#projects').exists()).toBe(true)
     expect(wrapper.get('main').find('#experience').exists()).toBe(true)
     expect(wrapper.get('main').find('#about').exists()).toBe(true)
-    expect(wrapper.get('main').find('#contact').exists()).toBe(true)
     expect(
       wrapper
         .get('main')
@@ -49,16 +49,13 @@ describe('HomeView', () => {
     expect(
       wrapper.get('#experience').element.compareDocumentPosition(wrapper.get('#about').element),
     ).toBe(4)
-    expect(
-      wrapper.get('#about').element.compareDocumentPosition(wrapper.get('#contact').element),
-    ).toBe(4)
   })
 
   it('keeps one page heading and matches About navigation to its target', async () => {
     const wrapper = await mountHome()
 
     expect(wrapper.get('main').findAll('h1')).toHaveLength(1)
-    expect(wrapper.get('main').findAll('h2')).toHaveLength(4)
+    expect(wrapper.get('main').findAll('h2')).toHaveLength(3)
     expect(wrapper.get('#projects').findAll('article')).toHaveLength(3)
     expect(wrapper.get('#experience').findAll('article')).toHaveLength(3)
     const projectsLink = wrapper
@@ -73,13 +70,9 @@ describe('HomeView', () => {
       .findAll('.site-header__navigation-link')
       .find((link) => link.text() === 'About')
     expect(aboutLink?.attributes('href')).toBe('/#about')
-    const contactLink = wrapper
-      .findAll('.site-header__navigation-link')
-      .find((link) => link.text() === 'Contact')
-    expect(contactLink?.attributes('href')).toBe('/#contact')
     expect(wrapper.get('#about').attributes('id')).toBe('about')
-    expect(wrapper.get('#contact').attributes('id')).toBe('contact')
-    expect(wrapper.get('main').findAll('#contact')).toHaveLength(1)
+    expect(wrapper.get('main').findAll('#about')).toHaveLength(1)
+    expect(wrapper.find('#contact').exists()).toBe(false)
     expect(wrapper.get('main').findAll('main')).toHaveLength(0)
   })
 

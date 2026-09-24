@@ -31,7 +31,12 @@
   padding: 0;
 }
 
+.experience-skills-view__groups {
+  row-gap: var(--space-8);
+}
+
 .experience-skills-view__experience-list {
+  gap: var(--space-8);
   list-style: none;
 }
 

@@ -37,6 +37,22 @@
   gap: var(--space-3);
 }
 
+.hero-view__email-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.75;
+}
+
+.hero-view__github-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  fill: currentColor;
+}
+
 .hero-view__availability {
   display: inline-flex;
   align-items: center;

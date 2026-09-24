@@ -15,7 +15,7 @@ defineProps<FeaturedProjectsViewProps>()
     width="content"
     labelledby="projects-title"
   >
-    <template #eyebrow>
+    <template v-if="content.eyebrow" #eyebrow>
       <UiText as="p" role="label" tone="accent" weight="medium">{{ content.eyebrow }}</UiText>
     </template>
     <template #title>

@@ -12,7 +12,6 @@ const items: readonly NavigationItem[] = [
   { label: 'Projects', kind: 'route', to: { name: 'home', hash: '#projects' } },
   { label: 'Experience', kind: 'route', to: { name: 'home', hash: '#experience' } },
   { label: 'About', kind: 'route', to: { name: 'home', hash: '#about' } },
-  { label: 'Contact', kind: 'route', to: { name: 'home', hash: '#contact' } },
 ]
 
 const mountHeader = async () => {
@@ -39,7 +38,9 @@ describe('SiteHeader', () => {
     const wrapper = await mountHeader()
 
     expect(wrapper.element.tagName).toBe('HEADER')
-    expect(wrapper.get('nav').attributes('aria-label')).toBe('Primary navigation')
+    expect(wrapper.get('.site-header__navigation').attributes('aria-label')).toBe(
+      'Primary navigation',
+    )
     expect(wrapper.classes()).toContain('site-header')
 
     wrapper.unmount()
@@ -58,19 +59,11 @@ describe('SiteHeader', () => {
       'Projects',
       'Experience',
       'About',
-      'Contact',
     ])
-    expect(componentLinks[2]?.props('to')).toEqual({ name: 'home', hash: '#hero' })
-    expect(componentLinks[3]?.props('to')).toEqual({ name: 'home', hash: '#projects' })
-    expect(componentLinks[4]?.props('to')).toEqual({ name: 'home', hash: '#experience' })
-    expect(componentLinks[5]?.props('to')).toEqual({ name: 'home', hash: '#about' })
     expect(navigationLinks[0]?.attributes('href')).toBe('/#hero')
     expect(navigationLinks[1]?.attributes('href')).toBe('/#projects')
     expect(navigationLinks[2]?.attributes('href')).toBe('/#experience')
     expect(navigationLinks[3]?.attributes('href')).toBe('/#about')
-    expect(componentLinks[6]?.props('to')).toEqual({ name: 'home', hash: '#contact' })
-    expect(navigationLinks[4]?.attributes('href')).toBe('/#contact')
-
     wrapper.unmount()
   })
 
@@ -154,25 +147,6 @@ describe('SiteHeader', () => {
       .find((link) => link.text() === 'Projects')
     expect(projectsLink?.attributes('href')).toBe('/#projects')
     await projectsLink?.trigger('click')
-    await nextTick()
-
-    expect(wrapper.find('#mobile-navigation-panel').exists()).toBe(false)
-    expect(trigger.attributes('aria-expanded')).toBe('false')
-
-    wrapper.unmount()
-  })
-
-  it('closes the mobile panel after selecting Contact', async () => {
-    const wrapper = await mountHeader()
-    const trigger = wrapper.get('.site-header__menu-trigger')
-
-    await trigger.trigger('click')
-    await nextTick()
-    const contactLink = wrapper
-      .findAll('.site-header__mobile-navigation-link')
-      .find((link) => link.text() === 'Contact')
-    expect(contactLink?.attributes('href')).toBe('/#contact')
-    await contactLink?.trigger('click')
     await nextTick()
 
     expect(wrapper.find('#mobile-navigation-panel').exists()).toBe(false)
