@@ -58,10 +58,17 @@ describe('ProjectCard', () => {
       project.outcome,
     ])
     expect(wrapper.findAll('li').map((item) => item.text())).toEqual(project.technologies)
-    expect(wrapper.findAll('a').map((link) => link.text())).toEqual([
+    const links = wrapper.findAll('a')
+    expect(links.map((link) => link.text())).toEqual([
       'Live↗ (opens in a new tab)',
       'Source↗ (opens in a new tab)',
     ])
+    expect(links.map((link) => link.attributes('href'))).toEqual([
+      project.liveAction.kind === 'href' ? project.liveAction.href : undefined,
+      project.sourceAction.kind === 'href' ? project.sourceAction.href : undefined,
+    ])
+    expect(links.every((link) => link.attributes('target') === '_blank')).toBe(true)
+    expect(links.every((link) => link.attributes('rel') === 'noopener noreferrer')).toBe(true)
     expect(wrapper.classes()).toContain('project-card--media-end')
     expect(wrapper.findAll('button')).toHaveLength(0)
   })
