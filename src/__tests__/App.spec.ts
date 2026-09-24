@@ -8,7 +8,7 @@ describe('portfolio views', () => {
   it('renders the portfolio foundation', () => {
     const wrapper = mount(HomeView)
     expect(wrapper.text()).toContain('I build dependable systems for ambitious worlds.')
-    expect(wrapper.find('select[aria-label="Color theme"]').exists()).toBe(true)
+    expect(wrapper.findAll('button[aria-label^="Color theme"]')).toHaveLength(3)
     expect(wrapper.text()).toContain('SCP: Riftborn')
     expect(wrapper.find('a[href="/debug"]').text()).toBe('Debug')
   })
