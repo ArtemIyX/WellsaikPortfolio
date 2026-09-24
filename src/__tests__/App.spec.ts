@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import App from '../App.vue'
 import DebugView from '../views/DebugView.vue'
+import HomeView from '../views/HomeView.vue'
 
-describe('App', () => {
+describe('portfolio views', () => {
   it('renders the portfolio foundation', () => {
-    const wrapper = mount(App)
+    const wrapper = mount(HomeView)
     expect(wrapper.text()).toContain('I build dependable systems for ambitious worlds.')
     expect(wrapper.find('select[aria-label="Color theme"]').exists()).toBe(true)
     expect(wrapper.text()).toContain('SCP: Riftborn')
