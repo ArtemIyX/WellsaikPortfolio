@@ -4,7 +4,11 @@ import type { UiTextProps } from './UiText'
 defineOptions({ inheritAttrs: false })
 
 withDefaults(defineProps<UiTextProps>(), {
-  as: 'p', role: 'body', tone: 'default', align: 'start', maxWidth: 'reading',
+  as: 'p',
+  role: 'body',
+  tone: 'default',
+  align: 'start',
+  maxWidth: 'reading',
 })
 </script>
 
@@ -13,7 +17,13 @@ withDefaults(defineProps<UiTextProps>(), {
     :is="as"
     v-bind="$attrs"
     class="ui-text"
-    :class="[`ui-text--role-${role}`, `ui-text--tone-${tone}`, `ui-text--align-${align}`, `ui-text--width-${maxWidth}`, weight && `ui-text--weight-${weight}`]"
+    :class="[
+      `ui-text--role-${role}`,
+      `ui-text--tone-${tone}`,
+      `ui-text--align-${align}`,
+      `ui-text--width-${maxWidth}`,
+      weight && `ui-text--weight-${weight}`,
+    ]"
   >
     <slot />
   </component>

@@ -1,15 +1,50 @@
-.ui-section { color: var(--color-text); background: var(--color-bg); }
-.ui-section--surface-default { background: var(--color-surface); }
-.ui-section--surface-muted { background: var(--color-surface-muted); }
-.ui-section__inner { width: 100%; margin-inline: auto; }
-.ui-section--width-full .ui-section__inner { max-width: none; }
-.ui-section--width-content .ui-section__inner { max-width: 78rem; }
-.ui-section--width-reading .ui-section__inner { max-width: var(--measure); }
-.ui-section--spacing-compact .ui-section__inner { padding-block: var(--space-8); }
-.ui-section--spacing-default .ui-section__inner { padding-block: var(--space-12); }
-.ui-section--spacing-hero .ui-section__inner { padding-block: var(--space-24); }
-.ui-section--divider-top { border-top: var(--border-width) solid var(--color-border); }
-.ui-section--divider-bottom { border-bottom: var(--border-width) solid var(--color-border); }
-.ui-section--divider-both { border-block: var(--border-width) solid var(--color-border); }
-.ui-section__eyebrow, .ui-section__title, .ui-section__intro, .ui-section__actions { margin-bottom: var(--space-4); }
-.ui-section__content { min-width: 0; }
+.ui-section {
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+.ui-section--surface-default {
+  background: var(--color-surface);
+}
+.ui-section--surface-muted {
+  background: var(--color-surface-muted);
+}
+.ui-section__inner {
+  width: 100%;
+  margin-inline: auto;
+}
+.ui-section--width-full .ui-section__inner {
+  max-width: none;
+}
+.ui-section--width-content .ui-section__inner {
+  max-width: 78rem;
+}
+.ui-section--width-reading .ui-section__inner {
+  max-width: var(--measure);
+}
+.ui-section--spacing-compact .ui-section__inner {
+  padding-block: var(--space-8);
+}
+.ui-section--spacing-default .ui-section__inner {
+  padding-block: var(--space-12);
+}
+.ui-section--spacing-hero .ui-section__inner {
+  padding-block: var(--space-24);
+}
+.ui-section--divider-top {
+  border-top: var(--border-width) solid var(--color-border);
+}
+.ui-section--divider-bottom {
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+.ui-section--divider-both {
+  border-block: var(--border-width) solid var(--color-border);
+}
+.ui-section__eyebrow,
+.ui-section__title,
+.ui-section__intro,
+.ui-section__actions {
+  margin-bottom: var(--space-4);
+}
+.ui-section__content {
+  min-width: 0;
+}

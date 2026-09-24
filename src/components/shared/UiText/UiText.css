@@ -1,22 +1,75 @@
-.ui-text { margin: 0; color: var(--color-text); }
-.ui-text--role-display { font-size: clamp(2.8rem, 6vw, 5.6rem); line-height: var(--line-height-heading); letter-spacing: -0.055em; }
-.ui-text--role-heading { font-size: clamp(2rem, 4vw, 3.5rem); line-height: var(--line-height-heading); letter-spacing: -0.04em; }
-.ui-text--role-body { font-size: var(--font-size-body); line-height: var(--line-height-body); }
-.ui-text--role-label { font-size: var(--font-size-small); line-height: 1.4; }
-.ui-text--role-caption { color: var(--color-text-subtle); font-size: var(--font-size-small); line-height: 1.4; }
-.ui-text--role-data { font-variant-numeric: tabular-nums; }
-.ui-text--tone-muted { color: var(--color-text-muted); }
-.ui-text--tone-subtle { color: var(--color-text-subtle); }
-.ui-text--tone-accent { color: var(--color-accent); }
-.ui-text--tone-positive { color: var(--color-positive); }
-.ui-text--tone-warning { color: var(--color-warning); }
-.ui-text--tone-danger { color: var(--color-danger); }
-.ui-text--weight-regular { font-weight: var(--font-weight-regular); }
-.ui-text--weight-medium { font-weight: var(--font-weight-medium); }
-.ui-text--weight-bold { font-weight: var(--font-weight-bold); }
-.ui-text--align-start { text-align: start; }
-.ui-text--align-center { text-align: center; }
-.ui-text--align-end { text-align: end; }
-.ui-text--width-none { max-width: none; }
-.ui-text--width-reading { max-width: var(--measure); }
-.ui-text--width-compact { max-width: 34ch; }
+.ui-text {
+  margin: 0;
+  color: var(--color-text);
+}
+.ui-text--role-display {
+  font-size: clamp(2.8rem, 6vw, 5.6rem);
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.055em;
+}
+.ui-text--role-heading {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.04em;
+}
+.ui-text--role-body {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+.ui-text--role-label {
+  font-size: var(--font-size-small);
+  line-height: 1.4;
+}
+.ui-text--role-caption {
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-small);
+  line-height: 1.4;
+}
+.ui-text--role-data {
+  font-variant-numeric: tabular-nums;
+}
+.ui-text--tone-muted {
+  color: var(--color-text-muted);
+}
+.ui-text--tone-subtle {
+  color: var(--color-text-subtle);
+}
+.ui-text--tone-accent {
+  color: var(--color-accent);
+}
+.ui-text--tone-positive {
+  color: var(--color-positive);
+}
+.ui-text--tone-warning {
+  color: var(--color-warning);
+}
+.ui-text--tone-danger {
+  color: var(--color-danger);
+}
+.ui-text--weight-regular {
+  font-weight: var(--font-weight-regular);
+}
+.ui-text--weight-medium {
+  font-weight: var(--font-weight-medium);
+}
+.ui-text--weight-bold {
+  font-weight: var(--font-weight-bold);
+}
+.ui-text--align-start {
+  text-align: start;
+}
+.ui-text--align-center {
+  text-align: center;
+}
+.ui-text--align-end {
+  text-align: end;
+}
+.ui-text--width-none {
+  max-width: none;
+}
+.ui-text--width-reading {
+  max-width: var(--measure);
+}
+.ui-text--width-compact {
+  max-width: 34ch;
+}

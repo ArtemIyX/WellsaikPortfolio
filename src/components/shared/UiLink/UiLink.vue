@@ -8,7 +8,11 @@ import { isExternalHref } from './UiLink'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<UiLinkProps>(), {
-  variant: 'inline', external: undefined, newTab: false, download: false, disabled: false,
+  variant: 'inline',
+  external: undefined,
+  newTab: false,
+  download: false,
+  disabled: false,
 })
 const attrs = useAttrs()
 const inferredExternal = computed(() => props.external ?? isExternalHref(props.href))
@@ -38,11 +42,22 @@ onMounted(() => {
     :aria-disabled="disabled || undefined"
     :tabindex="disabled ? -1 : undefined"
   >
-    <span v-if="$slots.leading" class="ui-link__leading" aria-hidden="true"><slot name="leading" /></span>
+    <span v-if="$slots.leading" class="ui-link__leading" aria-hidden="true"
+      ><slot name="leading"
+    /></span>
     <span class="ui-link__label"><slot /></span>
-    <span v-if="$slots.trailing" class="ui-link__trailing" aria-hidden="true"><slot name="trailing" /></span>
-    <span v-if="!$slots.trailing && (inferredExternal || newTab)" class="ui-link__indicator" aria-hidden="true">↗</span>
-    <span v-if="inferredExternal || newTab" class="ui-link__assistive">{{ newTab ? ' (opens in a new tab)' : ' (external link)' }}</span>
+    <span v-if="$slots.trailing" class="ui-link__trailing" aria-hidden="true"
+      ><slot name="trailing"
+    /></span>
+    <span
+      v-if="!$slots.trailing && (inferredExternal || newTab)"
+      class="ui-link__indicator"
+      aria-hidden="true"
+      >↗</span
+    >
+    <span v-if="inferredExternal || newTab" class="ui-link__assistive">{{
+      newTab ? ' (opens in a new tab)' : ' (external link)'
+    }}</span>
   </component>
 </template>
 
