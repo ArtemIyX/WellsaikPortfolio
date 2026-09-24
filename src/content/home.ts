@@ -43,6 +43,23 @@ export interface AboutContent {
   contactAction: NavigationItem
 }
 
+export interface ContactFact {
+  label: string
+  value: string
+}
+
+export interface ContactContent {
+  eyebrow: string
+  title: string
+  introduction: string
+  availability: string
+  email: string
+  primaryAction: NavigationItem
+  expectationNote: string
+  facts: readonly ContactFact[]
+  profileActions: readonly NavigationItem[]
+}
+
 export interface ExperiencePeriod {
   label: string
   startDate?: string
@@ -112,7 +129,7 @@ export const homeNavigation: readonly NavigationItem[] = [
   { label: 'Projects', kind: 'route', to: { name: 'home', hash: '#projects' } },
   { label: 'Experience', kind: 'route', to: { name: 'home', hash: '#experience' } },
   { label: 'About', kind: 'route', to: { name: 'home', hash: '#about' } },
-  { label: 'Contact', kind: 'href', href: 'mailto:developer@example.com' },
+  { label: 'Contact', kind: 'route', to: { name: 'home', hash: '#contact' } },
 ]
 
 export const heroContent: HeroContent = {
@@ -343,4 +360,42 @@ export const aboutContent: AboutContent = {
     kind: 'href',
     href: 'mailto:developer@example.com',
   },
+}
+
+export const contactContent: ContactContent = {
+  eyebrow: 'Contact',
+  title: "Have a project or opportunity in mind? Let's talk.",
+  introduction:
+    'Placeholder invitation describing the kinds of conversations, projects, or roles the developer welcomes.',
+  availability: 'Placeholder availability status',
+  email: 'developer@example.com',
+  primaryAction: {
+    label: 'Email developer',
+    kind: 'href',
+    href: 'mailto:developer@example.com',
+  },
+  expectationNote:
+    'Placeholder note describing the preferred contact method and expected response window.',
+  facts: [
+    { label: 'Based in', value: 'City, Country' },
+    { label: 'Work preference', value: 'Placeholder work preference' },
+    { label: 'Time zone', value: 'UTC±00:00 placeholder' },
+    { label: 'Response', value: 'Placeholder response expectation' },
+  ],
+  profileActions: [
+    {
+      label: 'Code profile',
+      kind: 'href',
+      href: 'https://example.com',
+      external: true,
+      newTab: true,
+    },
+    {
+      label: 'Professional network',
+      kind: 'href',
+      href: 'https://example.com',
+      external: true,
+      newTab: true,
+    },
+  ],
 }
