@@ -13,13 +13,14 @@ describe('portfolio views', () => {
     expect(wrapper.find('a[href="/debug"]').text()).toBe('Debug')
   })
 
-  it('renders every theme token and changes theme from the debug view', async () => {
+  it('renders the shared component specimen matrix and changes theme', async () => {
     const wrapper = mount(DebugView)
 
-    expect(wrapper.findAll('.color-swatch')).toHaveLength(16)
-    expect(wrapper.findAll('.type-sample')).toHaveLength(4)
+    expect(wrapper.findAll('.ui-button')).toHaveLength(10)
+    expect(wrapper.findAll('.ui-box')).toHaveLength(4)
+    expect(wrapper.findAll('.ui-text').length).toBeGreaterThan(10)
 
-    await wrapper.get('button.theme-button:nth-child(3)').trigger('click')
+    await wrapper.get('.debug-segmented button:nth-child(3)').trigger('click')
     expect(document.documentElement.dataset.theme).toBe('dark')
 
     document.documentElement.removeAttribute('data-theme')

@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { type ThemePreference, useTheme } from '@/composables/useTheme'
+import { useTheme } from '@/composables/useTheme'
+import { ThemeSelector, UiBox, UiLink } from '@/components/shared'
 
 const { theme, setTheme } = useTheme()
+
+const updateTheme = (value: 'system' | 'light' | 'dark'): void => setTheme(value)
 
 const projects = [
   {
@@ -50,18 +53,7 @@ const projects = [
         <a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a
         ><a href="/debug">Debug</a>
       </nav>
-      <label class="theme-control">
-        <span class="sr-only">Color theme</span>
-        <select
-          :value="theme"
-          aria-label="Color theme"
-          @change="setTheme(($event.target as HTMLSelectElement).value as ThemePreference)"
-        >
-          <option value="system">System</option>
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-        </select>
-      </label>
+      <ThemeSelector :model-value="theme" compact @update:model-value="updateTheme" />
     </header>
 
     <main id="top">
@@ -74,12 +66,12 @@ const projects = [
             technology and calm, human interfaces.
           </p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#work"
-              >View selected work <span aria-hidden="true">↘</span></a
-            ><a class="button button--quiet" href="#contact">Start a conversation</a>
+            <UiLink class="hero-action" variant="button-primary" href="#work"
+              >View selected work <span aria-hidden="true">↘</span></UiLink
+            ><UiLink class="hero-action" variant="button-secondary" href="#contact">Start a conversation</UiLink>
           </div>
         </div>
-        <div class="signal-panel" aria-label="Current focus">
+        <UiBox class="signal-panel" as="aside" variant="surface" padding="medium" aria-label="Current focus">
           <div class="signal-panel__top">
             <span>Current focus</span><span class="signal-panel__dot" aria-hidden="true"></span>
           </div>
@@ -87,7 +79,7 @@ const projects = [
           <p>Architecture, interaction, and tooling for teams solving difficult problems.</p>
           <div class="signal-panel__rule"></div>
           <span class="signal-panel__meta">Available for selected collaborations</span>
-        </div>
+        </UiBox>
       </section>
 
       <section id="work" class="section" aria-labelledby="work-title">
@@ -111,8 +103,8 @@ const projects = [
                 <dd>{{ fact[1] }}</dd>
               </div>
             </dl>
-            <a class="project-card__link" href="#contact"
-              >Discuss this project <span aria-hidden="true">↗</span></a
+            <UiLink class="project-card__link" href="#contact"
+              >Discuss this project <span aria-hidden="true">↗</span></UiLink
             >
           </article>
         </div>
@@ -151,8 +143,8 @@ const projects = [
       <section id="contact" class="contact-section" aria-labelledby="contact-title">
         <p class="eyebrow">03 / Contact</p>
         <h2 id="contact-title">Have a difficult problem worth making clearer?</h2>
-        <a class="contact-link" href="mailto:hello@wellsaik.dev"
-          >hello@wellsaik.dev <span aria-hidden="true">↗</span></a
+        <UiLink class="contact-link" href="mailto:hello@wellsaik.dev" variant="standalone"
+          >hello@wellsaik.dev <span aria-hidden="true">↗</span></UiLink
         >
       </section>
     </main>
