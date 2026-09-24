@@ -9,6 +9,7 @@ import type { NavigationItem } from '@/content/home'
 
 const items: readonly NavigationItem[] = [
   { label: 'Home', kind: 'route', to: { name: 'home', hash: '#hero' } },
+  { label: 'Projects', kind: 'route', to: { name: 'home', hash: '#projects' } },
   { label: 'About', kind: 'route', to: { name: 'home', hash: '#about' } },
   { label: 'Contact', kind: 'href', href: 'mailto:developer@example.com' },
 ]
@@ -51,12 +52,19 @@ describe('SiteHeader', () => {
     expect(componentLinks[1]?.props('to')).toEqual({ name: 'home' })
     expect(wrapper.get('.site-header__brand').attributes('href')).toBe('/')
     expect(navigationLinks).toHaveLength(items.length)
-    expect(navigationLinks.map((link) => link.text())).toEqual(['Home', 'About', 'Contact'])
+    expect(navigationLinks.map((link) => link.text())).toEqual([
+      'Home',
+      'Projects',
+      'About',
+      'Contact',
+    ])
     expect(componentLinks[2]?.props('to')).toEqual({ name: 'home', hash: '#hero' })
-    expect(componentLinks[3]?.props('to')).toEqual({ name: 'home', hash: '#about' })
+    expect(componentLinks[3]?.props('to')).toEqual({ name: 'home', hash: '#projects' })
+    expect(componentLinks[4]?.props('to')).toEqual({ name: 'home', hash: '#about' })
     expect(navigationLinks[0]?.attributes('href')).toBe('/#hero')
-    expect(navigationLinks[1]?.attributes('href')).toBe('/#about')
-    expect(navigationLinks[2]?.attributes('href')).toBe('mailto:developer@example.com')
+    expect(navigationLinks[1]?.attributes('href')).toBe('/#projects')
+    expect(navigationLinks[2]?.attributes('href')).toBe('/#about')
+    expect(navigationLinks[3]?.attributes('href')).toBe('mailto:developer@example.com')
 
     wrapper.unmount()
   })
@@ -126,6 +134,25 @@ describe('SiteHeader', () => {
     expect(wrapper.find('#mobile-navigation-panel').exists()).toBe(false)
     expect(trigger.attributes('aria-expanded')).toBe('false')
     expect(wrapper.find('.site-header__mobile-navigation-link').exists()).toBe(false)
+
+    wrapper.unmount()
+  })
+
+  it('closes the mobile panel after selecting Projects', async () => {
+    const wrapper = await mountHeader()
+    const trigger = wrapper.get('.site-header__menu-trigger')
+
+    await trigger.trigger('click')
+    await nextTick()
+    const projectsLink = wrapper
+      .findAll('.site-header__mobile-navigation-link')
+      .find((link) => link.text() === 'Projects')
+    expect(projectsLink?.attributes('href')).toBe('/#projects')
+    await projectsLink?.trigger('click')
+    await nextTick()
+
+    expect(wrapper.find('#mobile-navigation-panel').exists()).toBe(false)
+    expect(trigger.attributes('aria-expanded')).toBe('false')
 
     wrapper.unmount()
   })

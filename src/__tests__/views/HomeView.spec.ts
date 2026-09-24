@@ -24,18 +24,22 @@ afterEach(() => {
 })
 
 describe('HomeView', () => {
-  it('composes the header before main and places About after the hero', async () => {
+  it('composes the header before main and places Projects before About', async () => {
     const wrapper = await mountHome()
 
     expect(wrapper.get('.home-view').element.children[0]?.tagName).toBe('HEADER')
     expect(wrapper.get('.home-view').element.children[1]?.tagName).toBe('MAIN')
     expect(wrapper.get('main').find('#hero').exists()).toBe(true)
+    expect(wrapper.get('main').find('#projects').exists()).toBe(true)
     expect(wrapper.get('main').find('#about').exists()).toBe(true)
     expect(
       wrapper
         .get('main')
         .find('#hero')
-        .element.compareDocumentPosition(wrapper.get('#about').element),
+        .element.compareDocumentPosition(wrapper.get('#projects').element),
+    ).toBe(4)
+    expect(
+      wrapper.get('#projects').element.compareDocumentPosition(wrapper.get('#about').element),
     ).toBe(4)
   })
 
@@ -43,7 +47,12 @@ describe('HomeView', () => {
     const wrapper = await mountHome()
 
     expect(wrapper.get('main').findAll('h1')).toHaveLength(1)
-    expect(wrapper.get('main').findAll('h2')).toHaveLength(1)
+    expect(wrapper.get('main').findAll('h2')).toHaveLength(2)
+    expect(wrapper.get('main').findAll('article')).toHaveLength(3)
+    const projectsLink = wrapper
+      .findAll('.site-header__navigation-link')
+      .find((link) => link.text() === 'Projects')
+    expect(projectsLink?.attributes('href')).toBe('/#projects')
     const aboutLink = wrapper
       .findAll('.site-header__navigation-link')
       .find((link) => link.text() === 'About')

@@ -44,10 +44,40 @@ export interface AboutContent {
   contactAction: NavigationItem
 }
 
+export interface ProjectImage {
+  src: string
+  alt: string
+  width: number
+  height: number
+}
+
+export interface ProjectContent {
+  id: string
+  number: string
+  category: string
+  title: string
+  summary: string
+  problem: string
+  role: string
+  outcome: string
+  technologies: readonly string[]
+  image: ProjectImage
+  liveAction: NavigationItem
+  sourceAction: NavigationItem
+}
+
+export interface FeaturedProjectsContent {
+  eyebrow: string
+  title: string
+  introduction: string
+  projects: readonly ProjectContent[]
+}
+
 export const homeBrandLabel = 'Developer Name'
 
 export const homeNavigation: readonly NavigationItem[] = [
   { label: 'Home', kind: 'route', to: { name: 'home', hash: '#hero' } },
+  { label: 'Projects', kind: 'route', to: { name: 'home', hash: '#projects' } },
   { label: 'About', kind: 'route', to: { name: 'home', hash: '#about' } },
   { label: 'Contact', kind: 'href', href: 'mailto:developer@example.com' },
 ]
@@ -74,6 +104,110 @@ export const heroContent: HeroContent = {
     external: true,
     newTab: true,
   },
+}
+
+// Development placeholder content. Replace every value and demonstration link before launch.
+export const featuredProjectsContent: FeaturedProjectsContent = {
+  eyebrow: 'Selected work',
+  title: 'A few projects that show how I approach product development.',
+  introduction:
+    'Placeholder introduction explaining that these projects were selected to demonstrate problem solving, technical decisions, and delivery.',
+  projects: [
+    {
+      id: 'project-alpha',
+      number: '01',
+      category: 'Product application',
+      title: 'Project Alpha',
+      summary: 'Placeholder summary of a web product created for a specific user need.',
+      problem: 'Placeholder problem describing the user or business challenge.',
+      role: "Placeholder role describing the developer's direct ownership and collaboration.",
+      outcome:
+        'Placeholder outcome describing a result without presenting an invented metric as fact.',
+      technologies: ['TypeScript', 'Vue', 'API integration', 'Testing'],
+      image: {
+        src: '/images/projects/project-alpha-placeholder.svg',
+        alt: 'Placeholder interface preview for Project Alpha',
+        width: 1200,
+        height: 750,
+      },
+      liveAction: {
+        label: 'Preview placeholder',
+        kind: 'href',
+        href: 'https://example.com',
+        external: true,
+        newTab: true,
+      },
+      sourceAction: {
+        label: 'Source placeholder',
+        kind: 'href',
+        href: 'https://example.com',
+        external: true,
+        newTab: true,
+      },
+    },
+    {
+      id: 'project-beta',
+      number: '02',
+      category: 'Platform engineering',
+      title: 'Project Beta',
+      summary: 'Placeholder summary of a reliable service or internal platform.',
+      problem: 'Placeholder problem describing a workflow, scale, or reliability constraint.',
+      role: 'Placeholder role describing architecture and implementation responsibility.',
+      outcome: 'Placeholder outcome describing the intended operational improvement.',
+      technologies: ['Node.js', 'PostgreSQL', 'Observability', 'CI/CD'],
+      image: {
+        src: '/images/projects/project-beta-placeholder.svg',
+        alt: 'Placeholder service architecture preview for Project Beta',
+        width: 1200,
+        height: 750,
+      },
+      liveAction: {
+        label: 'Preview placeholder',
+        kind: 'href',
+        href: 'https://example.com',
+        external: true,
+        newTab: true,
+      },
+      sourceAction: {
+        label: 'Source placeholder',
+        kind: 'href',
+        href: 'https://example.com',
+        external: true,
+        newTab: true,
+      },
+    },
+    {
+      id: 'project-gamma',
+      number: '03',
+      category: 'Developer experience',
+      title: 'Project Gamma',
+      summary: 'Placeholder summary of a reusable system that improves consistency or delivery.',
+      problem: 'Placeholder problem describing fragmented UI or development workflows.',
+      role: 'Placeholder role describing component, documentation, and adoption work.',
+      outcome: 'Placeholder outcome describing the intended quality or productivity benefit.',
+      technologies: ['Vue', 'TypeScript', 'Accessibility', 'Documentation'],
+      image: {
+        src: '/images/projects/project-gamma-placeholder.svg',
+        alt: 'Placeholder developer tool preview for Project Gamma',
+        width: 1200,
+        height: 750,
+      },
+      liveAction: {
+        label: 'Preview placeholder',
+        kind: 'href',
+        href: 'https://example.com',
+        external: true,
+        newTab: true,
+      },
+      sourceAction: {
+        label: 'Source placeholder',
+        kind: 'href',
+        href: 'https://example.com',
+        external: true,
+        newTab: true,
+      },
+    },
+  ],
 }
 
 export const aboutContent: AboutContent = {

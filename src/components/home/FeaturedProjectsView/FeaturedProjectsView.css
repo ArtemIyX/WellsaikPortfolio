@@ -1,0 +1,31 @@
+.featured-projects-view {
+  scroll-margin-top: 6rem;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.featured-projects-view :deep(.ui-section__inner) {
+  width: min(100% - (2 * var(--layout-gutter)), var(--layout-content-max));
+}
+
+.featured-projects-view :deep(.ui-section__intro) {
+  max-width: var(--measure);
+}
+
+.featured-projects-view__list {
+  display: grid;
+  gap: clamp(var(--space-8), 6vw, var(--space-16));
+  margin: var(--space-8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.featured-projects-view__list > li {
+  min-width: 0;
+}
+
+@media (max-width: 52rem) {
+  .featured-projects-view__list {
+    gap: var(--space-8);
+    margin-top: var(--space-6);
+  }
+}
