@@ -1,0 +1,113 @@
+.about-view {
+  scroll-margin-top: calc(4.5rem + var(--space-4));
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.about-view :deep(.ui-section__inner) {
+  width: min(100% - (2 * var(--layout-gutter)), var(--layout-content-max));
+}
+
+.about-view__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(17rem, 0.65fr);
+  align-items: start;
+  gap: clamp(var(--space-8), 8vw, var(--space-16));
+}
+
+.about-view__story {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-6);
+}
+
+.about-view__paragraphs {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 62ch;
+}
+
+.about-view__paragraphs :deep(.ui-text),
+.about-view__personal-note {
+  margin: 0;
+}
+
+.about-view__personal-note {
+  max-width: 58ch;
+  padding-top: var(--space-2);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.about-view__actions {
+  margin-top: var(--space-2);
+}
+
+.about-view__details {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.about-view__details :deep(h3) {
+  margin: 0;
+}
+
+.about-view__facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: var(--space-3) var(--space-4);
+  margin: 0;
+}
+
+.about-view__facts dt,
+.about-view__facts dd {
+  margin: 0;
+}
+
+.about-view__facts dd {
+  text-align: end;
+}
+
+.about-view__skills {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-view__skills li {
+  min-width: 0;
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-small);
+}
+
+@media (max-width: 52rem) {
+  .about-view__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 32rem) {
+  .about-view__facts {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  .about-view__facts dd {
+    text-align: start;
+  }
+
+  .about-view__skills {
+    grid-template-columns: 1fr;
+  }
+
+  .about-view__actions,
+  .about-view__actions :deep(.ui-link) {
+    width: 100%;
+  }
+
+  .about-view__actions :deep(.ui-link) {
+    justify-content: center;
+  }
+}

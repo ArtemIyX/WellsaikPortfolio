@@ -24,12 +24,31 @@ afterEach(() => {
 })
 
 describe('HomeView', () => {
-  it('composes the header before main and includes the hero', async () => {
+  it('composes the header before main and places About after the hero', async () => {
     const wrapper = await mountHome()
 
     expect(wrapper.get('.home-view').element.children[0]?.tagName).toBe('HEADER')
     expect(wrapper.get('.home-view').element.children[1]?.tagName).toBe('MAIN')
     expect(wrapper.get('main').find('#hero').exists()).toBe(true)
+    expect(wrapper.get('main').find('#about').exists()).toBe(true)
+    expect(
+      wrapper
+        .get('main')
+        .find('#hero')
+        .element.compareDocumentPosition(wrapper.get('#about').element),
+    ).toBe(4)
+  })
+
+  it('keeps one page heading and matches About navigation to its target', async () => {
+    const wrapper = await mountHome()
+
+    expect(wrapper.get('main').findAll('h1')).toHaveLength(1)
+    expect(wrapper.get('main').findAll('h2')).toHaveLength(1)
+    const aboutLink = wrapper
+      .findAll('.site-header__navigation-link')
+      .find((link) => link.text() === 'About')
+    expect(aboutLink?.attributes('href')).toBe('/#about')
+    expect(wrapper.get('#about').attributes('id')).toBe('about')
   })
 
   it('provides a working skip-link target and hides the debug route', async () => {

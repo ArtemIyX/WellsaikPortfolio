@@ -1,4 +1,5 @@
-export type UiTextElement = 'p' | 'span' | 'div' | 'strong' | 'small' | 'h1' | 'h2' | 'h3' | 'h4'
+export type UiTextElement =
+  'p' | 'span' | 'div' | 'strong' | 'small' | 'dt' | 'dd' | 'h1' | 'h2' | 'h3' | 'h4'
 export type UiTextRole = 'display' | 'heading' | 'body' | 'label' | 'caption' | 'data'
 export type UiTextTone =
   'default' | 'muted' | 'subtle' | 'accent' | 'positive' | 'warning' | 'danger'

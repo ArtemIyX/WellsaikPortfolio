@@ -9,6 +9,7 @@ import type { NavigationItem } from '@/content/home'
 
 const items: readonly NavigationItem[] = [
   { label: 'Home', kind: 'route', to: { name: 'home', hash: '#hero' } },
+  { label: 'About', kind: 'route', to: { name: 'home', hash: '#about' } },
   { label: 'Contact', kind: 'href', href: 'mailto:developer@example.com' },
 ]
 
@@ -50,10 +51,12 @@ describe('SiteHeader', () => {
     expect(componentLinks[1]?.props('to')).toEqual({ name: 'home' })
     expect(wrapper.get('.site-header__brand').attributes('href')).toBe('/')
     expect(navigationLinks).toHaveLength(items.length)
-    expect(navigationLinks.map((link) => link.text())).toEqual(['Home', 'Contact'])
+    expect(navigationLinks.map((link) => link.text())).toEqual(['Home', 'About', 'Contact'])
     expect(componentLinks[2]?.props('to')).toEqual({ name: 'home', hash: '#hero' })
+    expect(componentLinks[3]?.props('to')).toEqual({ name: 'home', hash: '#about' })
     expect(navigationLinks[0]?.attributes('href')).toBe('/#hero')
-    expect(navigationLinks[1]?.attributes('href')).toBe('mailto:developer@example.com')
+    expect(navigationLinks[1]?.attributes('href')).toBe('/#about')
+    expect(navigationLinks[2]?.attributes('href')).toBe('mailto:developer@example.com')
 
     wrapper.unmount()
   })
@@ -103,6 +106,26 @@ describe('SiteHeader', () => {
     expect(trigger.attributes('aria-expanded')).toBe('false')
     expect(document.activeElement).toBe(trigger.element)
     expect(document.body.classList).not.toContain('site-header-menu-open')
+
+    wrapper.unmount()
+  })
+
+  it('closes the mobile panel after selecting About', async () => {
+    const wrapper = await mountHeader()
+    const trigger = wrapper.get('.site-header__menu-trigger')
+
+    await trigger.trigger('click')
+    await nextTick()
+    const aboutLink = wrapper
+      .findAll('.site-header__mobile-navigation-link')
+      .find((link) => link.text() === 'About')
+    expect(aboutLink).toBeDefined()
+    await aboutLink?.trigger('click')
+    await nextTick()
+
+    expect(wrapper.find('#mobile-navigation-panel').exists()).toBe(false)
+    expect(trigger.attributes('aria-expanded')).toBe('false')
+    expect(wrapper.find('.site-header__mobile-navigation-link').exists()).toBe(false)
 
     wrapper.unmount()
   })
