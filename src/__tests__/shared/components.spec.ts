@@ -73,12 +73,12 @@ describe('shared portfolio components', () => {
   })
   it('implements ThemeSelector v-model with icon buttons in both presentations', async () => {
     const wrapper = mount(ThemeSelector, {
-      props: { modelValue: 'system', presentation: 'segmented' },
+      props: { modelValue: 'light', presentation: 'segmented' },
     })
-    await wrapper.get('button:nth-child(3)').trigger('click')
+    await wrapper.get('button:nth-child(2)').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['dark'])
     await wrapper.setProps({ presentation: 'select' })
-    await wrapper.get('button:nth-child(2)').trigger('click')
+    await wrapper.get('button:nth-child(1)').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['light'])
     expect(wrapper.find('select').exists()).toBe(false)
   })

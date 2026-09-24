@@ -4,7 +4,7 @@ import { ThemeSelector, UiBox, UiLink } from '@/components/shared'
 
 const { theme, setTheme } = useTheme()
 
-const updateTheme = (value: 'system' | 'light' | 'dark'): void => setTheme(value)
+const updateTheme = (value: 'light' | 'dark'): void => setTheme(value)
 
 const projects = [
   {
@@ -68,10 +68,18 @@ const projects = [
           <div class="hero__actions">
             <UiLink class="hero-action" variant="button-primary" href="#work"
               >View selected work <span aria-hidden="true">↘</span></UiLink
-            ><UiLink class="hero-action" variant="button-secondary" href="#contact">Start a conversation</UiLink>
+            ><UiLink class="hero-action" variant="button-secondary" href="#contact"
+              >Start a conversation</UiLink
+            >
           </div>
         </div>
-        <UiBox class="signal-panel" as="aside" variant="surface" padding="medium" aria-label="Current focus">
+        <UiBox
+          class="signal-panel"
+          as="aside"
+          variant="surface"
+          padding="medium"
+          aria-label="Current focus"
+        >
           <div class="signal-panel__top">
             <span>Current focus</span><span class="signal-panel__dot" aria-hidden="true"></span>
           </div>

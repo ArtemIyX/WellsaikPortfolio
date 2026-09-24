@@ -10,7 +10,6 @@ export interface ThemeSelectorProps {
 }
 
 export const themeOptions: readonly { value: ThemePreference; label: string }[] = [
-  { value: 'system', label: 'System' },
   { value: 'light', label: 'Light' },
   { value: 'dark', label: 'Dark' },
 ]
