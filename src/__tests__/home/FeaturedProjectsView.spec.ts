@@ -15,8 +15,8 @@ describe('FeaturedProjectsView', () => {
     expect(wrapper.findAll('article')).toHaveLength(3)
     expect(wrapper.findAll('article h3').map((heading) => heading.text())).toEqual([
       featuredProjectsContent.projects[0]?.title,
-      'Project Beta',
-      'Project Gamma',
+      featuredProjectsContent.projects[1]?.title,
+      'Rockbelt',
     ])
     expect(wrapper.findAll('article').map((article) => article.classes())).toEqual([
       expect.arrayContaining(['project-card--media-start']),
@@ -25,6 +25,13 @@ describe('FeaturedProjectsView', () => {
     ])
     expect(wrapper.findAll('article')[0]?.findAll('a').map((link) => link.attributes('href'))).toEqual([
       'https://newjourney.online/en/',
+    ])
+    expect(wrapper.findAll('article')[1]?.findAll('a').map((link) => link.attributes('href'))).toEqual([
+      'https://youtu.be/m4f0rsE2DLQ',
+      'https://store.steampowered.com/app/3421920/Riftborn/',
+    ])
+    expect(wrapper.findAll('article')[2]?.findAll('a').map((link) => link.attributes('href'))).toEqual([
+      'https://wellsaik.itch.io/rockbelt',
     ])
   })
 

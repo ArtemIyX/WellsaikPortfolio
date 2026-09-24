@@ -62,10 +62,15 @@ export interface ExperienceEntry {
   technologies: readonly string[]
 }
 
+export interface SkillItem {
+  name: string
+  level?: string
+}
+
 export interface SkillGroup {
   id: string
   title: string
-  items: readonly string[]
+  items: readonly SkillItem[]
 }
 
 export interface ExperienceSkillsContent {
@@ -228,6 +233,7 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       labels: {
         problem: '10k entities',
         outcome: 'User experience',
+        technologies: 'Tech stack',
       },
       image: {
         src: '/images/projects/endless-war.webp',
@@ -244,63 +250,83 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       },
     },
     {
-      id: 'project-beta',
+      id: 'riftborn',
       number: '02',
-      category: 'Platform engineering',
-      title: 'Project Beta',
-      summary: 'Placeholder summary of a reliable service or internal platform.',
-      problem: { text: 'Placeholder problem describing a workflow, scale, or reliability constraint.' },
-      role: { text: 'Placeholder role describing architecture and implementation responsibility.' },
-      outcome: { text: 'Placeholder outcome describing the intended operational improvement.' },
-      technologies: ['Node.js', 'PostgreSQL', 'Observability', 'CI/CD'],
+      category: 'Multiplayer first-person hack-and-slash',
+      title: 'Riftborn',
+      summary:
+        'A multiplayer first-person hack-and-slash built around three-team combat, distinct classes, weapons, custom abilities, and varied game modes.',
+      problem: {
+        items: [
+          'Three-team multiplayer combat',
+          'Distinct classes, weapons, and custom abilities',
+          'Multiple game modes for varied team play',
+        ],
+      },
+      role: { text: 'Unreal Engine Developer' },
+      outcome: {
+        text: 'Released in public alpha and gathered substantial player feedback. Development paused after a change in direction because the available resources could not support the content needed for a full release; a follow-up game is planned.',
+      },
+      technologies: ['Unreal Engine', 'Steam', 'Multiplayer', 'VOIP'],
+      labels: {
+        problem: 'Game systems',
+        outcome: 'Public alpha',
+        technologies: 'Tech stack',
+      },
       image: {
-        src: '/images/projects/project-beta-placeholder.svg',
-        alt: 'Placeholder service architecture preview for Project Beta',
+        src: '/images/projects/riftborn.webp',
+        alt: 'Gameplay preview from Riftborn',
         width: 1200,
         height: 750,
       },
       liveAction: {
-        label: 'Preview placeholder',
+        label: 'Watch trailer',
         kind: 'href',
-        href: 'https://example.com',
+        href: 'https://youtu.be/m4f0rsE2DLQ',
         external: true,
         newTab: true,
       },
       sourceAction: {
-        label: 'Source placeholder',
+        label: 'View on Steam',
         kind: 'href',
-        href: 'https://example.com',
+        href: 'https://store.steampowered.com/app/3421920/Riftborn/',
         external: true,
         newTab: true,
       },
     },
     {
-      id: 'project-gamma',
+      id: 'rockbelt',
       number: '03',
-      category: 'Developer experience',
-      title: 'Project Gamma',
-      summary: 'Placeholder summary of a reusable system that improves consistency or delivery.',
-      problem: { text: 'Placeholder problem describing fragmented UI or development workflows.' },
-      role: { text: 'Placeholder role describing component, documentation, and adoption work.' },
-      outcome: { text: 'Placeholder outcome describing the intended quality or productivity benefit.' },
-      technologies: ['Vue', 'TypeScript', 'Accessibility', 'Documentation'],
+      category: '8-player sci-fi turn-based game',
+      title: 'Rockbelt',
+      summary:
+        'A completed eight-player sci-fi turn-based multiplayer game, built solo in four focused work weeks to prove that a fully finished game could be shipped quickly.',
+      problem: {
+        items: [
+          'Eight-player multiplayer turn-based gameplay',
+          'Ten rounds of playtesting with real players',
+          'Original sci-fi world, gameplay, and visual direction',
+        ],
+      },
+      role: { text: 'Solo developer — gameplay, networking, and 3D art' },
+      outcome: {
+        text: 'Shipped as a complete solo project after ten rounds of player testing, demonstrating a focused end-to-end game-development process from concept through release.',
+      },
+      technologies: ['Unreal Engine', 'Custom TCP networking', 'LAN multiplayer', 'Blender'],
+      labels: {
+        problem: 'Development scope',
+        technologies: 'Tech stack',
+      },
       image: {
-        src: '/images/projects/project-gamma-placeholder.svg',
-        alt: 'Placeholder developer tool preview for Project Gamma',
+        src: '/images/projects/rockbelt.webp',
+        alt: 'Gameplay preview from Rockbelt',
         width: 1200,
         height: 750,
       },
       liveAction: {
-        label: 'Preview placeholder',
+        label: 'Play on itch.io',
         kind: 'href',
-        href: 'https://example.com',
-        external: true,
-        newTab: true,
-      },
-      sourceAction: {
-        label: 'Source placeholder',
-        kind: 'href',
-        href: 'https://example.com',
+        href: 'https://wellsaik.itch.io/rockbelt',
         external: true,
         newTab: true,
       },
@@ -360,31 +386,67 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
     },
   ],
   skillGroups: [
-    { id: 'languages', title: 'Languages', items: ['Language A', 'Language B', 'Language C'] },
     {
-      id: 'frontend',
-      title: 'Frontend',
-      items: ['Framework A', 'UI architecture', 'Accessibility'],
+      id: 'languages',
+      title: 'Languages',
+      items: [
+        { name: 'English', level: 'Upper-intermediate' },
+        { name: 'Latvian', level: 'Elementary' },
+        { name: 'Ukrainian', level: 'Native' },
+        { name: 'Russian', level: 'Fluent' },
+      ],
     },
     {
-      id: 'backend-data',
-      title: 'Backend & data',
-      items: ['Runtime A', 'Database A', 'API design'],
+      id: 'unreal-engine',
+      title: 'Unreal Engine',
+      items: [
+        { name: 'Gameplay Framework' },
+        { name: 'Blueprint/C++' },
+        { name: 'Multiplayer' },
+        { name: 'UMG' },
+        { name: 'GAS' },
+        { name: 'ECS / MASS' },
+        { name: 'Subsystems' },
+        { name: 'TCP/UDP' },
+        { name: 'HTTP/WebSocket' },
+      ],
     },
     {
-      id: 'quality',
-      title: 'Quality',
-      items: ['Unit testing', 'Integration testing', 'Code review'],
+      id: 'web-game-ui',
+      title: 'Web Game UI',
+      items: [{ name: 'Vue.js / TypeScript' }, { name: 'HTML / CSS' }, { name: 'Protobuf / JSON' }],
     },
     {
-      id: 'delivery',
-      title: 'Delivery',
-      items: ['CI/CD', 'Cloud platform', 'Observability'],
+      id: 'backend',
+      title: 'Backend',
+      items: [
+        { name: 'C# / ASP.NET / Entity Framework' },
+        { name: 'Rust / Tauri' },
+        { name: 'C++' },
+      ],
     },
     {
-      id: 'collaboration',
-      title: 'Collaboration',
-      items: ['Technical planning', 'Documentation', 'Mentoring placeholder'],
+      id: 'game-tools-delivery',
+      title: 'Game Tools & Delivery',
+      items: [
+        { name: 'Git' },
+        { name: 'Steamworks' },
+        { name: 'Blender' },
+        { name: 'Build automation / CI' },
+        { name: 'Profiling & optimization' },
+      ],
+    },
+    {
+      id: 'engineering-practices',
+      title: 'Engineering Practices',
+      items: [
+        { name: 'Unit Testing' },
+        { name: 'Debugging' },
+        { name: 'Performance optimization' },
+        { name: 'Networking architecture' },
+        { name: 'Technical documentation' },
+        { name: 'Code review' },
+      ],
     },
   ],
 }

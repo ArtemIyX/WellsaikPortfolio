@@ -24,7 +24,9 @@ const customContent: ExperienceSkillsContent = {
       role: 'Custom second role',
     },
   ],
-  skillGroups: [{ id: 'custom-group', title: 'Custom group', items: ['Custom item'] }],
+  skillGroups: [
+    { id: 'custom-group', title: 'Custom group', items: [{ name: 'Custom item', level: 'Expert' }] },
+  ],
 }
 
 describe('ExperienceSkillsView', () => {
@@ -61,6 +63,18 @@ describe('ExperienceSkillsView', () => {
     expect(wrapper.text()).toContain('Custom second role')
     expect(wrapper.text()).toContain('Custom group')
     expect(wrapper.text()).toContain('Custom item')
+    expect(wrapper.text()).toContain('Expert')
     expect(wrapper.findAll('.experience-card')).toHaveLength(customContent.entries.length)
+  })
+
+  it('renders language proficiency levels when supplied', () => {
+    const wrapper = mount(ExperienceSkillsView, { props: { content: experienceSkillsContent } })
+    const languages = experienceSkillsContent.skillGroups.find((group) => group.id === 'languages')
+
+    expect(wrapper.get('.experience-skills-view__group').text()).toContain('Ukrainian')
+    for (const language of languages?.items ?? []) {
+      expect(wrapper.text()).toContain(language.name)
+      if (language.level) expect(wrapper.text()).toContain(language.level)
+    }
   })
 })

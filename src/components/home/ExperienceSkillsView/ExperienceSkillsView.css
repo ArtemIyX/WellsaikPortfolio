@@ -58,11 +58,23 @@
   margin: 0;
 }
 
+.experience-skills-view__group-title {
+  font-size: 1.25rem;
+  line-height: 1.25;
+  padding-bottom: var(--space-2);
+}
+
 .experience-skills-view__group ul {
   display: grid;
   gap: var(--space-2);
   margin: 0;
   padding-left: 1.25rem;
+}
+
+.experience-skills-view__skill {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
 }
 
 @media (max-width: 60rem) {

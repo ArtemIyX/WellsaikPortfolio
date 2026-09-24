@@ -50,10 +50,22 @@ defineProps<ExperienceSkillsViewProps>()
             variant="outline"
             padding="medium"
           >
-            <UiText as="h4" role="heading">{{ group.title }}</UiText>
+            <UiText
+              as="h4"
+              class="experience-skills-view__group-title"
+              role="body"
+              weight="medium"
+            >
+              {{ group.title }}
+            </UiText>
             <ul>
-              <li v-for="item in group.items" :key="item">
-                <UiText as="span" role="label">{{ item }}</UiText>
+              <li v-for="item in group.items" :key="item.name">
+                <span class="experience-skills-view__skill">
+                  <UiText as="span" role="label">{{ item.name }}</UiText>
+                  <UiText v-if="item.level" as="span" role="label" tone="muted">
+                    ({{ item.level }})
+                  </UiText>
+                </span>
               </li>
             </ul>
           </UiBox>
