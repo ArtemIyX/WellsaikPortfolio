@@ -14,6 +14,7 @@ defineProps<ExperienceSkillsViewProps>()
     spacing="default"
     width="content"
     surface="default"
+    divider="bottom"
     labelledby="experience-title"
   >
     <template v-if="content.eyebrow" #eyebrow>

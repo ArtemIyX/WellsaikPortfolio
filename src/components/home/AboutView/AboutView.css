@@ -1,6 +1,5 @@
 .about-view {
   scroll-margin-top: calc(4.5rem + var(--space-4));
-  border-bottom: var(--border-width) solid var(--color-border);
 }
 
 .about-view :deep(.ui-section__inner) {

@@ -7,7 +7,14 @@ defineProps<HeroViewProps>()
 </script>
 
 <template>
-  <UiSection id="hero" class="hero-view" spacing="hero" width="content" labelledby="hero-title">
+  <UiSection
+    id="hero"
+    class="hero-view"
+    spacing="hero"
+    width="content"
+    divider="bottom"
+    labelledby="hero-title"
+  >
     <div class="hero-view__grid">
       <div class="hero-view__copy">
         <UiText as="p" role="label" tone="accent" weight="medium">

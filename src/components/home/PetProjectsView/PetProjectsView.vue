@@ -13,6 +13,7 @@ defineProps<PetProjectsViewProps>()
     class="pet-projects-view"
     spacing="default"
     width="content"
+    divider="bottom"
     labelledby="pet-projects-title"
   >
     <template #title>

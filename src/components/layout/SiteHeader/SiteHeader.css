@@ -2,7 +2,9 @@
   position: sticky;
   top: 0;
   z-index: 30;
-  background: var(--color-bg);
+  background: var(--color-header-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: var(--border-width) solid var(--color-border);
 }
 

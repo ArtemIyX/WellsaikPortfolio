@@ -13,6 +13,7 @@ defineProps<FeaturedProjectsViewProps>()
     class="featured-projects-view"
     spacing="default"
     width="content"
+    divider="bottom"
     labelledby="projects-title"
   >
     <template v-if="content.eyebrow" #eyebrow>

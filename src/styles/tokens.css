@@ -42,6 +42,16 @@
   --color-positive: #0f766e;
   --color-warning: #b45309;
   --color-danger: #b42318;
+  --page-background:
+    linear-gradient(to bottom, rgba(247, 249, 252, 0.94), #e8edf4),
+    radial-gradient(circle at 50% 0%, rgba(15, 107, 120, 0.1), transparent 28%);
+  --page-grid-line: rgba(15, 23, 42, 0.045);
+  --page-grid-size: 24px;
+  --page-grid-mask: radial-gradient(ellipse at 50% 28%, #000 25%, transparent 88%);
+  --color-section-surface: transparent;
+  --color-section-surface-muted: transparent;
+  --color-header-surface: rgba(247, 249, 252, 0.86);
+  --color-footer-surface: rgba(238, 242, 247, 0.62);
 }
 :root[data-theme='dark'] {
   color-scheme: dark;
@@ -61,6 +71,14 @@
   --color-positive: #5eead4;
   --color-warning: #fbbf24;
   --color-danger: #fb7185;
+  --page-background:
+    linear-gradient(to bottom, rgba(9, 14, 23, 0.93), #05080d),
+    radial-gradient(circle at 50% 0%, rgba(94, 234, 212, 0.1), transparent 28%);
+  --page-grid-line: rgba(255, 255, 255, 0.024);
+  --color-section-surface: transparent;
+  --color-section-surface-muted: transparent;
+  --color-header-surface: rgba(6, 10, 16, 0.9);
+  --color-footer-surface: rgba(4, 7, 12, 0.72);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
@@ -81,5 +99,13 @@
     --color-positive: #5eead4;
     --color-warning: #fbbf24;
     --color-danger: #fb7185;
+    --page-background:
+      linear-gradient(to bottom, rgba(9, 14, 23, 0.93), #05080d),
+      radial-gradient(circle at 50% 0%, rgba(94, 234, 212, 0.1), transparent 28%);
+    --page-grid-line: rgba(255, 255, 255, 0.024);
+    --color-section-surface: transparent;
+    --color-section-surface-muted: transparent;
+    --color-header-surface: rgba(6, 10, 16, 0.9);
+    --color-footer-surface: rgba(4, 7, 12, 0.72);
   }
 }

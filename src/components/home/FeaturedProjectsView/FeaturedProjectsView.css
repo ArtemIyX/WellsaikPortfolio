@@ -1,6 +1,5 @@
 .featured-projects-view {
   scroll-margin-top: 6rem;
-  border-bottom: var(--border-width) solid var(--color-border);
 }
 
 .featured-projects-view :deep(.ui-section__inner) {

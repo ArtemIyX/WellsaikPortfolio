@@ -1,0 +1,46 @@
+.home-view {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  overflow: clip;
+  background: var(--page-background);
+}
+
+.home-view::before {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--page-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--page-grid-line) 1px, transparent 1px);
+  background-size: var(--page-grid-size) var(--page-grid-size);
+  -webkit-mask-image: var(--page-grid-mask);
+  mask-image: var(--page-grid-mask);
+  content: '';
+  pointer-events: none;
+}
+
+.home-view > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (forced-colors: active) {
+  .home-view {
+    background: Canvas;
+  }
+
+  .home-view::before {
+    display: none;
+  }
+}
+
+@media print {
+  .home-view {
+    background: Canvas;
+  }
+
+  .home-view::before {
+    display: none;
+  }
+}

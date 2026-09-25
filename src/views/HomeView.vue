@@ -59,3 +59,5 @@ const acceptCookiePreferences = (): void => {
     />
   </div>
 </template>
+
+<style scoped src="./HomeView.css"></style>

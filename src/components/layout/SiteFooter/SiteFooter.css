@@ -1,4 +1,5 @@
 .site-footer {
+  background: var(--color-footer-surface);
   border-top: var(--border-width) solid var(--color-border);
 }
 

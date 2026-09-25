@@ -1,12 +1,12 @@
 .ui-section {
   color: var(--color-text);
-  background: var(--color-bg);
+  background: transparent;
 }
 .ui-section--surface-default {
-  background: var(--color-surface);
+  background: var(--color-section-surface);
 }
 .ui-section--surface-muted {
-  background: var(--color-surface-muted);
+  background: var(--color-section-surface-muted);
 }
 .ui-section__inner {
   width: 100%;

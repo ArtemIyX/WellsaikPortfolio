@@ -1,6 +1,5 @@
 .hero-view {
   overflow: clip;
-  border-bottom: var(--border-width) solid var(--color-border);
 }
 
 .hero-view :deep(.ui-section__inner) {
