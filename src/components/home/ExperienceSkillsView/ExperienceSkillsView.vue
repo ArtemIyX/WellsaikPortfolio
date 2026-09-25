@@ -50,12 +50,7 @@ defineProps<ExperienceSkillsViewProps>()
             variant="outline"
             padding="medium"
           >
-            <UiText
-              as="h4"
-              class="experience-skills-view__group-title"
-              role="body"
-              weight="medium"
-            >
+            <UiText as="h4" class="experience-skills-view__group-title" role="body" weight="medium">
               {{ group.title }}
             </UiText>
             <ul>

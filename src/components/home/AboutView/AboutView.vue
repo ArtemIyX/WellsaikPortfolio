@@ -40,7 +40,13 @@ const formatFactValue = (fact: AboutFact): string =>
         <UiText class="about-view__personal-note" tone="subtle">
           {{ content.personalNote }}
         </UiText>
-        <UiText class="about-view__availability" role="label" tone="positive" weight="medium">
+        <UiText
+          v-if="content.availability"
+          class="about-view__availability"
+          role="label"
+          tone="positive"
+          weight="medium"
+        >
           <span class="about-view__status" aria-hidden="true"></span>
           {{ content.availability }}
         </UiText>

@@ -42,7 +42,7 @@ export interface AboutContent {
   paragraphs: readonly string[]
   facts: readonly AboutFact[]
   personalNote: string
-  availability: string
+  availability?: string
   contactAction: NavigationItem
 }
 
@@ -57,6 +57,7 @@ export interface ExperienceEntry {
   period: ExperiencePeriod
   organization: string
   organizationUrl?: string
+  applicationUrl?: string
   role: string
   location?: string
   engagement?: string
@@ -399,6 +400,38 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
       ],
     },
     {
+      id: 'swiss-tech-capital',
+      period: { label: '05/2024 — 07/2025' },
+      organization: 'Swiss Tech Capital AG',
+      organizationUrl: 'https://blockzero.rs/',
+      role: 'Mobile Application Developer',
+      location: 'Riga, Latvia',
+      engagement: 'Part-time · Remote',
+      summary:
+        'Owned the entire lifecycle of a consumer-grade, cross-platform mobile application built in C# (.NET 6/7) and delivered to iOS and Android with .NET MAUI.',
+      achievements: [
+        'Designed the application architecture, CI/CD workflow, and App Store and Play Store release process.',
+        'Built .NET MAUI Blazor Hybrid features with custom handlers, effects, dependency injection, and Shell navigation.',
+        'Integrated native iOS and Android SDKs, including bindings and APNs/FCM push notifications.',
+        'Implemented certificate pinning, encrypted keychain and keystore storage, and OWASP MASVS compliance measures.',
+        'Improved performance through UI virtualization, incremental list loading, image caching, and memory profiling for smooth 60 FPS scrolling.',
+        'Developed typed REST clients, Web3 RPC calls, SignalR balance and transaction feeds, and store delivery pipelines with App Center and Firebase dashboards.',
+      ],
+      technologies: [
+        'C#',
+        '.NET 6/7',
+        '.NET MAUI',
+        'Blazor Hybrid',
+        'iOS / Android',
+        'REST / SignalR',
+        'Web3 RPC',
+        'CI/CD',
+        'Firebase',
+      ],
+      applicationUrl:
+        'https://play.google.com/store/apps/details?id=com.blockzerowallet.app&hl=bs&pli=1',
+    },
+    {
       id: 'coffeee-io',
       period: { label: '07/2022 — 06/2023' },
       organization: 'Coffeee.io',
@@ -494,12 +527,11 @@ export const aboutContent: AboutContent = {
   eyebrow: '',
   title: 'A developer focused on useful, carefully made software.',
   paragraphs: [
-    "Placeholder biography describing the developer's current focus and the kinds of products they enjoy building.",
-    'Placeholder explanation of how the developer approaches collaboration, accessibility, maintainability, and thoughtful delivery.',
+    'I am an Unreal Engine C++ programmer specializing in developing gameplay, simulation, and networking systems. I have a passion for making innovative games a reality through creating an experience that responds and interacts with players.',
+    'I’m available for freelance projects and open to building custom applications across desktop, mobile, web, and game platforms.',
   ],
   personalNote:
-    'Outside of development, this placeholder can introduce one or two interests that add personality without becoming a full biography.',
-  availability: 'Placeholder availability status',
+    'Away from development, I love to play around with game design ideas, learn about how complicated systems function, and realize grand visions in games.',
   contactAction: {
     label: 'Start a conversation',
     kind: 'href',

@@ -52,4 +52,25 @@ describe('ExperienceCard', () => {
       rel: 'noopener noreferrer',
     })
   })
+
+  it('links the application when an application URL is provided', () => {
+    const wrapper = mount(ExperienceCard, {
+      props: {
+        entry: {
+          ...entry,
+          applicationUrl:
+            'https://play.google.com/store/apps/details?id=com.blockzerowallet.app&hl=bs&pli=1',
+        },
+      },
+    })
+
+    const applicationLink = wrapper
+      .findAll('a')
+      .find((link) => link.text().includes('View application'))
+    expect(applicationLink?.attributes()).toMatchObject({
+      href: 'https://play.google.com/store/apps/details?id=com.blockzerowallet.app&hl=bs&pli=1',
+      target: '_blank',
+      rel: 'noopener noreferrer',
+    })
+  })
 })

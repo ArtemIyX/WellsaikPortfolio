@@ -25,7 +25,11 @@ const customContent: ExperienceSkillsContent = {
     },
   ],
   skillGroups: [
-    { id: 'custom-group', title: 'Custom group', items: [{ name: 'Custom item', level: 'Expert' }] },
+    {
+      id: 'custom-group',
+      title: 'Custom group',
+      items: [{ name: 'Custom item', level: 'Expert' }],
+    },
   ],
 }
 

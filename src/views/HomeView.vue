@@ -15,7 +15,8 @@ import {
   homeNavigation,
 } from '@/content/home'
 
-const { hasAcceptedCookies, shouldShowCookieBanner, acceptCookies, rejectCookies } = useCookieConsent()
+const { hasAcceptedCookies, shouldShowCookieBanner, acceptCookies, rejectCookies } =
+  useCookieConsent()
 const { theme, setTheme } = useTheme(hasAcceptedCookies)
 
 const acceptCookiePreferences = (): void => {

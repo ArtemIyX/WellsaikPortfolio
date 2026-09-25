@@ -23,16 +23,27 @@ describe('FeaturedProjectsView', () => {
       expect.arrayContaining(['project-card--media-end']),
       expect.arrayContaining(['project-card--media-start']),
     ])
-    expect(wrapper.findAll('article')[0]?.findAll('a').map((link) => link.attributes('href'))).toEqual([
-      'https://newjourney.online/en/',
-    ])
-    expect(wrapper.findAll('article')[1]?.findAll('a').map((link) => link.attributes('href'))).toEqual([
+    expect(
+      wrapper
+        .findAll('article')[0]
+        ?.findAll('a')
+        .map((link) => link.attributes('href')),
+    ).toEqual(['https://newjourney.online/en/'])
+    expect(
+      wrapper
+        .findAll('article')[1]
+        ?.findAll('a')
+        .map((link) => link.attributes('href')),
+    ).toEqual([
       'https://youtu.be/m4f0rsE2DLQ',
       'https://store.steampowered.com/app/3421920/Riftborn/',
     ])
-    expect(wrapper.findAll('article')[2]?.findAll('a').map((link) => link.attributes('href'))).toEqual([
-      'https://wellsaik.itch.io/rockbelt',
-    ])
+    expect(
+      wrapper
+        .findAll('article')[2]
+        ?.findAll('a')
+        .map((link) => link.attributes('href')),
+    ).toEqual(['https://wellsaik.itch.io/rockbelt'])
   })
 
   it('renders custom content instead of relying on project-specific template text', () => {

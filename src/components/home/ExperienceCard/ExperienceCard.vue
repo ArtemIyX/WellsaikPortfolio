@@ -39,6 +39,9 @@ const titleId = `experience-card-title-${props.entry.id}`
     <div class="experience-card__body">
       <UiText :id="titleId" as="h4" role="heading" max-width="none">{{ entry.role }}</UiText>
       <UiText class="experience-card__summary" tone="muted">{{ entry.summary }}</UiText>
+      <UiLink v-if="entry.applicationUrl" :href="entry.applicationUrl" :new-tab="true">
+        View application
+      </UiLink>
       <div class="experience-card__list-group">
         <UiText
           :id="`${titleId}-achievements`"

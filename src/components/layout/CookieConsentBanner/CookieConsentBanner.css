@@ -3,7 +3,7 @@
   right: var(--layout-gutter);
   bottom: var(--layout-gutter);
   z-index: 35;
-  width: min(calc(100% - (2 * var(--layout-gutter)), 36rem);
+  width: min(calc(100% - (2 * var(--layout-gutter))), 36rem);
   box-shadow: 0 1rem 3rem color-mix(in srgb, var(--color-text) 18%, transparent);
 }
 

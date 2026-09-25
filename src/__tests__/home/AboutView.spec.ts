@@ -28,7 +28,7 @@ describe('AboutView', () => {
     })
     expect(wrapper.get('#about-title').element.tagName).toBe('H2')
     expect(wrapper.findAll('h1')).toHaveLength(0)
-    expect(wrapper.findAll('p')).toHaveLength(aboutContent.paragraphs.length + 2)
+    expect(wrapper.findAll('p')).toHaveLength(aboutContent.paragraphs.length + 1)
     expect(wrapper.findAll('dl dt')).toHaveLength(aboutContent.facts.length)
     expect(wrapper.findAll('dl dd')).toHaveLength(aboutContent.facts.length)
     expect(wrapper.find('h3').text()).toBe('Profile summary')
@@ -38,7 +38,7 @@ describe('AboutView', () => {
     expect(wrapper.text()).toContain(formatUtcOffset('Europe/Riga'))
     expect(wrapper.text()).not.toContain('Selected capabilities')
     expect(wrapper.text()).toContain(aboutContent.personalNote)
-    expect(wrapper.text()).toContain(aboutContent.availability)
+    expect(wrapper.find('.about-view__availability').exists()).toBe(false)
     expect(wrapper.find('.about-view__email').exists()).toBe(false)
   })
 

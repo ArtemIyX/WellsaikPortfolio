@@ -21,7 +21,9 @@ export const formatUtcOffset = (timeZone: string, date = new Date()): string | u
     if (!sign || !hours) return undefined
 
     const normalizedHours = Number.parseInt(hours, 10)
-    return minutes === '00' ? `UTC${sign}${normalizedHours}` : `UTC${sign}${normalizedHours}:${minutes}`
+    return minutes === '00'
+      ? `UTC${sign}${normalizedHours}`
+      : `UTC${sign}${normalizedHours}:${minutes}`
   } catch {
     return undefined
   }

@@ -67,7 +67,9 @@ describe('HeroView', () => {
   it('adds a decorative email icon to the primary action', () => {
     const wrapper = mount(HeroView, { props: { content: heroContent, theme: 'dark' } })
 
-    expect(wrapper.get('.hero-view__actions a:first-child .hero-view__email-icon').attributes()).toMatchObject({
+    expect(
+      wrapper.get('.hero-view__actions a:first-child .hero-view__email-icon').attributes(),
+    ).toMatchObject({
       'aria-hidden': 'true',
       viewBox: '0 0 24 24',
     })

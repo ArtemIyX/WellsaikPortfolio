@@ -58,7 +58,7 @@ describe('HomeView', () => {
     expect(wrapper.get('main').findAll('h1')).toHaveLength(1)
     expect(wrapper.get('main').findAll('h2')).toHaveLength(3)
     expect(wrapper.get('#projects').findAll('article')).toHaveLength(3)
-    expect(wrapper.get('#experience').findAll('article')).toHaveLength(3)
+    expect(wrapper.get('#experience').findAll('article')).toHaveLength(4)
     const projectsLink = wrapper
       .findAll('.site-header__navigation-link')
       .find((link) => link.text() === 'Projects')
