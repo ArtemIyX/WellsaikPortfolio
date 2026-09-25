@@ -6,6 +6,7 @@ import type { ExperienceEntry } from '@/content/home'
 
 const entry: ExperienceEntry = {
   id: 'custom-entry',
+  status: 'past',
   period: { label: '20XX — Present' },
   organization: 'Custom Organization',
   role: 'Custom Role',

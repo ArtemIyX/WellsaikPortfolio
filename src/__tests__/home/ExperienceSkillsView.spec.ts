@@ -51,6 +51,31 @@ describe('ExperienceSkillsView', () => {
       experienceSkillsContent.skillsHeading,
     )
     expect(wrapper.findAll('.experience-card')).toHaveLength(experienceSkillsContent.entries.length)
+    const experienceItems = wrapper.findAll('.experience-skills-view__experience-item')
+    expect(experienceItems).toHaveLength(experienceSkillsContent.entries.length)
+    expect(experienceItems.every((item) => item.element.tagName === 'LI')).toBe(true)
+    expect(wrapper.findAll('.experience-skills-view__timeline-mark')).toHaveLength(
+      experienceSkillsContent.entries.length,
+    )
+    expect(
+      wrapper
+        .findAll('.experience-skills-view__timeline-mark')
+        .every((marker) => marker.attributes('aria-hidden') === 'true'),
+    ).toBe(true)
+    expect(
+      experienceItems.filter((item) => item.attributes('data-status') === 'current'),
+    ).toHaveLength(1)
+    expect(experienceItems[0]?.attributes('data-status')).toBe('current')
+    expect(experienceItems[0]?.attributes('aria-current')).toBe('true')
+    expect(
+      experienceItems
+        .slice(1)
+        .every(
+          (item) =>
+            item.attributes('data-status') === 'past' &&
+            item.attributes('aria-current') === undefined,
+        ),
+    ).toBe(true)
     expect(wrapper.findAll('.experience-card h4').map((heading) => heading.text())).toEqual(
       experienceSkillsContent.entries.map((entry) => entry.role),
     )
@@ -60,6 +85,15 @@ describe('ExperienceSkillsView', () => {
     expect(wrapper.findAll('[role="tablist"], [role="progressbar"], [data-carousel]').length).toBe(
       0,
     )
+  })
+
+  it('keeps exactly one current role at the start of the content order', () => {
+    const currentEntries = experienceSkillsContent.entries.filter(
+      (entry) => entry.status === 'current',
+    )
+
+    expect(currentEntries).toHaveLength(1)
+    expect(experienceSkillsContent.entries[0]?.status).toBe('current')
   })
 
   it('renders custom props instead of hard-coded content', () => {
