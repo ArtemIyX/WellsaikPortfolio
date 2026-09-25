@@ -17,8 +17,16 @@ const titleId = `experience-card-title-${props.entry.id}`
     :aria-labelledby="titleId"
   >
     <div class="experience-card__meta">
-      <UiText as="span" role="label" tone="accent" weight="medium">{{ entry.period.label }}</UiText>
-      <UiText as="span" role="label" tone="default" weight="medium">
+      <UiText as="span" class="experience-card__period" role="label" tone="accent" weight="medium">
+        {{ entry.period.label }}
+      </UiText>
+      <UiText
+        as="span"
+        class="experience-card__organization"
+        role="label"
+        tone="default"
+        weight="medium"
+      >
         <UiLink
           v-if="entry.organizationUrl"
           :href="entry.organizationUrl"
@@ -29,15 +37,29 @@ const titleId = `experience-card-title-${props.entry.id}`
         </UiLink>
         <template v-else>{{ entry.organization }}</template>
       </UiText>
-      <UiText v-if="entry.location" as="span" role="label" tone="subtle">{{
-        entry.location
-      }}</UiText>
-      <UiText v-if="entry.engagement" as="span" role="label" tone="subtle">{{
-        entry.engagement
-      }}</UiText>
+      <UiText
+        v-if="entry.location"
+        as="span"
+        class="experience-card__location"
+        role="label"
+        tone="subtle"
+      >
+        {{ entry.location }}
+      </UiText>
+      <UiText
+        v-if="entry.engagement"
+        as="span"
+        class="experience-card__engagement"
+        role="label"
+        tone="subtle"
+      >
+        {{ entry.engagement }}
+      </UiText>
     </div>
     <div class="experience-card__body">
-      <UiText :id="titleId" as="h4" role="heading" max-width="none">{{ entry.role }}</UiText>
+      <UiText :id="titleId" as="h4" class="experience-card__role" role="heading" max-width="none">
+        {{ entry.role }}
+      </UiText>
       <UiText class="experience-card__summary" tone="muted">{{ entry.summary }}</UiText>
       <UiLink v-if="entry.applicationUrl" :href="entry.applicationUrl" :new-tab="true">
         View application

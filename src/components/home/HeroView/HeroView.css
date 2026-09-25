@@ -117,6 +117,21 @@
   }
 }
 
+@media (max-width: 41.9375rem) {
+  .hero-view__portrait-wrap {
+    width: 100%;
+    justify-self: center;
+  }
+
+  .hero-view__portrait-offset {
+    display: none;
+  }
+
+  .hero-view__availability {
+    display: none;
+  }
+}
+
 @media (max-width: 32rem) {
   .hero-view :deep(.ui-section__inner) {
     padding-block: var(--space-16);
@@ -130,9 +145,5 @@
 
   .hero-view__actions :deep(.ui-link) {
     justify-content: center;
-  }
-
-  .hero-view__portrait-offset {
-    inset: var(--space-4) calc(var(--space-4) * -1) calc(var(--space-4) * -1) var(--space-4);
   }
 }

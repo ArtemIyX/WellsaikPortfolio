@@ -148,6 +148,12 @@
   }
 }
 
+@media (max-width: 41.9375rem) {
+  .project-card__meta {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .project-card * {
     scroll-behavior: auto;

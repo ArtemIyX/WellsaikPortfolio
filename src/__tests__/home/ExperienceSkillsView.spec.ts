@@ -74,11 +74,16 @@ describe('ExperienceSkillsView', () => {
   it('renders language proficiency levels when supplied', () => {
     const wrapper = mount(ExperienceSkillsView, { props: { content: experienceSkillsContent } })
     const languages = experienceSkillsContent.skillGroups.find((group) => group.id === 'languages')
+    const languageLevels = languages?.items.flatMap((language) =>
+      language.level ? [language.level] : [],
+    )
 
     expect(wrapper.get('.experience-skills-view__group').text()).toContain('Ukrainian')
     for (const language of languages?.items ?? []) {
       expect(wrapper.text()).toContain(language.name)
-      if (language.level) expect(wrapper.text()).toContain(language.level)
+    }
+    for (const level of languageLevels ?? []) {
+      expect(wrapper.text()).toContain(level)
     }
   })
 })
