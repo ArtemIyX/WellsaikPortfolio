@@ -15,6 +15,6 @@ describe('portfolio views', () => {
     expect(document.documentElement.dataset.theme).toBe('dark')
 
     document.documentElement.removeAttribute('data-theme')
-    localStorage.removeItem('theme')
+    document.cookie = 'portfolio-theme=; Max-Age=0; Path=/'
   })
 })

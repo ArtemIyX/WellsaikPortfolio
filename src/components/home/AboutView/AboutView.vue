@@ -1,9 +1,18 @@
 <script setup lang="ts">
 import { UiBox, UiLink, UiSection, UiText } from '@/components/shared'
+import { useTimeZoneOffsets } from '@/composables/useTimeZoneOffsets'
+
+import type { AboutFact } from '@/content/home'
 
 import type { AboutViewProps } from './AboutView'
 
-defineProps<AboutViewProps>()
+const props = defineProps<AboutViewProps>()
+const timeZoneOffsets = useTimeZoneOffsets(
+  props.content.facts.flatMap((fact) => (fact.timeZone ? [fact.timeZone] : [])),
+)
+
+const formatFactValue = (fact: AboutFact): string =>
+  fact.timeZone ? (timeZoneOffsets.value[fact.timeZone] ?? fact.value) : fact.value
 </script>
 
 <template>
@@ -60,7 +69,7 @@ defineProps<AboutViewProps>()
         <dl class="about-view__facts">
           <template v-for="fact in content.facts" :key="fact.label">
             <UiText as="dt" role="label" tone="subtle">{{ fact.label }}</UiText>
-            <UiText as="dd" role="data" weight="medium">{{ fact.value }}</UiText>
+            <UiText as="dd" role="data" weight="medium">{{ formatFactValue(fact) }}</UiText>
           </template>
         </dl>
       </UiBox>

@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 
 import { AboutView } from '@/components/home'
+import { formatUtcOffset } from '@/composables/useTimeZoneOffsets'
 import type { AboutContent } from '@/content/home'
 import { aboutContent } from '@/content/home'
 
@@ -31,6 +32,10 @@ describe('AboutView', () => {
     expect(wrapper.findAll('dl dt')).toHaveLength(aboutContent.facts.length)
     expect(wrapper.findAll('dl dd')).toHaveLength(aboutContent.facts.length)
     expect(wrapper.find('h3').text()).toBe('Profile summary')
+    expect(wrapper.text()).toContain('Riga, Latvia')
+    expect(wrapper.text()).toContain('Unreal Engine')
+    expect(wrapper.text()).toContain('C++ Engineer')
+    expect(wrapper.text()).toContain(formatUtcOffset('Europe/Riga'))
     expect(wrapper.text()).not.toContain('Selected capabilities')
     expect(wrapper.text()).toContain(aboutContent.personalNote)
     expect(wrapper.text()).toContain(aboutContent.availability)

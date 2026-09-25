@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UiBox, UiText } from '@/components/shared'
+import { UiBox, UiLink, UiText } from '@/components/shared'
 
 import type { ExperienceCardProps } from './ExperienceCard'
 
@@ -18,10 +18,23 @@ const titleId = `experience-card-title-${props.entry.id}`
   >
     <div class="experience-card__meta">
       <UiText as="span" role="label" tone="accent" weight="medium">{{ entry.period.label }}</UiText>
-      <UiText as="span" role="label" tone="default" weight="medium">{{
-        entry.organization
+      <UiText as="span" role="label" tone="default" weight="medium">
+        <UiLink
+          v-if="entry.organizationUrl"
+          :href="entry.organizationUrl"
+          :new-tab="true"
+          :show-external-indicator="false"
+        >
+          {{ entry.organization }}
+        </UiLink>
+        <template v-else>{{ entry.organization }}</template>
+      </UiText>
+      <UiText v-if="entry.location" as="span" role="label" tone="subtle">{{
+        entry.location
       }}</UiText>
-      <UiText as="span" role="label" tone="subtle">{{ entry.location }}</UiText>
+      <UiText v-if="entry.engagement" as="span" role="label" tone="subtle">{{
+        entry.engagement
+      }}</UiText>
     </div>
     <div class="experience-card__body">
       <UiText :id="titleId" as="h4" role="heading" max-width="none">{{ entry.role }}</UiText>

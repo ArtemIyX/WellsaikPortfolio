@@ -33,6 +33,7 @@ export interface HeroContent {
 export interface AboutFact {
   label: string
   value: string
+  timeZone?: string
 }
 
 export interface AboutContent {
@@ -55,8 +56,10 @@ export interface ExperienceEntry {
   id: string
   period: ExperiencePeriod
   organization: string
+  organizationUrl?: string
   role: string
-  location: string
+  location?: string
+  engagement?: string
   summary: string
   achievements: readonly string[]
   technologies: readonly string[]
@@ -133,7 +136,7 @@ export interface FeaturedProjectsContent {
 }
 
 export const homeBrandLabel = 'Artem Podorozhko'
-export const homeFooterName = 'Name Surname'
+export const homeFooterName = 'Artem Podorozhko'
 export const homeFooterOccupation = 'Unreal Engine & C++ Engineer · Riga, Latvia'
 export const email = 'artem.podorozhko@outlook.com'
 export const github = 'https://github.com/ArtemIyX'
@@ -147,6 +150,7 @@ export const homeNavigation: readonly NavigationItem[] = [
 
 export const homeFooterActions: readonly NavigationItem[] = [
   { label: 'Email', kind: 'href', href: `mailto:${email}` },
+  { label: 'CV', kind: 'href', href: '/Artem-Podorozhko-CV.pdf', newTab: true },
   {
     label: 'GitHub',
     kind: 'href',
@@ -157,14 +161,14 @@ export const homeFooterActions: readonly NavigationItem[] = [
   {
     label: 'LinkedIn',
     kind: 'href',
-    href: 'https://example.com',
+    href: 'https://www.linkedin.com/in/artem-podorozhko/',
     external: true,
     newTab: true,
   },
   {
     label: 'Steam',
     kind: 'href',
-    href: 'https://example.com',
+    href: 'https://store.steampowered.com/app/3421920/Riftborn/',
     external: true,
     newTab: true,
   },
@@ -346,8 +350,9 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
       id: 'new-journey-studio',
       period: { label: '01/2024 — Present' },
       organization: 'New Journey Studio',
+      organizationUrl: 'https://newjourney.online/en/',
       role: 'Unreal Engine C++ Engineer',
-      location: 'Riga, Latvia',
+      location: 'China, Remote',
       summary: 'Core and Gameplay Engineer for a large-scale UE5 MMO RPG.',
       achievements: [
         'Designed reusable Unreal Engine C++ modules, plugins, and components for use across multiple gameplay systems.',
@@ -368,32 +373,55 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
       ],
     },
     {
-      id: 'placeholder-experience-b',
-      period: { label: '20XX — 20XX' },
-      organization: 'Placeholder Organization B',
-      role: 'Role Title Two',
-      location: 'City, Country · Work arrangement',
-      summary: "Placeholder summary of the role's responsibilities and product area.",
+      id: 'vic-tec',
+      period: { label: '06/2025 — 08/2025' },
+      organization: 'Vic Tec',
+      organizationUrl: 'https://www.victec.lv/',
+      role: 'Game Developer',
+      location: 'Riga, Latvia',
+      engagement: 'Part-time contract',
+      summary:
+        'Independently designed and delivered a production UE5 naval training simulator in 90 days, from an empty project to deployed game.',
       achievements: [
-        'Placeholder achievement describing contribution to a product or service outcome.',
-        'Placeholder achievement describing a thoughtful technical implementation.',
-        'Placeholder achievement describing collaboration across a delivery process.',
+        'Implemented the simulation architecture, gameplay, and physics entirely in C++.',
+        'Developed a custom 6-DOF vessel dynamics and buoyancy model using Chaos Physics.',
+        'Implemented sensor and weapons simulation systems.',
+        'Delivered and optimized the application for deployment on ruggedized hardware.',
       ],
-      technologies: ['Technology C', 'Technology D', 'Practice B'],
+      technologies: [
+        'Unreal Engine 5',
+        'C++',
+        'Chaos Physics',
+        '6-DOF Vessel Dynamics',
+        'Buoyancy',
+        'Simulation Architecture',
+        'Hardware Optimization',
+      ],
     },
     {
-      id: 'placeholder-experience-c',
-      period: { label: '20XX — 20XX' },
-      organization: 'Placeholder Organization C',
-      role: 'Role Title Three',
-      location: 'City, Country · Work arrangement',
-      summary:
-        'Placeholder summary of an earlier role, internship, freelance period, or equivalent experience.',
+      id: 'coffeee-io',
+      period: { label: '07/2022 — 06/2023' },
+      organization: 'Coffeee.io',
+      organizationUrl: 'https://www.coffeee.io/',
+      role: 'Unreal Engine Gameplay Programmer',
+      location: 'Riga, Latvia',
+      engagement: 'Remote',
+      summary: 'Full-stack multiplayer developer.',
       achievements: [
-        'Placeholder achievement describing an early contribution to a useful outcome.',
-        'Placeholder achievement describing learning through practical delivery and feedback.',
+        'Created production-ready experiences for an Unreal Engine 4 game.',
+        'Designed robust, scalable TCP C# microservices and authoritative game servers that maintained synchronization for over a thousand concurrent players.',
+        'Developed custom matchmaking and live-ops telemetry for a third-person shooter.',
       ],
-      technologies: ['Technology E', 'Tool A', 'Practice C'],
+      technologies: [
+        'Unreal Engine 4',
+        'C++',
+        'C#',
+        'TCP Networking',
+        'Microservices',
+        'Authoritative Game Servers',
+        'Matchmaking',
+        'Live Ops Telemetry',
+      ],
     },
   ],
   skillGroups: [
@@ -478,10 +506,9 @@ export const aboutContent: AboutContent = {
     href: `mailto:${email}`,
   },
   facts: [
-    { label: 'Based in', value: 'City, Country' },
-    { label: 'Primary focus', value: 'Product development' },
-    { label: 'Work preference', value: 'Placeholder work preference' },
-    { label: 'Time zone', value: 'UTC±00:00 placeholder' },
-    { label: 'Response', value: 'Placeholder response expectation' },
+    { label: 'Based in', value: 'Riga, Latvia' },
+    { label: 'Primary focus', value: 'Unreal Engine' },
+    { label: 'Work preference', value: 'C++ Engineer' },
+    { label: 'Time zone', value: 'UTC+2 / UTC+3', timeZone: 'Europe/Riga' },
   ],
 }

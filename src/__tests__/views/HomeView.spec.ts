@@ -20,7 +20,7 @@ const mountHome = async () => {
 
 afterEach(() => {
   document.documentElement.removeAttribute('data-theme')
-  localStorage.removeItem('theme')
+  document.cookie = 'portfolio-theme=; Max-Age=0; Path=/'
 })
 
 describe('HomeView', () => {
@@ -88,6 +88,15 @@ describe('HomeView', () => {
     const wrapper = await mountHome()
 
     await wrapper.get('[aria-label="Color theme: Dark"]').trigger('click')
+    expect(document.documentElement.dataset.theme).toBe('dark')
+    expect(document.cookie).toContain('portfolio-theme=dark')
+  })
+
+  it('restores the saved theme from a cookie', async () => {
+    document.cookie = 'portfolio-theme=dark; Path=/'
+
+    await mountHome()
+
     expect(document.documentElement.dataset.theme).toBe('dark')
   })
 })

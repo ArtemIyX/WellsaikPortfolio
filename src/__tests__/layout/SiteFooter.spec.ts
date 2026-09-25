@@ -6,6 +6,7 @@ import type { NavigationItem } from '@/content/home'
 
 const actions: readonly NavigationItem[] = [
   { label: 'Email', kind: 'href', href: 'mailto:developer@example.com' },
+  { label: 'CV', kind: 'href', href: '/Artem-Podorozhko-CV.pdf', newTab: true },
   {
     label: 'GitHub',
     kind: 'href',
@@ -41,7 +42,13 @@ describe('SiteFooter', () => {
     expect(wrapper.text()).toContain('Job occupation')
     expect(wrapper.findAll('a')).toHaveLength(actions.length)
     expect(wrapper.find('a').attributes('href')).toBe('mailto:developer@example.com')
-    expect(wrapper.findAll('a')[1]?.attributes()).toMatchObject({
+    const cvLink = wrapper.findAll('a').find((link) => link.text().includes('CV'))
+    expect(cvLink?.attributes()).toMatchObject({
+      href: '/Artem-Podorozhko-CV.pdf',
+      target: '_blank',
+      rel: 'noopener noreferrer',
+    })
+    expect(wrapper.findAll('a')[2]?.attributes()).toMatchObject({
       href: 'https://example.com',
       target: '_blank',
       rel: 'noopener noreferrer',
