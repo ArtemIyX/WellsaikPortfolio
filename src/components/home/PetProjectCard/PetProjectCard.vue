@@ -12,6 +12,7 @@ const titleId = `pet-project-card-title-${props.project.id}`
     as="article"
     class="pet-project-card"
     variant="outline"
+    depth-aware
     padding="none"
     radius="small"
     :aria-labelledby="titleId"

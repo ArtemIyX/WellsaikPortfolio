@@ -22,6 +22,16 @@
   background: var(--color-surface-muted);
 }
 
+:global(:root[data-theme='dark'] .project-card.ui-box--depth-aware > .ui-box__media) {
+  background-color: var(--color-depth-card-surface);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme]) .project-card.ui-box--depth-aware > .ui-box__media) {
+    background-color: var(--color-depth-card-surface);
+  }
+}
+
 .project-card__content {
   display: grid;
   align-content: start;

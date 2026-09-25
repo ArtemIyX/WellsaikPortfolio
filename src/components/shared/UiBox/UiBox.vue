@@ -9,6 +9,7 @@ withDefaults(defineProps<UiBoxProps>(), {
   padding: 'medium',
   radius: 'small',
   density: 'comfortable',
+  depthAware: false,
 })
 </script>
 
@@ -22,6 +23,7 @@ withDefaults(defineProps<UiBoxProps>(), {
       `ui-box--padding-${padding}`,
       `ui-box--radius-${radius}`,
       `ui-box--density-${density}`,
+      { 'ui-box--depth-aware': depthAware },
     ]"
   >
     <div v-if="$slots.media" class="ui-box__media"><slot name="media" /></div>

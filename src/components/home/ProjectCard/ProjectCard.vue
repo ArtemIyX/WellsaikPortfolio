@@ -18,6 +18,7 @@ const detailLabels = computed(() => ({ ...defaultProjectDetailLabels, ...props.p
     class="project-card"
     :class="`project-card--media-${mediaSide}`"
     variant="surface"
+    depth-aware
     padding="none"
     radius="medium"
     density="compact"

@@ -79,6 +79,7 @@
   --color-section-surface-muted: transparent;
   --color-header-surface: rgba(6, 10, 16, 0.9);
   --color-footer-surface: rgba(4, 7, 12, 0.72);
+  --color-depth-card-surface: rgb(255 255 255 / 0.03);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
@@ -107,5 +108,6 @@
     --color-section-surface-muted: transparent;
     --color-header-surface: rgba(6, 10, 16, 0.9);
     --color-footer-surface: rgba(4, 7, 12, 0.72);
+    --color-depth-card-surface: rgb(255 255 255 / 0.03);
   }
 }

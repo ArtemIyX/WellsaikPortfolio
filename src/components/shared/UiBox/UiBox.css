@@ -18,6 +18,14 @@
   background: var(--color-accent-soft);
   border-color: var(--color-accent);
 }
+:global(:root[data-theme='dark'] .ui-box--depth-aware) {
+  background-color: var(--color-depth-card-surface);
+}
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme]) .ui-box--depth-aware) {
+    background-color: var(--color-depth-card-surface);
+  }
+}
 .ui-box--padding-none {
   padding: 0;
 }

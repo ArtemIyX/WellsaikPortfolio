@@ -10,4 +10,5 @@ export interface UiBoxProps {
   padding?: UiBoxPadding
   radius?: UiBoxRadius
   density?: UiBoxDensity
+  depthAware?: boolean
 }

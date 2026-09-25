@@ -49,6 +49,7 @@ defineProps<ExperienceSkillsViewProps>()
             :key="group.id"
             class="experience-skills-view__group"
             variant="outline"
+            depth-aware
             padding="medium"
           >
             <UiText as="h4" class="experience-skills-view__group-title" role="body" weight="medium">

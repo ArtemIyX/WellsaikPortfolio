@@ -12,6 +12,7 @@ const titleId = `experience-card-title-${props.entry.id}`
     as="article"
     class="experience-card"
     variant="surface"
+    depth-aware
     padding="medium"
     radius="medium"
     :aria-labelledby="titleId"
