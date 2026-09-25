@@ -1,35 +1,27 @@
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
+
+import { cookieNames, readCookie, writeCookie } from './cookies'
 
 export type ThemePreference = 'light' | 'dark'
 
-const themeCookieName = 'portfolio-theme'
-const themeCookieMaxAgeSeconds = 60 * 60 * 24 * 365
-
-const readThemeCookie = (): ThemePreference | undefined => {
-  const value = document.cookie
-    .split('; ')
-    .find((cookie) => cookie.startsWith(`${themeCookieName}=`))
-    ?.split('=')[1]
-
-  return value === 'light' || value === 'dark' ? value : undefined
-}
-
-const writeThemeCookie = (preference: ThemePreference): void => {
-  document.cookie = `${themeCookieName}=${preference}; Max-Age=${themeCookieMaxAgeSeconds}; Path=/; SameSite=Lax`
-}
-
-export const useTheme = () => {
+export const useTheme = (hasCookieConsent?: Readonly<Ref<boolean>>) => {
   const theme = ref<ThemePreference>('light')
 
-  const setTheme = (preference: ThemePreference): void => {
-    const root = document.documentElement
+  const applyTheme = (preference: ThemePreference): void => {
     theme.value = preference
-    root.dataset.theme = preference
-    writeThemeCookie(preference)
+    document.documentElement.dataset.theme = preference
+  }
+
+  const canPersistTheme = (): boolean => hasCookieConsent?.value === true
+
+  const setTheme = (preference: ThemePreference): void => {
+    applyTheme(preference)
+    if (canPersistTheme()) writeCookie(cookieNames.theme, preference)
   }
 
   onMounted(() => {
-    setTheme(readThemeCookie() ?? 'light')
+    const savedTheme = canPersistTheme() ? readCookie(cookieNames.theme) : undefined
+    applyTheme(savedTheme === 'dark' ? 'dark' : 'light')
   })
 
   return { theme, setTheme }

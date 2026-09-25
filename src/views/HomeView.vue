@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { AboutView, ExperienceSkillsView, FeaturedProjectsView, HeroView } from '@/components/home'
-import { SiteFooter, SiteHeader } from '@/components/layout'
+import { CookieConsentBanner, SiteFooter, SiteHeader } from '@/components/layout'
+import { useCookieConsent } from '@/composables/useCookieConsent'
 import { useTheme } from '@/composables/useTheme'
 import {
   aboutContent,
@@ -14,7 +15,13 @@ import {
   homeNavigation,
 } from '@/content/home'
 
-const { theme, setTheme } = useTheme()
+const { hasAcceptedCookies, shouldShowCookieBanner, acceptCookies, rejectCookies } = useCookieConsent()
+const { theme, setTheme } = useTheme(hasAcceptedCookies)
+
+const acceptCookiePreferences = (): void => {
+  acceptCookies()
+  setTheme(theme.value)
+}
 </script>
 
 <template>
@@ -35,6 +42,11 @@ const { theme, setTheme } = useTheme()
       :actions="homeFooterActions"
       :name="homeFooterName"
       :occupation="homeFooterOccupation"
+    />
+    <CookieConsentBanner
+      v-if="shouldShowCookieBanner"
+      @accept="acceptCookiePreferences"
+      @reject="rejectCookies"
     />
   </div>
 </template>

@@ -21,6 +21,7 @@ const mountHome = async () => {
 afterEach(() => {
   document.documentElement.removeAttribute('data-theme')
   document.cookie = 'portfolio-theme=; Max-Age=0; Path=/'
+  document.cookie = 'portfolio-cookie-consent=; Max-Age=0; Path=/'
 })
 
 describe('HomeView', () => {
@@ -84,19 +85,50 @@ describe('HomeView', () => {
     expect(wrapper.findAll('a').some((link) => link.attributes('href') === '/debug')).toBe(false)
   })
 
-  it('applies theme changes to the document root', async () => {
+  it('does not persist theme choices before cookie consent', async () => {
     const wrapper = await mountHome()
 
+    expect(wrapper.get('.cookie-consent-banner').attributes()).toMatchObject({
+      role: 'dialog',
+      'aria-labelledby': 'cookie-consent-title',
+      'aria-describedby': 'cookie-consent-description',
+    })
     await wrapper.get('[aria-label="Color theme: Dark"]').trigger('click')
     expect(document.documentElement.dataset.theme).toBe('dark')
-    expect(document.cookie).toContain('portfolio-theme=dark')
+    expect(document.cookie).not.toContain('portfolio-theme=dark')
   })
 
-  it('restores the saved theme from a cookie', async () => {
+  it('persists the theme only after accepting cookies', async () => {
+    const wrapper = await mountHome()
+
+    await wrapper.get('.cookie-consent-banner__accept').trigger('click')
+    await wrapper.get('[aria-label="Color theme: Dark"]').trigger('click')
+
+    expect(document.cookie).toContain('portfolio-cookie-consent=accepted')
+    expect(document.cookie).toContain('portfolio-theme=dark')
+    expect(wrapper.find('.cookie-consent-banner').exists()).toBe(false)
+  })
+
+  it('asks again after rejecting cookies', async () => {
+    const firstVisit = await mountHome()
+
+    await firstVisit.get('.cookie-consent-banner__reject').trigger('click')
+    expect(document.cookie).not.toContain('portfolio-cookie-consent=accepted')
+    expect(document.cookie).not.toContain('portfolio-theme=')
+    expect(firstVisit.find('.cookie-consent-banner').exists()).toBe(false)
+    firstVisit.unmount()
+
+    const nextVisit = await mountHome()
+    expect(nextVisit.find('.cookie-consent-banner').exists()).toBe(true)
+  })
+
+  it('restores the saved theme only after accepting cookies', async () => {
+    document.cookie = 'portfolio-cookie-consent=accepted; Path=/'
     document.cookie = 'portfolio-theme=dark; Path=/'
 
-    await mountHome()
+    const wrapper = await mountHome()
 
     expect(document.documentElement.dataset.theme).toBe('dark')
+    expect(wrapper.find('.cookie-consent-banner').exists()).toBe(false)
   })
 })

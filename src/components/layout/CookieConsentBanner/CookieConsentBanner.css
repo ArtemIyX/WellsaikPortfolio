@@ -1,0 +1,30 @@
+.cookie-consent-banner {
+  position: fixed;
+  right: var(--layout-gutter);
+  bottom: var(--layout-gutter);
+  z-index: 35;
+  width: min(calc(100% - (2 * var(--layout-gutter)), 36rem);
+  box-shadow: 0 1rem 3rem color-mix(in srgb, var(--color-text) 18%, transparent);
+}
+
+.cookie-consent-banner :deep(.ui-box__content) {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.cookie-consent-banner :deep(h2),
+.cookie-consent-banner :deep(p) {
+  margin: 0;
+}
+
+.cookie-consent-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+@media (max-width: 30rem) {
+  .cookie-consent-banner__actions :deep(.ui-button) {
+    flex: 1 1 100%;
+  }
+}
