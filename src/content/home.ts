@@ -655,6 +655,20 @@ export const petProjectsContent: PetProjectsContent = {
         newTab: true,
       },
     },
+    {
+      id: 'optimized-skeletal-mesh',
+      title: 'Optimized Skeletal Mesh',
+      summary:
+        'Renders high counts of animated skeletal meshes through a custom GPU skinning path, without requiring a component and AnimBP for every entity.',
+      metadata: ['Unreal Engine 5.7', 'C++', 'GPU skinning', 'Batched rendering'],
+      githubAction: {
+        label: 'GitHub',
+        kind: 'href',
+        href: 'https://github.com/ArtemIyX/OptimizedSkeletalMesh',
+        external: true,
+        newTab: true,
+      },
+    },
   ],
 }
 
