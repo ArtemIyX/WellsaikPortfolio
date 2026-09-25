@@ -52,6 +52,12 @@
   --color-section-surface-muted: transparent;
   --color-header-surface: rgba(247, 249, 252, 0.86);
   --color-footer-surface: rgba(238, 242, 247, 0.62);
+  --color-timeline-current: var(--color-accent);
+  --color-timeline-current-halo: color-mix(in srgb, var(--color-accent) 18%, transparent);
+  --color-timeline-past-mark: color-mix(in srgb, var(--color-border-strong) 70%, transparent);
+  --color-timeline-rail-start: color-mix(in srgb, var(--color-accent) 48%, transparent);
+  --color-timeline-rail-mid: color-mix(in srgb, var(--color-border-strong) 55%, transparent);
+  --color-timeline-rail-end: color-mix(in srgb, var(--color-border-strong) 24%, transparent);
 }
 :root[data-theme='dark'] {
   color-scheme: dark;
@@ -80,6 +86,12 @@
   --color-header-surface: rgba(6, 10, 16, 0.9);
   --color-footer-surface: rgba(4, 7, 12, 0.72);
   --color-depth-card-surface: rgb(255 255 255 / 0.03);
+  --color-timeline-current: var(--color-accent);
+  --color-timeline-current-halo: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  --color-timeline-past-mark: color-mix(in srgb, var(--color-border-strong) 62%, transparent);
+  --color-timeline-rail-start: color-mix(in srgb, var(--color-accent) 52%, transparent);
+  --color-timeline-rail-mid: color-mix(in srgb, var(--color-border-strong) 48%, transparent);
+  --color-timeline-rail-end: color-mix(in srgb, var(--color-text-subtle) 22%, transparent);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
@@ -109,5 +121,11 @@
     --color-header-surface: rgba(6, 10, 16, 0.9);
     --color-footer-surface: rgba(4, 7, 12, 0.72);
     --color-depth-card-surface: rgb(255 255 255 / 0.03);
+    --color-timeline-current: var(--color-accent);
+    --color-timeline-current-halo: color-mix(in srgb, var(--color-accent) 22%, transparent);
+    --color-timeline-past-mark: color-mix(in srgb, var(--color-border-strong) 62%, transparent);
+    --color-timeline-rail-start: color-mix(in srgb, var(--color-accent) 52%, transparent);
+    --color-timeline-rail-mid: color-mix(in srgb, var(--color-border-strong) 48%, transparent);
+    --color-timeline-rail-end: color-mix(in srgb, var(--color-text-subtle) 22%, transparent);
   }
 }

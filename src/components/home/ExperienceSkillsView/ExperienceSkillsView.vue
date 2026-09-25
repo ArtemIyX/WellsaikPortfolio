@@ -35,7 +35,14 @@ defineProps<ExperienceSkillsViewProps>()
           content.experienceHeading
         }}</UiText>
         <ol class="experience-skills-view__experience-list">
-          <li v-for="entry in content.entries" :key="entry.id">
+          <li
+            v-for="entry in content.entries"
+            :key="entry.id"
+            class="experience-skills-view__experience-item"
+            :data-status="entry.status"
+            :aria-current="entry.status === 'current' ? 'true' : undefined"
+          >
+            <span class="experience-skills-view__timeline-mark" aria-hidden="true"></span>
             <ExperienceCard :entry="entry" />
           </li>
         </ol>

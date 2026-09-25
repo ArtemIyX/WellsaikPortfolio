@@ -35,11 +35,61 @@
 }
 
 .experience-skills-view__experience-list {
+  --timeline-marker-size: 0.875rem;
+  --timeline-rail-width: 2px;
+  --timeline-gutter: var(--space-4);
+
+  position: relative;
   gap: var(--space-8);
   list-style: none;
 }
 
-.experience-skills-view__experience-list > li,
+.experience-skills-view__experience-list::before {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: calc((var(--timeline-marker-size) - var(--timeline-rail-width)) / 2);
+  width: var(--timeline-rail-width);
+  background: linear-gradient(
+    to bottom,
+    var(--color-timeline-rail-start) 0%,
+    var(--color-timeline-rail-mid) 38%,
+    var(--color-timeline-rail-end) 100%
+  );
+  content: '';
+  pointer-events: none;
+}
+
+.experience-skills-view__experience-item {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: var(--timeline-marker-size) minmax(0, 1fr);
+  column-gap: var(--timeline-gutter);
+  align-items: start;
+}
+
+.experience-skills-view__timeline-mark {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: var(--timeline-marker-size);
+  aspect-ratio: 1;
+  margin-top: var(--space-6);
+  border: 2px solid var(--color-timeline-past-mark);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.experience-skills-view__experience-item[data-status='current']
+  .experience-skills-view__timeline-mark {
+  border-color: var(--color-timeline-current);
+  background: var(--color-timeline-current);
+  box-shadow: 0 0 0 0.25rem var(--color-timeline-current-halo);
+}
+
+.experience-skills-view__experience-item > .experience-card,
 .experience-skills-view__group {
   min-width: 0;
 }
@@ -87,11 +137,33 @@
 }
 
 @media (max-width: 42rem) {
+  .experience-skills-view__experience-list {
+    --timeline-marker-size: 0.75rem;
+    --timeline-gutter: var(--space-3);
+  }
+
   .experience-skills-view__layout {
     margin-top: var(--space-6);
   }
 
   .experience-skills-view__groups {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (forced-colors: active) {
+  .experience-skills-view__experience-list::before {
+    background: CanvasText;
+  }
+
+  .experience-skills-view__timeline-mark {
+    border-color: CanvasText;
+  }
+
+  .experience-skills-view__experience-item[data-status='current']
+    .experience-skills-view__timeline-mark {
+    border-color: Highlight;
+    background: Highlight;
+    box-shadow: none;
   }
 }

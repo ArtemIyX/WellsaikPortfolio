@@ -52,8 +52,11 @@ export interface ExperiencePeriod {
   endDate?: string
 }
 
+export type ExperienceStatus = 'current' | 'past'
+
 export interface ExperienceEntry {
   id: string
+  status: ExperienceStatus
   period: ExperiencePeriod
   organization: string
   organizationUrl?: string
@@ -364,6 +367,7 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
   entries: [
     {
       id: 'new-journey-studio',
+      status: 'current',
       period: { label: '01/2024 — Present' },
       organization: 'New Journey Studio',
       organizationUrl: 'https://newjourney.online/en/',
@@ -390,6 +394,7 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
     },
     {
       id: 'vic-tec',
+      status: 'past',
       period: { label: '06/2025 — 08/2025' },
       organization: 'Vic Tec',
       organizationUrl: 'https://www.victec.lv/',
@@ -416,6 +421,7 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
     },
     {
       id: 'swiss-tech-capital',
+      status: 'past',
       period: { label: '05/2024 — 07/2025' },
       organization: 'Swiss Tech Capital AG',
       organizationUrl: 'https://blockzero.rs/',
@@ -448,6 +454,7 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
     },
     {
       id: 'coffeee-io',
+      status: 'past',
       period: { label: '07/2022 — 06/2023' },
       organization: 'Coffeee.io',
       organizationUrl: 'https://www.coffeee.io/',
