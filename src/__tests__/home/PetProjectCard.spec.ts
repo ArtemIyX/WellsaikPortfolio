@@ -23,6 +23,7 @@ describe('PetProjectCard', () => {
     const wrapper = mount(PetProjectCard, { props: { project } })
 
     expect(wrapper.element.tagName).toBe('ARTICLE')
+    expect(wrapper.classes()).toContain('ui-box--depth-aware')
     expect(wrapper.attributes('aria-labelledby')).toBe('pet-project-card-title-test-plugin')
     expect(wrapper.get('h3 .ui-link__label').text()).toBe(project.title)
     expect(wrapper.text()).toContain(project.summary)

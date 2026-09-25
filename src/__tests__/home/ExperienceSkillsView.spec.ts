@@ -54,9 +54,9 @@ describe('ExperienceSkillsView', () => {
     expect(wrapper.findAll('.experience-card h4').map((heading) => heading.text())).toEqual(
       experienceSkillsContent.entries.map((entry) => entry.role),
     )
-    expect(wrapper.findAll('.experience-skills-view__group')).toHaveLength(
-      experienceSkillsContent.skillGroups.length,
-    )
+    const skillGroups = wrapper.findAll('.experience-skills-view__group')
+    expect(skillGroups).toHaveLength(experienceSkillsContent.skillGroups.length)
+    expect(skillGroups.every((group) => group.classes().includes('ui-box--depth-aware'))).toBe(true)
     expect(wrapper.findAll('[role="tablist"], [role="progressbar"], [data-carousel]').length).toBe(
       0,
     )

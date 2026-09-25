@@ -47,6 +47,7 @@ describe('ProjectCard', () => {
     const wrapper = mount(ProjectCard, { props: { project, mediaSide: 'end' } })
 
     expect(wrapper.element.tagName).toBe('ARTICLE')
+    expect(wrapper.classes()).toContain('ui-box--depth-aware')
     expect(wrapper.attributes('aria-labelledby')).toBe('project-card-title-test-project')
     expect(wrapper.get('h3').text()).toBe(project.title)
     expect(wrapper.get('img').attributes()).toMatchObject({

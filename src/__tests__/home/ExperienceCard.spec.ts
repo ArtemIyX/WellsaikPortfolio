@@ -23,6 +23,7 @@ describe('ExperienceCard', () => {
     const title = wrapper.get('h4')
 
     expect(article.attributes('aria-labelledby')).toBe(title.attributes('id'))
+    expect(article.classes()).toContain('ui-box--depth-aware')
     expect(title.text()).toBe(entry.role)
     expect(wrapper.text()).toContain(entry.period.label)
     expect(wrapper.text()).toContain(entry.organization)

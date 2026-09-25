@@ -61,7 +61,18 @@ describe('shared portfolio components', () => {
       slots: { default: 'Content' },
     })
     expect(wrapper.element.tagName).toBe('ARTICLE')
+    expect(wrapper.classes()).not.toContain('ui-box--depth-aware')
     expect(wrapper.find('button, a').exists()).toBe(false)
+  })
+  it('adds depth-aware styling without changing the selected variant', () => {
+    const wrapper = mount(UiBox, {
+      props: { variant: 'outline', depthAware: true },
+      slots: { default: 'Content' },
+    })
+
+    expect(wrapper.classes()).toEqual(
+      expect.arrayContaining(['ui-box--outline', 'ui-box--depth-aware']),
+    )
   })
   it('selects RouterLink for to, native anchors for href, and rejects ambiguity', () => {
     const wrapper = mount(
