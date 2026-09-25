@@ -29,16 +29,6 @@
   width: 100%;
 }
 
-.pet-projects-view__all-action {
-  margin-top: var(--space-6);
-}
-
-.pet-projects-view__all-action :deep(.ui-link) {
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
-}
-
 @media (max-width: 48rem) {
   .pet-projects-view__list {
     grid-template-columns: 1fr;

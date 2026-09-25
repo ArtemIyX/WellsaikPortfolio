@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UiLink, UiSection, UiText } from '@/components/shared'
+import { UiSection, UiText } from '@/components/shared'
 
 import PetProjectCard from '../PetProjectCard/PetProjectCard.vue'
 import type { PetProjectsViewProps } from './PetProjectsView'
@@ -29,20 +29,6 @@ defineProps<PetProjectsViewProps>()
         <PetProjectCard :project="project" />
       </li>
     </ol>
-
-    <div class="pet-projects-view__all-action">
-      <UiLink v-if="content.allProjectsAction.kind === 'route'" :to="content.allProjectsAction.to">
-        {{ content.allProjectsAction.label }}
-      </UiLink>
-      <UiLink
-        v-else
-        :href="content.allProjectsAction.href"
-        :external="content.allProjectsAction.external"
-        :new-tab="content.allProjectsAction.newTab"
-      >
-        {{ content.allProjectsAction.label }}
-      </UiLink>
-    </div>
   </UiSection>
 </template>
 

@@ -151,7 +151,6 @@ export interface PetProjectsContent {
   title: string
   introduction: string
   projects: readonly PetProjectContent[]
-  allProjectsAction: NavigationItem
 }
 
 export const homeBrandLabel = 'Artem Podorozhko'
@@ -684,13 +683,6 @@ export const petProjectsContent: PetProjectsContent = {
       },
     },
   ],
-  allProjectsAction: {
-    label: 'View all repositories',
-    kind: 'href',
-    href: github,
-    external: true,
-    newTab: true,
-  },
 }
 
 export const aboutContent: AboutContent = {

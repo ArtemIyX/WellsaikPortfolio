@@ -5,7 +5,7 @@ import PetProjectsView from '@/components/home/PetProjectsView/PetProjectsView.v
 import { petProjectsContent } from '@/content/home'
 
 describe('PetProjectsView', () => {
-  it('renders eight accessible project cards in source order with an archive action', () => {
+  it('renders eight accessible project cards in source order', () => {
     const wrapper = mount(PetProjectsView, { props: { content: petProjectsContent } })
 
     expect(wrapper.get('section').attributes()).toMatchObject({
@@ -17,9 +17,6 @@ describe('PetProjectsView', () => {
     expect(wrapper.findAll('article')).toHaveLength(8)
     expect(wrapper.findAll('article h3').map((heading) => heading.text())).toEqual(
       petProjectsContent.projects.map((project) => project.title),
-    )
-    expect(wrapper.get('.pet-projects-view__all-action a').attributes('href')).toBe(
-      'https://github.com/ArtemIyX',
     )
     expect(wrapper.find('input').exists()).toBe(false)
     expect(wrapper.text()).not.toMatch(/filter|pagination|carousel|loading/i)

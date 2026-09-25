@@ -100,7 +100,6 @@ Suggested section copy:
 
 - Title: `Pet Projects`
 - Introduction: `Open-source Unreal Engine plugins and small tools I build to explore reusable systems, editor workflows, networking, and Blueprint integration.`
-- Optional closing action: `View all repositories`
 
 Do not add an eyebrow if it would be empty or repeat the title.
 
@@ -216,7 +215,6 @@ export interface PetProjectsContent {
   title: string
   introduction: string
   projects: readonly PetProjectContent[]
-  allProjectsAction: NavigationItem
 }
 ```
 
@@ -262,7 +260,6 @@ Responsibilities:
 - render the title as an `h2` and the introduction as body text;
 - render the projects as one semantic ordered list;
 - render one `PetProjectCard` per project in source order;
-- render `View all repositories` after the grid;
 - own no state, repository-fetching logic, theme logic, router logic, or viewport logic.
 
 ### `PetProjectCard`
@@ -371,7 +368,7 @@ The new item should target `{ name: 'home', hash: '#pet-projects' }`.
 
 Because the label is wider than the existing items, manually verify the desktop header between `42rem` and `70rem`. If it collides with the theme selector or brand, move the desktop/mobile breakpoint upward based on the measured header. Do not abbreviate the label, shrink tap targets, or reduce text below the existing navigation size.
 
-If visual testing shows five content links are too dense, omit the new header item rather than renaming the section. The page order still makes the section discoverable while `View all repositories` provides a clear action.
+If visual testing shows five content links are too dense, omit the new header item rather than renaming the section. The page order still makes the section discoverable.
 
 ## 11. Home View Integration
 
@@ -442,7 +439,6 @@ Create `src/__tests__/home/PetProjectsView.spec.ts` and verify that the view:
 - contains no `h1`;
 - renders exactly eight cards from the initial content;
 - preserves source order;
-- renders the `View all repositories` action;
 - renders custom prop data;
 - has no filter, search, pagination, carousel, or loading state.
 
