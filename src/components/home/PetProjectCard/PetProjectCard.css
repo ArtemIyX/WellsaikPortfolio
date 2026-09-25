@@ -1,5 +1,4 @@
 .pet-project-card {
-  min-height: 18rem;
   transition:
     border-color var(--duration-fast) var(--ease-standard),
     transform var(--duration-fast) var(--ease-standard);

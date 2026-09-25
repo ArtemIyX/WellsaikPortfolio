@@ -13,7 +13,7 @@
 
 .pet-projects-view__list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-4);
   margin: var(--space-8) 0 0;
   padding: 0;
@@ -27,6 +27,12 @@
 
 .pet-projects-view__list > li > * {
   width: 100%;
+}
+
+@media (max-width: 72rem) {
+  .pet-projects-view__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 48rem) {

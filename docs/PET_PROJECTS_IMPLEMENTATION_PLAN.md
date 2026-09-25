@@ -103,29 +103,34 @@ Do not add an eyebrow if it would be empty or repeat the title.
 
 ### Wide layout
 
-At approximately `48rem` and above, use a two-column grid of equal-width cards:
+At `72rem` and above, use a three-column grid of equal-width cards:
 
 ```text
 Pet Projects
 Open-source Unreal Engine plugins and small tools...
 
-┌───────────────────────────────────┐  ┌───────────────────────────────────┐
-│ Web User Interface                │  │ Blueprint Subsystems              │
-│ CEF-based web UI for UE...        │  │ Blueprint-accessible...           │
-│ Unreal Engine · C++ · CEF          │  │ Unreal Engine · C++ · Blueprint...│
-└───────────────────────────────────┘  └───────────────────────────────────┘
+┌───────────────────────┐  ┌───────────────────────┐  ┌───────────────────────┐
+│ Web User Interface    │  │ Blueprint Subsystems  │  │ Signal Hub            │
+│ CEF-based web UI...   │  │ Blueprint-accessible… │  │ Signals for UE...     │
+│ Unreal Engine · C++   │  │ Unreal Engine · C++   │  │ Unreal Engine · C++   │
+└───────────────────────┘  └───────────────────────┘  └───────────────────────┘
 ```
 
 Card rules:
 
 - equal-height cards within each grid row;
 - `minmax(0, 1fr)` columns to prevent overflow;
-- a minimum useful card height, but no fixed height that can clip translated or zoomed text;
+- compact content-driven heights, with no fixed minimum that wastes space or clips translated or zoomed text;
 - title and description at the top, followed by metadata;
 - all text remains start-aligned;
 - no screenshots are required for the initial version.
 
-### Narrow layout
+### Medium and narrow layouts
+
+From `48rem` through less than `72rem`:
+
+- use two equal-width card columns;
+- retain the same DOM and reading order.
 
 Below approximately `48rem`:
 
@@ -289,7 +294,7 @@ Grid:
 ```css
 .pet-projects-view__list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-4);
   margin: var(--space-8) 0 0;
   padding: 0;
@@ -319,6 +324,12 @@ Interaction:
 Responsive breakpoint:
 
 ```css
+@media (max-width: 72rem) {
+  .pet-projects-view__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 48rem) {
   .pet-projects-view__list {
     grid-template-columns: 1fr;
@@ -458,7 +469,7 @@ The feature is ready when:
 - Pet Projects appears after Experience and before About;
 - the section presents eight curated real repositories from typed static content;
 - its visual language belongs to the portfolio while remaining recognizably repository-oriented;
-- the two-column desktop grid becomes one column without duplicated markup;
+- the three-column wide grid becomes two columns at medium widths and one column on mobile without duplicated markup;
 - every card explains a project, shows restrained verified metadata, and links to its source;
 - the section does not fetch GitHub data or display stale popularity metrics;
 - every article and section has a correct accessible name;
