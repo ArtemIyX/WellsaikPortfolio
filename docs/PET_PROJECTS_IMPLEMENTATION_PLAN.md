@@ -41,7 +41,9 @@ SiteHeader
     │   ├── PetProjectCard 03
     │   ├── PetProjectCard 04
     │   ├── PetProjectCard 05
-    │   └── PetProjectCard 06
+    │   ├── PetProjectCard 06
+    │   ├── PetProjectCard 07
+    │   └── PetProjectCard 08
     └── AboutView                #about
 ```
 
@@ -70,7 +72,7 @@ Use a Swiss editorial direction: neutral surfaces, one existing teal accent, lef
 
 ### Differentiator
 
-Give every card a narrow numbered rail (`01` through `06`). Align the rails and card borders across the two-column layout so the section reads like a technical component index rather than a clone of GitHub's pinned repositories.
+Give every card a narrow numbered rail (`01` through `08`). Align the rails and card borders across the two-column layout so the section reads like a technical component index rather than a clone of GitHub's pinned repositories.
 
 The numbers are meaningful ordering and navigation aids, not decoration. Store them as authored content so a reordered list cannot silently display the wrong sequence.
 
@@ -170,7 +172,7 @@ Avoid:
 
 ## 6. Initial Curated Content
 
-Start with six repositories so the wide layout forms three complete rows. The attached reference already identifies a coherent initial set:
+Use eight repositories so the wide layout forms four complete rows. The attached reference identifies a coherent initial set:
 
 | Order | Display title | Repository | Card focus |
 | --- | --- | --- | --- |
@@ -180,6 +182,8 @@ Start with six repositories so the wide layout forms three complete rows. The at
 | 04 | Data Serializer | [`ArtemIyX/DataSerializerUnreal`](https://github.com/ArtemIyX/DataSerializerUnreal) | serialization utilities with Blueprint support |
 | 05 | Async Blueprints | [`ArtemIyX/AsyncBlueprintsUnreal`](https://github.com/ArtemIyX/AsyncBlueprintsUnreal) | asynchronous Blueprint execution and task handoff |
 | 06 | Advanced Asset | [`ArtemIyX/AdvancedAssetUnreal`](https://github.com/ArtemIyX/AdvancedAssetUnreal) | reusable data-asset workflows |
+| 07 | Signal Hub | [`ArtemIyX/SignalHubUnreal`](https://github.com/ArtemIyX/SignalHubUnreal) | typed local signal routing with safe subscriptions and queued delivery |
+| 08 | Fragmented Inventory | [`ArtemIyX/FragmentedInventoryUnreal`](https://github.com/ArtemIyX/FragmentedInventoryUnreal) | fragment-based, Fast Array replicated inventories |
 
 Before implementation, review each current README and write an accurate one-sentence summary. Verify engine versions, documentation URLs, license/maturity language, and whether the repository is still the best destination. Do not copy README paragraphs into the cards.
 
@@ -218,7 +222,7 @@ export interface PetProjectsContent {
 }
 ```
 
-Export `petProjectsContent` with six curated entries.
+Export `petProjectsContent` with eight curated entries.
 
 Data invariants:
 
@@ -439,7 +443,7 @@ Create `src/__tests__/home/PetProjectsView.spec.ts` and verify that the view:
 - renders `<section id="pet-projects">`;
 - connects `aria-labelledby="pet-projects-title"` to an `h2`;
 - contains no `h1`;
-- renders exactly six cards from the initial content;
+- renders exactly eight cards from the initial content;
 - preserves source order;
 - renders the `View all repositories` action;
 - renders custom prop data;
@@ -449,7 +453,7 @@ Create `src/__tests__/home/PetProjectsView.spec.ts` and verify that the view:
 
 Update:
 
-- `HomeView.spec.ts` to assert Projects → Experience → Pet Projects → About, four major-section `h2` headings, six pet-project articles, and matching navigation target;
+- `HomeView.spec.ts` to assert Projects → Experience → Pet Projects → About, four major-section `h2` headings, eight pet-project articles, and matching navigation target;
 - `SiteHeader.spec.ts` if the navigation item is added, including desktop and mobile destinations and mobile-menu close behavior;
 - any fixtures that assert the complete `homeNavigation` list.
 
@@ -459,7 +463,7 @@ Do not use jsdom tests as proof of grid breakpoints, hover, zoom, or dark-theme 
 
 1. Run `git status --short` and preserve unrelated work.
 2. Review the selected repositories and verify all public content and links.
-3. Add `PetProjectContent`, `PetProjectsContent`, and six curated entries to `src/content/home.ts`.
+3. Add `PetProjectContent`, `PetProjectsContent`, and eight curated entries to `src/content/home.ts`.
 4. Implement and test `PetProjectCard`.
 5. Implement and test `PetProjectsView`.
 6. Export both components from `src/components/home/index.ts`.
@@ -482,7 +486,7 @@ npm run build
 The feature is ready when:
 
 - Pet Projects appears after Experience and before About;
-- the section presents six curated real repositories from typed static content;
+- the section presents eight curated real repositories from typed static content;
 - its visual language belongs to the portfolio while remaining recognizably repository-oriented;
 - the two-column desktop grid becomes one column without duplicated markup;
 - the numbered rail is visible and useful in both themes;

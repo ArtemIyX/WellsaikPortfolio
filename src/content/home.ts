@@ -685,6 +685,40 @@ export const petProjectsContent: PetProjectsContent = {
         newTab: true,
       },
     },
+    {
+      id: 'signal-hub',
+      number: '07',
+      kind: 'Unreal plugin',
+      title: 'Signal Hub',
+      repositoryName: 'SignalHubUnreal',
+      summary:
+        'Routes typed in-process signals per game instance with safe subscription lifetimes, Blueprint nodes, worker-thread queuing, and delivery diagnostics.',
+      metadata: ['Unreal Engine 5.7', 'C++', 'Blueprint support', 'Thread-safe queuing'],
+      sourceAction: {
+        label: 'View source',
+        kind: 'href',
+        href: 'https://github.com/ArtemIyX/SignalHubUnreal',
+        external: true,
+        newTab: true,
+      },
+    },
+    {
+      id: 'fragmented-inventory',
+      number: '08',
+      kind: 'Unreal plugin',
+      title: 'Fragmented Inventory',
+      repositoryName: 'FragmentedInventoryUnreal',
+      summary:
+        'Builds network-replicated UE5 inventories from composable item fragments, dynamic item state, configurable slots, and Blueprint-facing events.',
+      metadata: ['Unreal Engine 5', 'C++', 'Fast Array replication', 'Blueprint support'],
+      sourceAction: {
+        label: 'View source',
+        kind: 'href',
+        href: 'https://github.com/ArtemIyX/FragmentedInventoryUnreal',
+        external: true,
+        newTab: true,
+      },
+    },
   ],
   allProjectsAction: {
     label: 'View all repositories',
