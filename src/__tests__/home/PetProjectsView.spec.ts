@@ -12,6 +12,7 @@ describe('PetProjectsView', () => {
       id: 'pet-projects',
       'aria-labelledby': 'pet-projects-title',
     })
+    expect(wrapper.get('section').classes()).toContain('ui-section--divider-bottom')
     expect(wrapper.get('h2').attributes('id')).toBe('pet-projects-title')
     expect(wrapper.findAll('h1')).toHaveLength(0)
     expect(wrapper.findAll('article')).toHaveLength(9)

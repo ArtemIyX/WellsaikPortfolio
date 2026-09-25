@@ -9,6 +9,7 @@ describe('FeaturedProjectsView', () => {
     const wrapper = mount(FeaturedProjectsView, { props: { content: featuredProjectsContent } })
 
     expect(wrapper.get('section').attributes('id')).toBe('projects')
+    expect(wrapper.get('section').classes()).toContain('ui-section--divider-bottom')
     expect(wrapper.get('section').attributes('aria-labelledby')).toBe('projects-title')
     expect(wrapper.get('h2').attributes('id')).toBe('projects-title')
     expect(wrapper.findAll('h1')).toHaveLength(0)

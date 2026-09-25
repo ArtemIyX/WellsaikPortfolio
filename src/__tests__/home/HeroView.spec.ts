@@ -5,6 +5,12 @@ import { HeroView } from '@/components/home'
 import { email, github, heroContent } from '@/content/home'
 
 describe('HeroView', () => {
+  it('uses the shared bottom divider for the hero boundary', () => {
+    const wrapper = mount(HeroView, { props: { content: heroContent, theme: 'dark' } })
+
+    expect(wrapper.get('section').classes()).toContain('ui-section--divider-bottom')
+  })
+
   it('connects the hero landmark to its only page-level heading', () => {
     const wrapper = mount(HeroView, { props: { content: heroContent, theme: 'dark' } })
 

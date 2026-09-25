@@ -39,6 +39,9 @@ describe('ExperienceSkillsView', () => {
     const section = wrapper.get('section#experience')
 
     expect(section.attributes('aria-labelledby')).toBe('experience-title')
+    expect(section.classes()).toEqual(
+      expect.arrayContaining(['ui-section--surface-default', 'ui-section--divider-bottom']),
+    )
     expect(wrapper.get('#experience-title').element.tagName).toBe('H2')
     expect(wrapper.findAll('h1')).toHaveLength(0)
     expect(wrapper.get('section[aria-labelledby="experience-list-title"] h3').text()).toBe(

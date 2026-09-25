@@ -26,6 +26,7 @@ describe('AboutView', () => {
       id: 'about',
       'aria-labelledby': 'about-title',
     })
+    expect(section.classes()).toContain('ui-section--surface-muted')
     expect(wrapper.get('#about-title').element.tagName).toBe('H2')
     expect(wrapper.findAll('h1')).toHaveLength(0)
     expect(wrapper.findAll('p')).toHaveLength(aboutContent.paragraphs.length + 1)

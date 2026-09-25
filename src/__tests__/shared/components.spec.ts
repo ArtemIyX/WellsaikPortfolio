@@ -39,9 +39,21 @@ describe('shared portfolio components', () => {
       slots: { title: '<h2 id="section-title">Title</h2>', default: '<p>Content</p>' },
     })
     expect(wrapper.get('section').attributes('aria-labelledby')).toBe('section-title')
+    expect(wrapper.classes()).toContain('ui-section--surface-transparent')
+    expect(wrapper.classes()).toContain('ui-section--divider-none')
     expect(wrapper.find('.ui-section__eyebrow').exists()).toBe(false)
     expect(wrapper.get('.ui-section__title').text()).toBe('Title')
     expect(wrapper.get('.ui-section__content').text()).toBe('Content')
+  })
+  it('maps UiSection surface and divider props to stable modifier classes', () => {
+    const wrapper = mount(UiSection, {
+      props: { surface: 'muted', divider: 'bottom' },
+      slots: { default: 'Content' },
+    })
+
+    expect(wrapper.classes()).toEqual(
+      expect.arrayContaining(['ui-section--surface-muted', 'ui-section--divider-bottom']),
+    )
   })
   it('keeps UiBox a semantic, non-interactive container', () => {
     const wrapper = mount(UiBox, {
