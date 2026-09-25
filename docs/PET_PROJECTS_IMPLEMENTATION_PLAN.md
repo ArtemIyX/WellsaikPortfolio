@@ -116,7 +116,7 @@ Open-source Unreal Engine plugins and small tools...
 │ 01 │ Web User Interface           │  │ 02 │ Blueprint Subsystems         │
 │    │ CEF-based web UI for UE...   │  │    │ Blueprint-accessible...      │
 │    │ Unreal plugin · C++ · UE ... │  │    │ Unreal plugin · C++ · UE ... │
-│    │ View source ↗                │  │    │ View source ↗                │
+│    │ GitHub                       │  │    │ GitHub                       │
 └────┴──────────────────────────────┘  └────┴──────────────────────────────┘
 
 ┌────┬──────────────────────────────┐  ┌────┬──────────────────────────────┐
@@ -156,8 +156,7 @@ Each card should contain only useful, maintained information:
 3. human-readable display title;
 4. one-sentence description focused on the solved problem;
 5. two to four metadata labels, such as `C++`, `Blueprint support`, or a verified engine version;
-6. `View source` link;
-7. optional `Read documentation` link when a maintained documentation destination exists.
+6. clearly named GitHub source link.
 
 The repository slug does not need to be the visible title. Use a readable title in the card and keep the exact repository name available as secondary text or in the link's accessible name. For example, display `Blueprint Subsystems` and link with an accessible name equivalent to `View BlueprintSubsystemsUnreal source on GitHub`.
 
@@ -210,8 +209,7 @@ export interface PetProjectContent {
   repositoryName: string
   summary: string
   metadata: readonly string[]
-  sourceAction: NavigationItem
-  documentationAction?: NavigationItem
+  sourceAction: HrefNavigationItem
 }
 
 export interface PetProjectsContent {
@@ -231,8 +229,7 @@ Data invariants:
 - titles are reader-friendly while `repositoryName` preserves the exact slug;
 - summaries are authored locally and are not presented as live GitHub data;
 - metadata contains two to four verified labels;
-- source and documentation actions use the existing `NavigationItem` contract;
-- external actions use `external: true` and `newTab: true`;
+- source actions use the existing `HrefNavigationItem` contract with `external: true` and `newTab: true`;
 - layout classes, column positions, and color values never enter content data.
 
 Do not store stars, forks, watchers, last-commit dates, or a `languageColor`. If live repository data becomes a real requirement later, design caching, loading, error, privacy, and rate-limit behavior as a separate feature.
@@ -292,7 +289,7 @@ Responsibilities:
 - connect `aria-labelledby` to a unique `h3` derived from `project.id`;
 - render the number rail and content in a two-column internal grid;
 - render metadata as a semantic list;
-- render source and optional documentation links with `UiLink`;
+- render the GitHub source link with `UiLink`;
 - contain no click handler on the card surface;
 - contain no GitHub logo, repository icon, or decorative Unicode icon;
 - contain no internal state.
@@ -432,7 +429,7 @@ Create `src/__tests__/home/PetProjectCard.spec.ts` and verify that the card:
 - renders the authored number, kind, title, repository name, and summary;
 - renders every metadata item as a list item;
 - renders the source action with the correct destination and external-link behavior;
-- renders documentation only when supplied;
+- renders one GitHub source action with no external-link indicator;
 - contains no button and is not itself a link;
 - contains no star/fork counters or GitHub metric labels.
 

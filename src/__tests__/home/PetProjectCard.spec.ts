@@ -13,16 +13,9 @@ const project: PetProjectContent = {
   summary: 'A concise project summary.',
   metadata: ['C++', 'Blueprint support'],
   sourceAction: {
-    label: 'View source',
+    label: 'GitHub',
     kind: 'href',
     href: 'https://github.com/example/TestPluginUnreal',
-    external: true,
-    newTab: true,
-  },
-  documentationAction: {
-    label: 'Read documentation',
-    kind: 'href',
-    href: 'https://example.com/docs',
     external: true,
     newTab: true,
   },
@@ -45,22 +38,14 @@ describe('PetProjectCard', () => {
     const links = wrapper.findAll('a')
     expect(links.map((link) => link.attributes('href'))).toEqual([
       'https://github.com/example/TestPluginUnreal',
-      'https://example.com/docs',
     ])
-    expect(links[0]?.attributes('aria-label')).toBe('View TestPluginUnreal source on GitHub')
+    expect(links[0]?.attributes('aria-label')).toBe('View TestPluginUnreal on GitHub')
     expect(links.every((link) => link.attributes('target') === '_blank')).toBe(true)
     expect(links.every((link) => link.attributes('rel') === 'noopener noreferrer')).toBe(true)
+    expect(wrapper.get('.pet-project-card__github-icon').exists()).toBe(true)
+    expect(wrapper.find('.ui-link__indicator').exists()).toBe(false)
     expect(wrapper.findAll('button')).toHaveLength(0)
-    expect(wrapper.findAll('article a')).toHaveLength(2)
+    expect(wrapper.findAll('article a')).toHaveLength(1)
     expect(wrapper.text()).not.toMatch(/star|fork/i)
-  })
-
-  it('omits documentation when it is not supplied', () => {
-    const wrapper = mount(PetProjectCard, {
-      props: { project: { ...project, documentationAction: undefined } },
-    })
-
-    expect(wrapper.findAll('a')).toHaveLength(1)
-    expect(wrapper.text()).not.toContain('Read documentation')
   })
 })

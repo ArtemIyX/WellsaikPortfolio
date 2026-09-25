@@ -144,8 +144,7 @@ export interface PetProjectContent {
   repositoryName: string
   summary: string
   metadata: readonly string[]
-  sourceAction: NavigationItem
-  documentationAction?: NavigationItem
+  sourceAction: HrefNavigationItem
 }
 
 export interface PetProjectsContent {
@@ -558,16 +557,9 @@ export const petProjectsContent: PetProjectsContent = {
         'Embeds CEF-powered web interfaces in Unreal Engine with off-screen rendering, local WebSocket transport, and Blueprint-friendly browser controls.',
       metadata: ['Unreal Engine 5.7.4+', 'C++', 'CEF', 'WebSocket'],
       sourceAction: {
-        label: 'View source',
+        label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/WebUserInterfaceUnreal',
-        external: true,
-        newTab: true,
-      },
-      documentationAction: {
-        label: 'Read documentation',
-        kind: 'href',
-        href: 'https://github.com/ArtemIyX/WebUserInterfaceUnreal/wiki',
         external: true,
         newTab: true,
       },
@@ -582,16 +574,9 @@ export const petProjectsContent: PetProjectsContent = {
         'Lets Blueprint authors define and register Unreal Engine subsystems without writing a dedicated C++ subsystem class.',
       metadata: ['Unreal Engine 5.3', 'C++', 'Blueprint support'],
       sourceAction: {
-        label: 'View source',
+        label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/BlueprintSubsystemsUnreal',
-        external: true,
-        newTab: true,
-      },
-      documentationAction: {
-        label: 'Read documentation',
-        kind: 'href',
-        href: 'https://artemiyx.github.io/BlueprintSubsystemsUnrealDoc/annotated.html',
         external: true,
         newTab: true,
       },
@@ -606,7 +591,7 @@ export const petProjectsContent: PetProjectsContent = {
         'Provides a reusable foundation for replicating network-supported UObjects and their subobjects in Unreal Engine.',
       metadata: ['Unreal Engine 5.3', 'C++', 'Networking'],
       sourceAction: {
-        label: 'View source',
+        label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/ReplicatedObjectUnreal',
         external: true,
@@ -623,16 +608,9 @@ export const petProjectsContent: PetProjectsContent = {
         'Offers utilities for serializing and deserializing Unreal data, including complex structures such as maps, with Blueprint support.',
       metadata: ['Unreal Engine 5.3', 'C++', 'Blueprint support'],
       sourceAction: {
-        label: 'View source',
+        label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/DataSerializerUnreal',
-        external: true,
-        newTab: true,
-      },
-      documentationAction: {
-        label: 'Read documentation',
-        kind: 'href',
-        href: 'https://artemiyx.github.io/DataSerializerUnrealDoc/annotated.html',
         external: true,
         newTab: true,
       },
@@ -647,16 +625,9 @@ export const petProjectsContent: PetProjectsContent = {
         'Adds Blueprint nodes for dispatching work to selected threads and handing execution back to the Unreal game thread.',
       metadata: ['Unreal Engine 5.3', 'C++', 'Blueprint support', 'Async tasks'],
       sourceAction: {
-        label: 'View source',
+        label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/AsyncBlueprintsUnreal',
-        external: true,
-        newTab: true,
-      },
-      documentationAction: {
-        label: 'Read documentation',
-        kind: 'href',
-        href: 'https://artemiyx.github.io/AsyncBlueprintsUnrealDoc/annotated.html',
         external: true,
         newTab: true,
       },
@@ -671,16 +642,9 @@ export const petProjectsContent: PetProjectsContent = {
         'Extends Primary Data Assets with configurable asset IDs and editor thumbnails for reusable data-asset workflows.',
       metadata: ['Unreal Engine 5.3', 'C++', 'Primary Data Assets'],
       sourceAction: {
-        label: 'View source',
+        label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/AdvancedAssetUnreal',
-        external: true,
-        newTab: true,
-      },
-      documentationAction: {
-        label: 'Read documentation',
-        kind: 'href',
-        href: 'https://artemiyx.github.io/AdvancedAssetUnrealDoc/annotated.html',
         external: true,
         newTab: true,
       },
@@ -695,7 +659,7 @@ export const petProjectsContent: PetProjectsContent = {
         'Routes typed in-process signals per game instance with safe subscription lifetimes, Blueprint nodes, worker-thread queuing, and delivery diagnostics.',
       metadata: ['Unreal Engine 5.7', 'C++', 'Blueprint support', 'Thread-safe queuing'],
       sourceAction: {
-        label: 'View source',
+        label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/SignalHubUnreal',
         external: true,
@@ -712,7 +676,7 @@ export const petProjectsContent: PetProjectsContent = {
         'Builds network-replicated UE5 inventories from composable item fragments, dynamic item state, configurable slots, and Blueprint-facing events.',
       metadata: ['Unreal Engine 5', 'C++', 'Fast Array replication', 'Blueprint support'],
       sourceAction: {
-        label: 'View source',
+        label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/FragmentedInventoryUnreal',
         external: true,
