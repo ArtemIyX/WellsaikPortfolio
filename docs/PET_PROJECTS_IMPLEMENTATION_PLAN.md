@@ -68,13 +68,11 @@ This is a technical portfolio for recruiters, engineering leads, collaborators, 
 
 ### Visual anchor
 
-Use a Swiss editorial direction: neutral surfaces, one existing teal accent, left-aligned typography, visible one-pixel rules, asymmetric numbering, and a strict grid. The implementation should preserve the portfolio's existing palette rather than introducing GitHub grey, GitHub blue, or another local mini-theme.
+Use a Swiss editorial direction: neutral surfaces, one existing teal accent, left-aligned typography, visible one-pixel rules, and a strict grid. The implementation should preserve the portfolio's existing palette rather than introducing GitHub grey, GitHub blue, or another local mini-theme.
 
 ### Differentiator
 
-Give every card a narrow numbered rail (`01` through `08`). Align the rails and card borders across the two-column layout so the section reads like a technical component index rather than a clone of GitHub's pinned repositories.
-
-The numbers are meaningful ordering and navigation aids, not decoration. Store them as authored content so a reordered list cannot silently display the wrong sequence.
+Use the project title as the primary scan target and direct GitHub destination. The title link should retain normal heading color and have no underline.
 
 ### What to borrow from GitHub
 
@@ -111,25 +109,19 @@ At approximately `48rem` and above, use a two-column grid of equal-width cards:
 Pet Projects
 Open-source Unreal Engine plugins and small tools...
 
-┌────┬──────────────────────────────┐  ┌────┬──────────────────────────────┐
-│ 01 │ Web User Interface           │  │ 02 │ Blueprint Subsystems         │
-│    │ CEF-based web UI for UE...   │  │    │ Blueprint-accessible...      │
-│    │ Unreal plugin · C++ · UE ... │  │    │ Unreal plugin · C++ · UE ... │
-│    │ GitHub                       │  │    │ GitHub                       │
-└────┴──────────────────────────────┘  └────┴──────────────────────────────┘
-
-┌────┬──────────────────────────────┐  ┌────┬──────────────────────────────┐
-│ 03 │ Replicated Object            │  │ 04 │ Data Serializer              │
-└────┴──────────────────────────────┘  └────┴──────────────────────────────┘
+┌───────────────────────────────────┐  ┌───────────────────────────────────┐
+│ Web User Interface                │  │ Blueprint Subsystems              │
+│ CEF-based web UI for UE...        │  │ Blueprint-accessible...           │
+│ Unreal Engine · C++ · CEF          │  │ Unreal Engine · C++ · Blueprint...│
+└───────────────────────────────────┘  └───────────────────────────────────┘
 ```
 
 Card rules:
 
 - equal-height cards within each grid row;
 - `minmax(0, 1fr)` columns to prevent overflow;
-- a fixed rail of roughly `3.25rem–4rem` and a flexible content column;
 - a minimum useful card height, but no fixed height that can clip translated or zoomed text;
-- title and description at the top, metadata and actions pushed toward the bottom;
+- title and description at the top, followed by metadata;
 - all text remains start-aligned;
 - no screenshots are required for the initial version.
 
@@ -138,26 +130,19 @@ Card rules:
 Below approximately `48rem`:
 
 - use one card per row;
-- keep the numbered rail on the left;
-- reduce card and rail padding with existing spacing tokens;
 - allow metadata to wrap;
 - preserve the exact DOM and reading order;
 - keep each link target at least 44 CSS pixels high where it behaves like a button-style action.
-
-At very narrow widths, the rail can move above the body only if testing shows the side rail leaves too little reading width. Prefer retaining the rail at 320 px when possible because it is the section's identifying motif.
 
 ## 5. Card Information Architecture
 
 Each card should contain only useful, maintained information:
 
-1. authored project number;
-2. project kind, such as `Unreal plugin` or `Developer tool`;
-3. human-readable display title;
-4. one-sentence description focused on the solved problem;
-5. two to four metadata labels, such as `C++`, `Blueprint support`, or a verified engine version;
-6. clearly named GitHub source link.
+1. human-readable display title, linked directly to GitHub;
+2. one-sentence description focused on the solved problem;
+3. two to four metadata labels, such as `C++` or `Blueprint support`.
 
-The repository slug does not need to be the visible title. Use a readable title in the card and keep the exact repository name available as secondary text or in the link's accessible name. For example, display `Blueprint Subsystems` and link with an accessible name equivalent to `View BlueprintSubsystemsUnreal source on GitHub`.
+The repository slug does not need to be visible. Use a readable title and an accessible link name equivalent to `View Blueprint Subsystems on GitHub`.
 
 Avoid:
 
@@ -202,13 +187,10 @@ Extend `src/content/home.ts` with generic names that also support non-Unreal pro
 ```ts
 export interface PetProjectContent {
   id: string
-  number: string
-  kind: string
   title: string
-  repositoryName: string
   summary: string
   metadata: readonly string[]
-  sourceAction: HrefNavigationItem
+  githubAction: HrefNavigationItem
 }
 
 export interface PetProjectsContent {
@@ -223,8 +205,7 @@ Export `petProjectsContent` with eight curated entries.
 Data invariants:
 
 - IDs are unique, stable, and URL-safe;
-- numbers are unique, zero-padded strings in source order;
-- titles are reader-friendly while `repositoryName` preserves the exact slug;
+- titles are reader-friendly and link to their GitHub repositories;
 - summaries are authored locally and are not presented as live GitHub data;
 - metadata contains two to four verified labels;
 - source actions use the existing `HrefNavigationItem` contract with `external: true` and `newTab: true`;
@@ -284,11 +265,9 @@ Responsibilities:
 
 - render one `UiBox` as a semantic `article`;
 - connect `aria-labelledby` to a unique `h3` derived from `project.id`;
-- render the number rail and content in a two-column internal grid;
 - render metadata as a semantic list;
-- render the GitHub source link with `UiLink`;
+- render the title as the GitHub source link with `UiLink`;
 - contain no click handler on the card surface;
-- contain no GitHub logo, repository icon, or decorative Unicode icon;
 - contain no internal state.
 
 Keep the card feature-local. Do not add a generic shared `RepositoryCard`, `Tag`, or `Icon` component until another implemented feature proves the same contract.
@@ -325,9 +304,7 @@ Card:
 - transparent or normal surface according to visual testing; prefer `UiBox variant="outline"` initially;
 - `border-color: var(--color-border-strong)` only where stronger separation is needed;
 - `border-radius: var(--radius-small)`;
-- rail separated with a one-pixel right border;
-- number uses muted text, medium weight, and tabular numerals;
-- title uses normal heading text color; repository name may use subtle text;
+- title uses normal heading text color with no underline;
 - metadata is a wrapping list separated by spacing or borders, not fake pills everywhere;
 - links use existing `UiLink` behavior and focus treatment.
 
@@ -423,10 +400,10 @@ Create `src/__tests__/home/PetProjectCard.spec.ts` and verify that the card:
 - renders as an article;
 - connects `aria-labelledby` to the project `h3`;
 - renders custom prop data rather than hard-coded content;
-- renders the authored number, kind, title, repository name, and summary;
+- renders the linked title and summary;
 - renders every metadata item as a list item;
 - renders the source action with the correct destination and external-link behavior;
-- renders one GitHub source action with no external-link indicator;
+- renders the title as the sole GitHub link with no external-link indicator;
 - contains no button and is not itself a link;
 - contains no star/fork counters or GitHub metric labels.
 
@@ -482,7 +459,6 @@ The feature is ready when:
 - the section presents eight curated real repositories from typed static content;
 - its visual language belongs to the portfolio while remaining recognizably repository-oriented;
 - the two-column desktop grid becomes one column without duplicated markup;
-- the numbered rail is visible and useful in both themes;
 - every card explains a project, shows restrained verified metadata, and links to its source;
 - the section does not fetch GitHub data or display stale popularity metrics;
 - every article and section has a correct accessible name;

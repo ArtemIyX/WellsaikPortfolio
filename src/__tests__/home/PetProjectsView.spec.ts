@@ -15,7 +15,7 @@ describe('PetProjectsView', () => {
     expect(wrapper.get('h2').attributes('id')).toBe('pet-projects-title')
     expect(wrapper.findAll('h1')).toHaveLength(0)
     expect(wrapper.findAll('article')).toHaveLength(8)
-    expect(wrapper.findAll('article h3').map((heading) => heading.text())).toEqual(
+    expect(wrapper.findAll('article h3 .ui-link__label').map((heading) => heading.text())).toEqual(
       petProjectsContent.projects.map((project) => project.title),
     )
     expect(wrapper.find('input').exists()).toBe(false)

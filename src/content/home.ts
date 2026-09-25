@@ -138,13 +138,10 @@ export interface FeaturedProjectsContent {
 
 export interface PetProjectContent {
   id: string
-  number: string
-  kind: string
   title: string
-  repositoryName: string
   summary: string
   metadata: readonly string[]
-  sourceAction: HrefNavigationItem
+  githubAction: HrefNavigationItem
 }
 
 export interface PetProjectsContent {
@@ -548,14 +545,11 @@ export const petProjectsContent: PetProjectsContent = {
   projects: [
     {
       id: 'web-user-interface',
-      number: '01',
-      kind: 'Unreal plugin',
       title: 'Web User Interface',
-      repositoryName: 'WebUserInterfaceUnreal',
       summary:
         'Embeds CEF-powered web interfaces in Unreal Engine with off-screen rendering, local WebSocket transport, and Blueprint-friendly browser controls.',
-      metadata: ['Unreal Engine 5.7.4+', 'C++', 'CEF', 'WebSocket'],
-      sourceAction: {
+      metadata: ['Unreal Engine', 'C++', 'CEF', 'WebSocket'],
+      githubAction: {
         label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/WebUserInterfaceUnreal',
@@ -565,14 +559,11 @@ export const petProjectsContent: PetProjectsContent = {
     },
     {
       id: 'blueprint-subsystems',
-      number: '02',
-      kind: 'Unreal plugin',
       title: 'Blueprint Subsystems',
-      repositoryName: 'BlueprintSubsystemsUnreal',
       summary:
         'Lets Blueprint authors define and register Unreal Engine subsystems without writing a dedicated C++ subsystem class.',
-      metadata: ['Unreal Engine 5.3', 'C++', 'Blueprint support'],
-      sourceAction: {
+      metadata: ['Unreal Engine', 'C++', 'Blueprint support'],
+      githubAction: {
         label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/BlueprintSubsystemsUnreal',
@@ -582,14 +573,11 @@ export const petProjectsContent: PetProjectsContent = {
     },
     {
       id: 'replicated-object',
-      number: '03',
-      kind: 'Unreal plugin',
       title: 'Replicated Object',
-      repositoryName: 'ReplicatedObjectUnreal',
       summary:
         'Provides a reusable foundation for replicating network-supported UObjects and their subobjects in Unreal Engine.',
-      metadata: ['Unreal Engine 5.3', 'C++', 'Networking'],
-      sourceAction: {
+      metadata: ['Unreal Engine', 'C++', 'Networking'],
+      githubAction: {
         label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/ReplicatedObjectUnreal',
@@ -599,14 +587,11 @@ export const petProjectsContent: PetProjectsContent = {
     },
     {
       id: 'data-serializer',
-      number: '04',
-      kind: 'Unreal plugin',
       title: 'Data Serializer',
-      repositoryName: 'DataSerializerUnreal',
       summary:
         'Offers utilities for serializing and deserializing Unreal data, including complex structures such as maps, with Blueprint support.',
-      metadata: ['Unreal Engine 5.3', 'C++', 'Blueprint support'],
-      sourceAction: {
+      metadata: ['Unreal Engine', 'C++', 'Blueprint support'],
+      githubAction: {
         label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/DataSerializerUnreal',
@@ -616,14 +601,11 @@ export const petProjectsContent: PetProjectsContent = {
     },
     {
       id: 'async-blueprints',
-      number: '05',
-      kind: 'Unreal plugin',
       title: 'Async Blueprints',
-      repositoryName: 'AsyncBlueprintsUnreal',
       summary:
         'Adds Blueprint nodes for dispatching work to selected threads and handing execution back to the Unreal game thread.',
-      metadata: ['Unreal Engine 5.3', 'C++', 'Blueprint support', 'Async tasks'],
-      sourceAction: {
+      metadata: ['Unreal Engine', 'C++', 'Blueprint support', 'Async tasks'],
+      githubAction: {
         label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/AsyncBlueprintsUnreal',
@@ -633,14 +615,11 @@ export const petProjectsContent: PetProjectsContent = {
     },
     {
       id: 'advanced-asset',
-      number: '06',
-      kind: 'Unreal plugin',
       title: 'Advanced Asset',
-      repositoryName: 'AdvancedAssetUnreal',
       summary:
         'Extends Primary Data Assets with configurable asset IDs and editor thumbnails for reusable data-asset workflows.',
-      metadata: ['Unreal Engine 5.3', 'C++', 'Primary Data Assets'],
-      sourceAction: {
+      metadata: ['Unreal Engine', 'C++', 'Primary Data Assets'],
+      githubAction: {
         label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/AdvancedAssetUnreal',
@@ -650,14 +629,11 @@ export const petProjectsContent: PetProjectsContent = {
     },
     {
       id: 'signal-hub',
-      number: '07',
-      kind: 'Unreal plugin',
       title: 'Signal Hub',
-      repositoryName: 'SignalHubUnreal',
       summary:
         'Routes typed in-process signals per game instance with safe subscription lifetimes, Blueprint nodes, worker-thread queuing, and delivery diagnostics.',
-      metadata: ['Unreal Engine 5.7', 'C++', 'Blueprint support', 'Thread-safe queuing'],
-      sourceAction: {
+      metadata: ['Unreal Engine', 'C++', 'Blueprint support', 'Thread-safe queuing'],
+      githubAction: {
         label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/SignalHubUnreal',
@@ -667,14 +643,11 @@ export const petProjectsContent: PetProjectsContent = {
     },
     {
       id: 'fragmented-inventory',
-      number: '08',
-      kind: 'Unreal plugin',
       title: 'Fragmented Inventory',
-      repositoryName: 'FragmentedInventoryUnreal',
       summary:
         'Builds network-replicated UE5 inventories from composable item fragments, dynamic item state, configurable slots, and Blueprint-facing events.',
-      metadata: ['Unreal Engine 5', 'C++', 'Fast Array replication', 'Blueprint support'],
-      sourceAction: {
+      metadata: ['Unreal Engine', 'C++', 'Fast Array replication', 'Blueprint support'],
+      githubAction: {
         label: 'GitHub',
         kind: 'href',
         href: 'https://github.com/ArtemIyX/FragmentedInventoryUnreal',
