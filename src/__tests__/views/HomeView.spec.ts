@@ -34,6 +34,7 @@ describe('HomeView', () => {
     expect(wrapper.get('main').find('#hero').exists()).toBe(true)
     expect(wrapper.get('main').find('#projects').exists()).toBe(true)
     expect(wrapper.get('main').find('#experience').exists()).toBe(true)
+    expect(wrapper.get('main').find('#pet-projects').exists()).toBe(true)
     expect(wrapper.get('main').find('#about').exists()).toBe(true)
     expect(
       wrapper
@@ -48,7 +49,12 @@ describe('HomeView', () => {
       wrapper.get('#projects').element.compareDocumentPosition(wrapper.get('#experience').element),
     ).toBe(4)
     expect(
-      wrapper.get('#experience').element.compareDocumentPosition(wrapper.get('#about').element),
+      wrapper
+        .get('#experience')
+        .element.compareDocumentPosition(wrapper.get('#pet-projects').element),
+    ).toBe(4)
+    expect(
+      wrapper.get('#pet-projects').element.compareDocumentPosition(wrapper.get('#about').element),
     ).toBe(4)
   })
 
@@ -56,9 +62,10 @@ describe('HomeView', () => {
     const wrapper = await mountHome()
 
     expect(wrapper.get('main').findAll('h1')).toHaveLength(1)
-    expect(wrapper.get('main').findAll('h2')).toHaveLength(3)
+    expect(wrapper.get('main').findAll('h2')).toHaveLength(4)
     expect(wrapper.get('#projects').findAll('article')).toHaveLength(3)
     expect(wrapper.get('#experience').findAll('article')).toHaveLength(4)
+    expect(wrapper.get('#pet-projects').findAll('article')).toHaveLength(6)
     const projectsLink = wrapper
       .findAll('.site-header__navigation-link')
       .find((link) => link.text() === 'Projects')
@@ -67,6 +74,10 @@ describe('HomeView', () => {
       .findAll('.site-header__navigation-link')
       .find((link) => link.text() === 'Experience')
     expect(experienceLink?.attributes('href')).toBe('/#experience')
+    const petProjectsLink = wrapper
+      .findAll('.site-header__navigation-link')
+      .find((link) => link.text() === 'Pet Projects')
+    expect(petProjectsLink?.attributes('href')).toBe('/#pet-projects')
     const aboutLink = wrapper
       .findAll('.site-header__navigation-link')
       .find((link) => link.text() === 'About')

@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { AboutView, ExperienceSkillsView, FeaturedProjectsView, HeroView } from '@/components/home'
+import {
+  AboutView,
+  ExperienceSkillsView,
+  FeaturedProjectsView,
+  HeroView,
+  PetProjectsView,
+} from '@/components/home'
 import { CookieConsentBanner, SiteFooter, SiteHeader } from '@/components/layout'
 import { useCookieConsent } from '@/composables/useCookieConsent'
 import { useTheme } from '@/composables/useTheme'
@@ -13,6 +19,7 @@ import {
   homeFooterOccupation,
   homeBrandLabel,
   homeNavigation,
+  petProjectsContent,
 } from '@/content/home'
 
 const { hasAcceptedCookies, shouldShowCookieBanner, acceptCookies, rejectCookies } =
@@ -37,6 +44,7 @@ const acceptCookiePreferences = (): void => {
       <HeroView :content="heroContent" :theme="theme" />
       <FeaturedProjectsView :content="featuredProjectsContent" />
       <ExperienceSkillsView :content="experienceSkillsContent" />
+      <PetProjectsView :content="petProjectsContent" />
       <AboutView :content="aboutContent" />
     </main>
     <SiteFooter

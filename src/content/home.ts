@@ -136,6 +136,25 @@ export interface FeaturedProjectsContent {
   projects: readonly ProjectContent[]
 }
 
+export interface PetProjectContent {
+  id: string
+  number: string
+  kind: string
+  title: string
+  repositoryName: string
+  summary: string
+  metadata: readonly string[]
+  sourceAction: NavigationItem
+  documentationAction?: NavigationItem
+}
+
+export interface PetProjectsContent {
+  title: string
+  introduction: string
+  projects: readonly PetProjectContent[]
+  allProjectsAction: NavigationItem
+}
+
 export const homeBrandLabel = 'Artem Podorozhko'
 export const homeFooterName = 'Artem Podorozhko'
 export const homeFooterOccupation = 'Unreal Engine & C++ Engineer · Riga, Latvia'
@@ -146,6 +165,7 @@ export const homeNavigation: readonly NavigationItem[] = [
   { label: 'Home', kind: 'route', to: { name: 'home', hash: '#hero' } },
   { label: 'Projects', kind: 'route', to: { name: 'home', hash: '#projects' } },
   { label: 'Experience', kind: 'route', to: { name: 'home', hash: '#experience' } },
+  { label: 'Pet Projects', kind: 'route', to: { name: 'home', hash: '#pet-projects' } },
   { label: 'About', kind: 'route', to: { name: 'home', hash: '#about' } },
 ]
 
@@ -521,6 +541,158 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
       ],
     },
   ],
+}
+
+export const petProjectsContent: PetProjectsContent = {
+  title: 'Pet Projects',
+  introduction:
+    'Open-source Unreal Engine plugins and small tools I build to explore reusable systems, editor workflows, networking, and Blueprint integration.',
+  projects: [
+    {
+      id: 'web-user-interface',
+      number: '01',
+      kind: 'Unreal plugin',
+      title: 'Web User Interface',
+      repositoryName: 'WebUserInterfaceUnreal',
+      summary:
+        'Embeds CEF-powered web interfaces in Unreal Engine with off-screen rendering, local WebSocket transport, and Blueprint-friendly browser controls.',
+      metadata: ['Unreal Engine 5.7.4+', 'C++', 'CEF', 'WebSocket'],
+      sourceAction: {
+        label: 'View source',
+        kind: 'href',
+        href: 'https://github.com/ArtemIyX/WebUserInterfaceUnreal',
+        external: true,
+        newTab: true,
+      },
+      documentationAction: {
+        label: 'Read documentation',
+        kind: 'href',
+        href: 'https://github.com/ArtemIyX/WebUserInterfaceUnreal/wiki',
+        external: true,
+        newTab: true,
+      },
+    },
+    {
+      id: 'blueprint-subsystems',
+      number: '02',
+      kind: 'Unreal plugin',
+      title: 'Blueprint Subsystems',
+      repositoryName: 'BlueprintSubsystemsUnreal',
+      summary:
+        'Lets Blueprint authors define and register Unreal Engine subsystems without writing a dedicated C++ subsystem class.',
+      metadata: ['Unreal Engine 5.3', 'C++', 'Blueprint support'],
+      sourceAction: {
+        label: 'View source',
+        kind: 'href',
+        href: 'https://github.com/ArtemIyX/BlueprintSubsystemsUnreal',
+        external: true,
+        newTab: true,
+      },
+      documentationAction: {
+        label: 'Read documentation',
+        kind: 'href',
+        href: 'https://artemiyx.github.io/BlueprintSubsystemsUnrealDoc/annotated.html',
+        external: true,
+        newTab: true,
+      },
+    },
+    {
+      id: 'replicated-object',
+      number: '03',
+      kind: 'Unreal plugin',
+      title: 'Replicated Object',
+      repositoryName: 'ReplicatedObjectUnreal',
+      summary:
+        'Provides a reusable foundation for replicating network-supported UObjects and their subobjects in Unreal Engine.',
+      metadata: ['Unreal Engine 5.3', 'C++', 'Networking'],
+      sourceAction: {
+        label: 'View source',
+        kind: 'href',
+        href: 'https://github.com/ArtemIyX/ReplicatedObjectUnreal',
+        external: true,
+        newTab: true,
+      },
+    },
+    {
+      id: 'data-serializer',
+      number: '04',
+      kind: 'Unreal plugin',
+      title: 'Data Serializer',
+      repositoryName: 'DataSerializerUnreal',
+      summary:
+        'Offers utilities for serializing and deserializing Unreal data, including complex structures such as maps, with Blueprint support.',
+      metadata: ['Unreal Engine 5.3', 'C++', 'Blueprint support'],
+      sourceAction: {
+        label: 'View source',
+        kind: 'href',
+        href: 'https://github.com/ArtemIyX/DataSerializerUnreal',
+        external: true,
+        newTab: true,
+      },
+      documentationAction: {
+        label: 'Read documentation',
+        kind: 'href',
+        href: 'https://artemiyx.github.io/DataSerializerUnrealDoc/annotated.html',
+        external: true,
+        newTab: true,
+      },
+    },
+    {
+      id: 'async-blueprints',
+      number: '05',
+      kind: 'Unreal plugin',
+      title: 'Async Blueprints',
+      repositoryName: 'AsyncBlueprintsUnreal',
+      summary:
+        'Adds Blueprint nodes for dispatching work to selected threads and handing execution back to the Unreal game thread.',
+      metadata: ['Unreal Engine 5.3', 'C++', 'Blueprint support', 'Async tasks'],
+      sourceAction: {
+        label: 'View source',
+        kind: 'href',
+        href: 'https://github.com/ArtemIyX/AsyncBlueprintsUnreal',
+        external: true,
+        newTab: true,
+      },
+      documentationAction: {
+        label: 'Read documentation',
+        kind: 'href',
+        href: 'https://artemiyx.github.io/AsyncBlueprintsUnrealDoc/annotated.html',
+        external: true,
+        newTab: true,
+      },
+    },
+    {
+      id: 'advanced-asset',
+      number: '06',
+      kind: 'Unreal plugin',
+      title: 'Advanced Asset',
+      repositoryName: 'AdvancedAssetUnreal',
+      summary:
+        'Extends Primary Data Assets with configurable asset IDs and editor thumbnails for reusable data-asset workflows.',
+      metadata: ['Unreal Engine 5.3', 'C++', 'Primary Data Assets'],
+      sourceAction: {
+        label: 'View source',
+        kind: 'href',
+        href: 'https://github.com/ArtemIyX/AdvancedAssetUnreal',
+        external: true,
+        newTab: true,
+      },
+      documentationAction: {
+        label: 'Read documentation',
+        kind: 'href',
+        href: 'https://artemiyx.github.io/AdvancedAssetUnrealDoc/annotated.html',
+        external: true,
+        newTab: true,
+      },
+    },
+  ],
+  allProjectsAction: {
+    label: 'View all repositories',
+    kind: 'href',
+    href: github,
+    external: true,
+    newTab: true,
+  },
 }
 
 export const aboutContent: AboutContent = {

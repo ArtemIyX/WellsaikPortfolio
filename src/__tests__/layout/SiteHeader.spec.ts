@@ -11,6 +11,7 @@ const items: readonly NavigationItem[] = [
   { label: 'Home', kind: 'route', to: { name: 'home', hash: '#hero' } },
   { label: 'Projects', kind: 'route', to: { name: 'home', hash: '#projects' } },
   { label: 'Experience', kind: 'route', to: { name: 'home', hash: '#experience' } },
+  { label: 'Pet Projects', kind: 'route', to: { name: 'home', hash: '#pet-projects' } },
   { label: 'About', kind: 'route', to: { name: 'home', hash: '#about' } },
 ]
 
@@ -58,12 +59,14 @@ describe('SiteHeader', () => {
       'Home',
       'Projects',
       'Experience',
+      'Pet Projects',
       'About',
     ])
     expect(navigationLinks[0]?.attributes('href')).toBe('/#hero')
     expect(navigationLinks[1]?.attributes('href')).toBe('/#projects')
     expect(navigationLinks[2]?.attributes('href')).toBe('/#experience')
-    expect(navigationLinks[3]?.attributes('href')).toBe('/#about')
+    expect(navigationLinks[3]?.attributes('href')).toBe('/#pet-projects')
+    expect(navigationLinks[4]?.attributes('href')).toBe('/#about')
     wrapper.unmount()
   })
 
@@ -166,6 +169,25 @@ describe('SiteHeader', () => {
       .find((link) => link.text() === 'Experience')
     expect(experienceLink?.attributes('href')).toBe('/#experience')
     await experienceLink?.trigger('click')
+    await nextTick()
+
+    expect(wrapper.find('#mobile-navigation-panel').exists()).toBe(false)
+    expect(trigger.attributes('aria-expanded')).toBe('false')
+
+    wrapper.unmount()
+  })
+
+  it('closes the mobile panel after selecting Pet Projects', async () => {
+    const wrapper = await mountHeader()
+    const trigger = wrapper.get('.site-header__menu-trigger')
+
+    await trigger.trigger('click')
+    await nextTick()
+    const petProjectsLink = wrapper
+      .findAll('.site-header__mobile-navigation-link')
+      .find((link) => link.text() === 'Pet Projects')
+    expect(petProjectsLink?.attributes('href')).toBe('/#pet-projects')
+    await petProjectsLink?.trigger('click')
     await nextTick()
 
     expect(wrapper.find('#mobile-navigation-panel').exists()).toBe(false)

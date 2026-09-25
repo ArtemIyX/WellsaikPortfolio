@@ -1,0 +1,47 @@
+.pet-projects-view {
+  scroll-margin-top: calc(4.5rem + var(--space-4));
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.pet-projects-view :deep(.ui-section__inner) {
+  width: min(100% - (2 * var(--layout-gutter)), var(--layout-content-max));
+}
+
+.pet-projects-view :deep(.ui-section__intro) {
+  max-width: var(--measure);
+}
+
+.pet-projects-view__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin: var(--space-8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pet-projects-view__list > li {
+  display: flex;
+  min-width: 0;
+}
+
+.pet-projects-view__list > li > * {
+  width: 100%;
+}
+
+.pet-projects-view__all-action {
+  margin-top: var(--space-6);
+}
+
+.pet-projects-view__all-action :deep(.ui-link) {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+}
+
+@media (max-width: 48rem) {
+  .pet-projects-view__list {
+    grid-template-columns: 1fr;
+    margin-top: var(--space-6);
+  }
+}
