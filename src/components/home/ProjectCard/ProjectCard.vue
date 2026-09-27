@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 import { UiBox, UiLink, UiText } from '@/components/shared'
 import { defaultProjectDetailLabels } from '@/content/home'
+import { useReveal } from '@/composables/useReveal'
 
 import type { ProjectCardProps } from './ProjectCard'
 
@@ -10,13 +11,16 @@ const props = withDefaults(defineProps<ProjectCardProps>(), { mediaSide: 'start'
 
 const titleId = `project-card-title-${props.project.id}`
 const detailLabels = computed(() => ({ ...defaultProjectDetailLabels, ...props.project.labels }))
+const cardElement = ref<HTMLElement | null>(null)
+const { isRevealed } = useReveal(cardElement)
 </script>
 
 <template>
   <UiBox
     as="article"
+    ref="cardElement"
     class="project-card"
-    :class="`project-card--media-${mediaSide}`"
+    :class="[`project-card--media-${mediaSide}`, { 'project-card--revealed': isRevealed }]"
     :style="project.accent ? { '--project-accent': project.accent } : undefined"
     variant="surface"
     depth-aware

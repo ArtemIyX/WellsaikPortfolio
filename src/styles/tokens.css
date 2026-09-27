@@ -25,6 +25,11 @@
   --border-width: 1px;
   --duration-fast: 120ms;
   --duration-normal: 200ms;
+  --duration-entrance: 520ms;
+  --duration-exit: 180ms;
+  --duration-stagger: 70ms;
+  --duration-ambient: 5s;
+  --motion-reveal-distance: 1.125rem;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --color-bg: #f7f9fc;
   --color-surface: #ffffff;

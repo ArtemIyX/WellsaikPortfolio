@@ -7,12 +7,29 @@
     border-color var(--duration-fast) var(--ease-standard),
     box-shadow var(--duration-fast) var(--ease-standard),
     transform var(--duration-fast) var(--ease-standard);
+  opacity: 0;
+  transform: translateY(var(--motion-reveal-distance));
+}
+
+.project-card--revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--duration-entrance) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard),
+    transform var(--duration-entrance) var(--ease-standard);
 }
 
 .project-card:hover,
 .project-card:focus-within {
   border-color: var(--project-accent, var(--color-accent));
   box-shadow: 0 0.75rem 2rem color-mix(in srgb, var(--project-accent, var(--color-accent)) 12%, transparent);
+  transform: translateY(-2px);
+}
+
+.project-card--revealed:hover,
+.project-card--revealed:focus-within {
   transform: translateY(-2px);
 }
 
@@ -222,6 +239,8 @@
 
   .project-card:hover,
   .project-card:focus-within,
+  .project-card--revealed:hover,
+  .project-card--revealed:focus-within,
   .project-card:hover img,
   .project-card:focus-within img {
     transform: none;

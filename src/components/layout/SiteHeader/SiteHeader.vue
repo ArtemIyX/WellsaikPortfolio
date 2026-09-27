@@ -3,16 +3,39 @@ import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { ThemeSelector, UiLink } from '@/components/shared'
 import type { ThemePreference } from '@/composables/useTheme'
+import type { NavigationItem } from '@/content/home'
 
 import type { SiteHeaderProps } from './SiteHeader'
 
-defineProps<SiteHeaderProps>()
+const props = defineProps<SiteHeaderProps>()
 
 const emit = defineEmits<{ 'update:theme': [value: ThemePreference] }>()
 
 const menuOpen = ref(false)
 const menuTrigger = ref<HTMLButtonElement | null>(null)
 const mobilePanel = ref<HTMLElement | null>(null)
+const activeSection = ref('hero')
+const readingProgress = ref(0)
+let sectionObserver: IntersectionObserver | undefined
+let progressFrame = 0
+
+const navigationHash = (item: NavigationItem): string | undefined => {
+  if (item.kind !== 'route' || typeof item.to !== 'object' || !item.to || !('hash' in item.to)) return
+  return typeof item.to.hash === 'string' ? item.to.hash : undefined
+}
+
+const isNavigationItemActive = (item: NavigationItem): boolean => navigationHash(item) === `#${activeSection.value}`
+
+const updateReadingProgress = (): void => {
+  progressFrame = 0
+  const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
+  readingProgress.value = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0
+}
+
+const scheduleReadingProgress = (): void => {
+  if (progressFrame) return
+  progressFrame = window.requestAnimationFrame(updateReadingProgress)
+}
 
 const updateTheme = (value: ThemePreference): void => emit('update:theme', value)
 
@@ -64,16 +87,45 @@ watch(menuOpen, (isOpen) => {
   document.body.classList.toggle('site-header-menu-open', isOpen)
 })
 
-onMounted(() => window.addEventListener('resize', handleViewportResize))
+onMounted(() => {
+  window.addEventListener('resize', handleViewportResize)
+  const sections = props.items
+    .map(navigationHash)
+    .filter((hash): hash is string => Boolean(hash))
+    .map((hash) => document.querySelector(hash))
+    .filter((section): section is Element => Boolean(section))
+
+  if (typeof window.IntersectionObserver !== 'function') {
+    window.addEventListener('scroll', scheduleReadingProgress, { passive: true })
+    updateReadingProgress()
+    return
+  }
+
+  sectionObserver = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
+      if (visible?.target.id) activeSection.value = visible.target.id
+    },
+    { rootMargin: '-22% 0px -62% 0px', threshold: [0, 0.1, 0.5] },
+  )
+  sections.forEach((section) => sectionObserver?.observe(section))
+  window.addEventListener('scroll', scheduleReadingProgress, { passive: true })
+  updateReadingProgress()
+})
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', handleViewportResize)
+  sectionObserver?.disconnect()
+  window.removeEventListener('scroll', scheduleReadingProgress)
+  if (progressFrame) window.cancelAnimationFrame(progressFrame)
   document.body.classList.remove('site-header-menu-open')
 })
 </script>
 
 <template>
-  <header class="site-header">
+  <header class="site-header" :style="{ '--reading-progress': `${readingProgress}%` }">
     <UiLink class="site-header__skip-link" href="#main-content">Skip to main content</UiLink>
     <div class="site-header__inner">
       <UiLink class="site-header__brand" :to="{ name: 'home' }" variant="standalone">
@@ -87,6 +139,8 @@ onBeforeUnmount(() => {
               <UiLink
                 v-if="item.kind === 'route'"
                 class="site-header__navigation-link"
+                :class="{ 'site-header__navigation-link--active': isNavigationItemActive(item) }"
+                :aria-current="isNavigationItemActive(item) ? 'location' : undefined"
                 :to="item.to"
                 variant="standalone"
               >
@@ -171,6 +225,8 @@ onBeforeUnmount(() => {
                 <UiLink
                   v-if="item.kind === 'route'"
                   class="site-header__mobile-navigation-link"
+                  :class="{ 'site-header__mobile-navigation-link--active': isNavigationItemActive(item) }"
+                  :aria-current="isNavigationItemActive(item) ? 'location' : undefined"
                   :to="item.to"
                   variant="standalone"
                   @click="closeMenu(false)"
