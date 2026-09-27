@@ -42,6 +42,11 @@
   gap: var(--space-4);
 }
 
+.site-header__cv-link {
+  min-height: 2.75rem;
+  padding-inline: var(--space-3);
+}
+
 .site-header__navigation-list {
   flex-wrap: wrap;
   gap: var(--space-2);
@@ -148,6 +153,11 @@
   gap: var(--space-4);
 }
 
+.site-header__panel-cv {
+  justify-content: center;
+  width: 100%;
+}
+
 .site-header__panel-heading {
   padding-bottom: var(--space-4);
   border-bottom: var(--border-width) solid var(--color-border);
@@ -206,6 +216,10 @@
 .site-header-panel-enter-from .site-header__mobile-panel,
 .site-header-panel-leave-to .site-header__mobile-panel {
   transform: translateX(100%);
+}
+
+.site-header__backdrop {
+  background: rgb(3 7 18 / 78%);
 }
 
 :global(body.site-header-menu-open) {

@@ -30,6 +30,12 @@ export interface HeroContent {
   secondaryAction: NavigationItem
 }
 
+export interface ProofPoint {
+  value: string
+  label: string
+  detail: string
+}
+
 export interface AboutFact {
   label: string
   value: string
@@ -195,10 +201,10 @@ export const homeFooterActions: readonly NavigationItem[] = [
 
 export const heroContent: HeroContent = {
   eyebrow: 'Unreal Engine & C++ Engineer · Riga, Latvia',
-  title: 'Nothing can stop an idea whose time has come',
+  title: 'Unreal Engine systems built for scale, speed, and play',
   summary:
-    'I develop games in Unreal Engine, with a primary focus on client-side optimization and pushing the engine to its practical limits. I also build bespoke full-stack applications for clients, using Vue.js with C# or Rust backends.',
-  availability: 'Employed full-time',
+    'I design and ship Unreal Engine gameplay, networking, and simulation systems, with a focus on measurable performance at scale. I also deliver focused full-stack tools with Vue.js and C# or Rust backends.',
+  availability: 'Open to selective freelance work',
   imageSrc: '/images/portrait.webp',
   imageLightSrc: '/images/portrait_light.webp',
   imageAlt: `Portrait of ${homeBrandLabel}`,
@@ -218,12 +224,18 @@ export const heroContent: HeroContent = {
   },
 }
 
-// Development placeholder content. Replace every value and demonstration link before launch.
+export const proofPoints: readonly ProofPoint[] = [
+  { value: '10k+', label: 'replicated entities', detail: 'large-scale UE5 simulation' },
+  { value: '1k+', label: 'concurrent players', detail: 'networked multiplayer systems' },
+  { value: '60 FPS', label: 'target experience', detail: 'profiling-led optimization' },
+  { value: '90 days', label: 'from blank project', detail: 'to deployed simulator' },
+]
+
 export const featuredProjectsContent: FeaturedProjectsContent = {
-  eyebrow: '',
+  eyebrow: 'Selected work',
   title: 'A few projects that show how I turn complex ideas into working systems',
   introduction:
-    'A selection of projects that show how I turn game ideas into working products - from early concepts and gameplay systems to technical implementation, iteration, and delivery.',
+    'A selection of projects showing how I turn game ideas into working products — from multiplayer architecture and simulation to technical implementation, iteration, and delivery.',
   projects: [
     {
       id: 'endless-war-mmo-rpg',
@@ -359,9 +371,9 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
 
 export const experienceSkillsContent: ExperienceSkillsContent = {
   eyebrow: '',
-  title: 'A placeholder record of responsibilities, growth, and technical focus.',
+  title: 'Engineering experience grounded in shipped systems.',
   introduction:
-    'Placeholder introduction explaining how professional experience and practical skills will be summarized here.',
+    'Selected roles across Unreal Engine, multiplayer systems, simulation, mobile delivery, and full-stack product engineering.',
   experienceHeading: 'Experience',
   skillsHeading: 'Skills',
   entries: [
@@ -684,7 +696,7 @@ export const aboutContent: AboutContent = {
   title: 'A developer focused on useful, carefully made software.',
   paragraphs: [
     'I am an Unreal Engine C++ programmer specializing in developing gameplay, simulation, and networking systems. I have a passion for making innovative games a reality through creating an experience that responds and interacts with players.',
-    'I’m available for freelance projects and open to building custom applications across desktop, mobile, web, and game platforms.',
+    'I’m open to selective freelance work and focused collaborations across desktop, mobile, web, and game platforms.',
   ],
   personalNote:
     'Away from development, I love to play around with game design ideas, learn about how complicated systems function, and realize grand visions in games.',

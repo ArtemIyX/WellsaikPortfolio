@@ -112,6 +112,9 @@ onBeforeUnmount(() => {
           label="Color theme"
           @update:model-value="updateTheme"
         />
+        <UiLink class="site-header__cv-link" href="/Artem-Podorozhko-CV.pdf" new-tab variant="button-secondary">
+          CV
+        </UiLink>
       </div>
 
       <button
@@ -188,6 +191,10 @@ onBeforeUnmount(() => {
               </li>
             </ul>
           </nav>
+
+          <UiLink class="site-header__panel-cv" href="/Artem-Podorozhko-CV.pdf" new-tab variant="button-primary">
+            View CV
+          </UiLink>
 
           <div class="site-header__panel-theme">
             <span>Theme</span>

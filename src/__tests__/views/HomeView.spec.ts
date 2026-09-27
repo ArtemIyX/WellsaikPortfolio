@@ -62,7 +62,7 @@ describe('HomeView', () => {
     const wrapper = await mountHome()
 
     expect(wrapper.get('main').findAll('h1')).toHaveLength(1)
-    expect(wrapper.get('main').findAll('h2')).toHaveLength(4)
+    expect(wrapper.get('main').findAll('h2')).toHaveLength(5)
     expect(wrapper.get('#projects').findAll('article')).toHaveLength(3)
     expect(wrapper.get('#experience').findAll('article')).toHaveLength(4)
     expect(wrapper.get('#pet-projects').findAll('article')).toHaveLength(9)

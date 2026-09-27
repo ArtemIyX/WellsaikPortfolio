@@ -7,6 +7,7 @@ import {
   PetProjectsView,
 } from '@/components/home'
 import { CookieConsentBanner, SiteFooter, SiteHeader } from '@/components/layout'
+import { UiSection, UiText } from '@/components/shared'
 import { useCookieConsent } from '@/composables/useCookieConsent'
 import { useTheme } from '@/composables/useTheme'
 import {
@@ -20,6 +21,7 @@ import {
   homeBrandLabel,
   homeNavigation,
   petProjectsContent,
+  proofPoints,
 } from '@/content/home'
 
 const { hasAcceptedCookies, shouldShowCookieBanner, acceptCookies, rejectCookies } =
@@ -42,6 +44,16 @@ const acceptCookiePreferences = (): void => {
     />
     <main id="main-content">
       <HeroView :content="heroContent" :theme="theme" />
+      <UiSection id="proof" class="proof-strip" spacing="compact" width="content" labelledby="proof-title">
+        <UiText id="proof-title" as="h2" role="heading" class="sr-only">Selected engineering proof</UiText>
+        <ul class="proof-strip__list">
+          <li v-for="point in proofPoints" :key="point.label" class="proof-strip__item">
+            <UiText as="strong" role="data" class="proof-strip__value">{{ point.value }}</UiText>
+            <UiText as="span" role="label" weight="medium">{{ point.label }}</UiText>
+            <UiText as="span" tone="subtle">{{ point.detail }}</UiText>
+          </li>
+        </ul>
+      </UiSection>
       <FeaturedProjectsView :content="featuredProjectsContent" />
       <ExperienceSkillsView :content="experienceSkillsContent" />
       <PetProjectsView :content="petProjectsContent" />
