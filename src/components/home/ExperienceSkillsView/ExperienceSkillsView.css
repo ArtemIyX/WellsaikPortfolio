@@ -87,6 +87,7 @@
   border-color: var(--color-timeline-current);
   background: var(--color-timeline-current);
   box-shadow: 0 0 0 0.25rem var(--color-timeline-current-halo);
+  transform: scale(1.75);
 }
 
 .experience-skills-view__experience-item > .experience-card,
