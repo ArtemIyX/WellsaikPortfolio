@@ -20,7 +20,7 @@ describe('PetProjectsView', () => {
       petProjectsContent.projects.map((project) => project.title),
     )
     expect(wrapper.findAll('button')).toHaveLength(5)
-    expect(wrapper.get('[role="status"]').text()).toContain('Showing 9 repositories')
+    expect(wrapper.get('[aria-live="polite"]').text()).toContain('Showing 9 repositories')
     expect(wrapper.text()).toContain('Filter by area')
   })
 
