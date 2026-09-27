@@ -95,6 +95,42 @@
   text-anchor: middle;
 }
 
+.case-study-view__diagram-pulse {
+  fill: var(--color-accent);
+  animation: case-study-flow 2.4s linear infinite;
+}
+
+.case-study-view__diagram-pulse--paused {
+  animation-play-state: paused;
+}
+
+.case-study-view__diagram-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.case-study-view__diagram-controls button {
+  min-height: 2.75rem;
+  padding: 0 var(--space-3);
+  background: transparent;
+  color: var(--color-text);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-small);
+  cursor: pointer;
+}
+
+@keyframes case-study-flow {
+  from { transform: translateX(0); }
+  to { transform: translateX(238px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-study-view__diagram-pulse {
+    animation: none;
+  }
+}
+
 .case-study-view__technologies {
   display: flex;
   flex-wrap: wrap;

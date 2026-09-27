@@ -48,6 +48,7 @@ export interface AboutContent {
   paragraphs: readonly string[]
   facts: readonly AboutFact[]
   personalNote: string
+  principles?: readonly { title: string; detail: string }[]
   availability?: string
   contactAction: NavigationItem
 }
@@ -775,6 +776,20 @@ export const aboutContent: AboutContent = {
   ],
   personalNote:
     'Away from development, I love to play around with game design ideas, learn about how complicated systems function, and realize grand visions in games.',
+  principles: [
+    {
+      title: 'Measure before optimizing',
+      detail: 'I profile CPU, GPU, memory, and network paths before choosing a change, then verify the result against the same scenario.',
+    },
+    {
+      title: 'Build reusable engine modules',
+      detail: 'I prefer explicit components, plugins, and subsystem boundaries that keep the next gameplay feature cheaper to build.',
+    },
+    {
+      title: 'Test under realistic scale',
+      detail: 'Multiplayer systems are evaluated with meaningful entity counts, latency, and player-facing failure modes—not only an editor happy path.',
+    },
+  ],
   contactAction: {
     label: 'Start a conversation',
     kind: 'href',

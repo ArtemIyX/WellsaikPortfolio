@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
 import { UiLink, UiText } from '@/components/shared'
@@ -9,6 +9,8 @@ const route = useRoute()
 const project = computed(() =>
   featuredProjectsContent.projects.find((item) => item.id === route.params.projectId),
 )
+const flowPaused = ref(false)
+const flowResetKey = ref(0)
 
 const updateDocumentMetadata = (): void => {
   if (!project.value) return
@@ -19,7 +21,7 @@ const updateDocumentMetadata = (): void => {
 onMounted(updateDocumentMetadata)
 watch(project, updateDocumentMetadata)
 onBeforeUnmount(() => {
-  document.title = 'Artem Podorozhko - Portfolio'
+  document.title = 'Artem Podorozhko — Portfolio'
 })
 </script>
 
@@ -75,7 +77,12 @@ onBeforeUnmount(() => {
             <g class="case-study-view__diagram-node"><rect x="24" y="50" width="156" height="80" rx="8" /><text x="102" y="96">Player input</text></g>
             <g class="case-study-view__diagram-node"><rect x="300" y="50" width="120" height="80" rx="8" /><text x="360" y="96">Game systems</text></g>
             <g class="case-study-view__diagram-node"><rect x="540" y="50" width="156" height="80" rx="8" /><text x="618" y="96">World state</text></g>
+            <circle :key="flowResetKey" class="case-study-view__diagram-pulse" :class="{ 'case-study-view__diagram-pulse--paused': flowPaused }" cx="242" cy="90" r="7" />
           </svg>
+          <div class="case-study-view__diagram-controls" aria-label="Systems flow controls">
+            <button type="button" @click="flowPaused = !flowPaused">{{ flowPaused ? 'Resume flow' : 'Pause flow' }}</button>
+            <button type="button" @click="flowResetKey++">Reset</button>
+          </div>
           <p>Inputs are validated at the gameplay boundary, passed through reusable systems, and reflected in authoritative world state.</p>
         </section>
         <section id="evidence" aria-labelledby="evidence-title">
