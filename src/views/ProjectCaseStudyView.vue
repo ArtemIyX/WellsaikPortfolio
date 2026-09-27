@@ -54,6 +54,7 @@ onBeforeUnmount(() => {
       <img
         class="case-study-view__image"
         :src="project.image.src"
+        :srcset="project.image.srcSet"
         :alt="project.image.alt"
         :width="project.image.width"
         :height="project.image.height"

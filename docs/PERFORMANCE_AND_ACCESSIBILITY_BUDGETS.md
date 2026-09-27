@@ -20,6 +20,9 @@ Run `npm run build` and inspect the generated asset sizes before release. Run a
 mobile Lighthouse profile without Vue DevTools; a budget failure requires either a
 measured explanation or a smaller asset/interaction path.
 
+`npm run build` generates 480 px, 768 px, and 1200 px WebP derivatives for the
+portrait and featured project media before Vite bundles the application.
+
 ## Accessibility scenarios
 
 - Tab from the skip link through the header, drawer, filters, cards, and contact panel.

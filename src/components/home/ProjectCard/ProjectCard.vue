@@ -32,6 +32,7 @@ const { isRevealed } = useReveal(cardElement)
     <template #media>
       <img
         :src="project.image.src"
+        :srcset="project.image.srcSet"
         :alt="project.image.alt"
         :width="project.image.width"
         :height="project.image.height"

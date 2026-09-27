@@ -23,6 +23,8 @@ export interface HeroContent {
   availability: string
   imageSrc: string
   imageLightSrc: string
+  imageSrcSet?: string
+  imageLightSrcSet?: string
   imageAlt: string
   imageWidth: number
   imageHeight: number
@@ -112,6 +114,7 @@ export interface ProjectImage {
   alt: string
   width: number
   height: number
+  srcSet?: string
 }
 
 export interface ProjectDetailLabels {
@@ -228,6 +231,8 @@ export const heroContent: HeroContent = {
   availability: 'Open to selective freelance work',
   imageSrc: '/images/portrait.webp',
   imageLightSrc: '/images/portrait_light.webp',
+  imageSrcSet: '/images/generated/portrait-480.webp 480w, /images/generated/portrait-768.webp 768w, /images/generated/portrait-1200.webp 1200w',
+  imageLightSrcSet: '/images/generated/portrait_light-480.webp 480w, /images/generated/portrait_light-768.webp 768w, /images/generated/portrait_light-1200.webp 1200w',
   imageAlt: `Portrait of ${homeBrandLabel}`,
   imageWidth: 1200,
   imageHeight: 1600,
@@ -294,6 +299,7 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       },
       image: {
         src: '/images/projects/endless-war.webp',
+        srcSet: '/images/generated/endless-war-480.webp 480w, /images/generated/endless-war-768.webp 768w, /images/generated/endless-war-1200.webp 1200w',
         alt: 'Gameplay preview from Endless War',
         width: 1200,
         height: 750,
@@ -339,6 +345,7 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       },
       image: {
         src: '/images/projects/riftborn.webp',
+        srcSet: '/images/generated/riftborn-480.webp 480w, /images/generated/riftborn-768.webp 768w, /images/generated/riftborn-1200.webp 1200w',
         alt: 'Gameplay preview from Riftborn',
         width: 1200,
         height: 750,
@@ -390,6 +397,7 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       },
       image: {
         src: '/images/projects/rockbelt.webp',
+        srcSet: '/images/generated/rockbelt-480.webp 480w, /images/generated/rockbelt-768.webp 768w, /images/generated/rockbelt-1200.webp 1200w',
         alt: 'Gameplay preview from Rockbelt',
         width: 1200,
         height: 750,

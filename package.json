@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/generate-responsive-images.mjs",
+    "prebuild": "node scripts/generate-responsive-images.mjs",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
@@ -40,6 +42,7 @@
     "npm-run-all2": "^9.0.3",
     "oxlint": "~1.82.0",
     "prettier": "3.9.6",
+    "sharp": "^0.35.5",
     "typescript": "~6.0.0",
     "vite": "^8.2.2",
     "vite-plugin-vue-devtools": "^8.2.1",
