@@ -130,6 +130,7 @@ export interface ProjectContent {
   image: ProjectImage
   liveAction: NavigationItem
   sourceAction?: NavigationItem
+  caseStudyAction?: RouteNavigationItem
 }
 
 export const defaultProjectDetailLabels: ProjectDetailLabels = {
@@ -285,6 +286,11 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
         external: true,
         newTab: true,
       },
+      caseStudyAction: {
+        label: 'Read case study',
+        kind: 'route',
+        to: { name: 'project-case-study', params: { projectId: 'endless-war-mmo-rpg' } },
+      },
     },
     {
       id: 'riftborn',
@@ -331,6 +337,11 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
         external: true,
         newTab: true,
       },
+      caseStudyAction: {
+        label: 'Read case study',
+        kind: 'route',
+        to: { name: 'project-case-study', params: { projectId: 'riftborn' } },
+      },
     },
     {
       id: 'rockbelt',
@@ -368,6 +379,11 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
         href: 'https://wellsaik.itch.io/rockbelt',
         external: true,
         newTab: true,
+      },
+      caseStudyAction: {
+        label: 'Read case study',
+        kind: 'route',
+        to: { name: 'project-case-study', params: { projectId: 'rockbelt' } },
       },
     },
   ],

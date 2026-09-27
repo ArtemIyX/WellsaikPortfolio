@@ -6,7 +6,10 @@ import { featuredProjectsContent } from '@/content/home'
 
 describe('FeaturedProjectsView', () => {
   it('renders the named projects in source order with alternating media sides', () => {
-    const wrapper = mount(FeaturedProjectsView, { props: { content: featuredProjectsContent } })
+    const wrapper = mount(FeaturedProjectsView, {
+      props: { content: featuredProjectsContent },
+      global: { stubs: { RouterLink: { template: '<a><slot /></a>' } } },
+    })
 
     expect(wrapper.get('section').attributes('id')).toBe('projects')
     expect(wrapper.get('section').classes()).toContain('ui-section--divider-bottom')
@@ -28,13 +31,15 @@ describe('FeaturedProjectsView', () => {
       wrapper
         .findAll('article')[0]
         ?.findAll('a')
-        .map((link) => link.attributes('href')),
+        .map((link) => link.attributes('href'))
+        .filter(Boolean),
     ).toEqual(['https://newjourney.online/en/'])
     expect(
       wrapper
         .findAll('article')[1]
         ?.findAll('a')
-        .map((link) => link.attributes('href')),
+        .map((link) => link.attributes('href'))
+        .filter(Boolean),
     ).toEqual([
       'https://youtu.be/m4f0rsE2DLQ',
       'https://store.steampowered.com/app/3421920/Riftborn/',
@@ -43,7 +48,8 @@ describe('FeaturedProjectsView', () => {
       wrapper
         .findAll('article')[2]
         ?.findAll('a')
-        .map((link) => link.attributes('href')),
+        .map((link) => link.attributes('href'))
+        .filter(Boolean),
     ).toEqual(['https://wellsaik.itch.io/rockbelt'])
   })
 
@@ -55,7 +61,10 @@ describe('FeaturedProjectsView', () => {
       introduction: 'Custom introduction',
       projects: [featuredProjectsContent.projects[0]!],
     }
-    const wrapper = mount(FeaturedProjectsView, { props: { content: customContent } })
+    const wrapper = mount(FeaturedProjectsView, {
+      props: { content: customContent },
+      global: { stubs: { RouterLink: { template: '<a><slot /></a>' } } },
+    })
 
     expect(wrapper.text()).toContain('Custom work')
     expect(wrapper.text()).toContain('Custom title')

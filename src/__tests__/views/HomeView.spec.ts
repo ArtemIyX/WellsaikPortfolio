@@ -9,6 +9,7 @@ const mountHome = async () => {
     history: createMemoryHistory(),
     routes: [
       { path: '/', name: 'home', component: HomeView },
+      { path: '/projects/:projectId', name: 'project-case-study', component: { template: '<div />' } },
       { path: '/debug', name: 'debug', component: { template: '<div />' } },
     ],
   })

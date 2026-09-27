@@ -103,6 +103,13 @@ const detailLabels = computed(() => ({ ...defaultProjectDetailLabels, ...props.p
 
       <div class="project-card__actions" aria-label="Project actions">
         <UiLink
+          v-if="project.caseStudyAction"
+          :to="project.caseStudyAction.to"
+          variant="button-secondary"
+        >
+          {{ project.caseStudyAction.label }}
+        </UiLink>
+        <UiLink
           v-if="project.liveAction.kind === 'route'"
           :to="project.liveAction.to"
           variant="button-primary"
