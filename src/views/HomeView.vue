@@ -2,6 +2,7 @@
 import {
   AboutView,
   ContactView,
+  EngineeringEvidenceView,
   ExperienceSkillsView,
   FeaturedProjectsView,
   HeroView,
@@ -14,6 +15,7 @@ import { useTheme } from '@/composables/useTheme'
 import {
   aboutContent,
   contactContent,
+  engineeringEvidence,
   experienceSkillsContent,
   featuredProjectsContent,
   heroContent,
@@ -57,6 +59,7 @@ const acceptCookiePreferences = (): void => {
         </ul>
       </UiSection>
       <FeaturedProjectsView :content="featuredProjectsContent" />
+      <EngineeringEvidenceView :items="engineeringEvidence" />
       <ExperienceSkillsView :content="experienceSkillsContent" />
       <PetProjectsView :content="petProjectsContent" />
       <AboutView :content="aboutContent" />

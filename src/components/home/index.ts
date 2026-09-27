@@ -16,3 +16,5 @@ export { default as PetProjectsView } from './PetProjectsView/PetProjectsView.vu
 export type * from './PetProjectsView/PetProjectsView'
 export { default as ContactView } from './ContactView/ContactView.vue'
 export type * from './ContactView/ContactView'
+export { default as EngineeringEvidenceView } from './EngineeringEvidenceView/EngineeringEvidenceView.vue'
+export type * from './EngineeringEvidenceView/EngineeringEvidenceView'
