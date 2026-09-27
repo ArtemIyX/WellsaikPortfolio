@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   AboutView,
+  ContactView,
   ExperienceSkillsView,
   FeaturedProjectsView,
   HeroView,
@@ -12,6 +13,7 @@ import { useCookieConsent } from '@/composables/useCookieConsent'
 import { useTheme } from '@/composables/useTheme'
 import {
   aboutContent,
+  contactContent,
   experienceSkillsContent,
   featuredProjectsContent,
   heroContent,
@@ -58,6 +60,7 @@ const acceptCookiePreferences = (): void => {
       <ExperienceSkillsView :content="experienceSkillsContent" />
       <PetProjectsView :content="petProjectsContent" />
       <AboutView :content="aboutContent" />
+      <ContactView :content="contactContent" />
     </main>
     <SiteFooter
       :actions="homeFooterActions"

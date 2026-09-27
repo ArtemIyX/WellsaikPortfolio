@@ -52,6 +52,16 @@ export interface AboutContent {
   contactAction: NavigationItem
 }
 
+export interface ContactContent {
+  eyebrow: string
+  title: string
+  introduction: string
+  availability: string
+  responseNote: string
+  email: string
+  actions: readonly HrefNavigationItem[]
+}
+
 export interface ExperiencePeriod {
   label: string
   startDate?: string
@@ -178,6 +188,7 @@ export const homeNavigation: readonly NavigationItem[] = [
   { label: 'Experience', kind: 'route', to: { name: 'home', hash: '#experience' } },
   { label: 'Pet Projects', kind: 'route', to: { name: 'home', hash: '#pet-projects' } },
   { label: 'About', kind: 'route', to: { name: 'home', hash: '#about' } },
+  { label: 'Contact', kind: 'route', to: { name: 'home', hash: '#contact' } },
 ]
 
 export const homeFooterActions: readonly NavigationItem[] = [
@@ -774,5 +785,26 @@ export const aboutContent: AboutContent = {
     { label: 'Primary focus', value: 'Unreal Engine' },
     { label: 'Work preference', value: 'C++ Engineer' },
     { label: 'Time zone', value: 'UTC+2 / UTC+3', timeZone: 'Europe/Riga' },
+  ],
+}
+
+export const contactContent: ContactContent = {
+  eyebrow: 'Contact',
+  title: 'Have a system worth making work?',
+  introduction:
+    'I’m interested in Unreal Engine roles, performance-heavy gameplay systems, and carefully scoped product work where technical clarity matters.',
+  availability: 'Open to selective freelance work and engineering conversations.',
+  responseNote: 'Email is the best first step; I usually reply within a few working days.',
+  email,
+  actions: [
+    { label: 'CV', kind: 'href', href: '/Artem-Podorozhko-CV.pdf', newTab: true },
+    { label: 'GitHub', kind: 'href', href: github, external: true, newTab: true },
+    {
+      label: 'LinkedIn',
+      kind: 'href',
+      href: 'https://www.linkedin.com/in/artem-podorozhko/',
+      external: true,
+      newTab: true,
+    },
   ],
 }

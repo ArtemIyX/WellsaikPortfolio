@@ -63,7 +63,7 @@ describe('HomeView', () => {
     const wrapper = await mountHome()
 
     expect(wrapper.get('main').findAll('h1')).toHaveLength(1)
-    expect(wrapper.get('main').findAll('h2')).toHaveLength(5)
+    expect(wrapper.get('main').findAll('h2')).toHaveLength(6)
     expect(wrapper.get('#projects').findAll('article')).toHaveLength(3)
     expect(wrapper.get('#experience').findAll('article')).toHaveLength(4)
     expect(wrapper.get('#pet-projects').findAll('article')).toHaveLength(9)
@@ -85,7 +85,7 @@ describe('HomeView', () => {
     expect(aboutLink?.attributes('href')).toBe('/#about')
     expect(wrapper.get('#about').attributes('id')).toBe('about')
     expect(wrapper.get('main').findAll('#about')).toHaveLength(1)
-    expect(wrapper.find('#contact').exists()).toBe(false)
+    expect(wrapper.find('#contact').exists()).toBe(true)
     expect(wrapper.get('main').findAll('main')).toHaveLength(0)
   })
 
