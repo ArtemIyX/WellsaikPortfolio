@@ -47,7 +47,7 @@
 .experience-skills-view__experience-list::before {
   position: absolute;
   z-index: 0;
-  top: 0;
+  top: calc(var(--space-6) + (var(--timeline-marker-size) / 2) - (var(--timeline-rail-width) / 2));
   bottom: 0;
   left: calc((var(--timeline-marker-size) - var(--timeline-rail-width)) / 2);
   width: var(--timeline-rail-width);
