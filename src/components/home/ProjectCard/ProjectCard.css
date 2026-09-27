@@ -21,6 +21,15 @@
     transform var(--duration-entrance) var(--ease-standard);
 }
 
+.project-card--revealed .project-card__content {
+  animation: project-content-rise var(--duration-entrance) var(--ease-standard) var(--duration-stagger) both;
+}
+
+@keyframes project-content-rise {
+  from { opacity: 0.72; transform: translateY(var(--space-2)); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .project-card:hover,
 .project-card:focus-within {
   border-color: var(--project-accent, var(--color-accent));

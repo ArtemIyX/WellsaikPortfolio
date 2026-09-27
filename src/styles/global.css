@@ -23,11 +23,26 @@ body {
   line-height: var(--line-height-body);
 }
 
-:where(html, body, .site-header, .site-footer, .ui-section, .ui-box) {
+:where(html, body, .site-header, .site-footer) {
   transition:
     background-color 300ms var(--ease-standard),
     border-color 300ms var(--ease-standard),
     color 300ms var(--ease-standard);
+}
+
+.ui-section__title {
+  animation: section-title-rise var(--duration-entrance) var(--ease-standard) both;
+}
+
+@keyframes section-title-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--motion-reveal-distance));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 #app {
   min-height: 100vh;

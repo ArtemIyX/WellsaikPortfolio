@@ -19,6 +19,26 @@
   gap: var(--space-6);
 }
 
+.hero-view__copy > * {
+  animation: hero-entrance var(--duration-entrance) var(--ease-standard) both;
+}
+
+.hero-view__copy > :nth-child(2) { animation-delay: var(--duration-stagger); }
+.hero-view__copy > :nth-child(3) { animation-delay: calc(2 * var(--duration-stagger)); }
+.hero-view__copy > :nth-child(4) { animation-delay: calc(3 * var(--duration-stagger)); }
+.hero-view__copy > :nth-child(5) { animation-delay: calc(4 * var(--duration-stagger)); }
+
+@keyframes hero-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(var(--motion-reveal-distance));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .hero-view__copy::before {
   width: 4rem;
   height: var(--border-width);
@@ -70,6 +90,12 @@
   position: relative;
   width: min(100%, 25rem);
   justify-self: end;
+  animation: hero-portrait-entrance var(--duration-entrance) var(--ease-standard) 160ms both;
+}
+
+@keyframes hero-portrait-entrance {
+  from { opacity: 0; transform: translateY(var(--motion-reveal-distance)); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .hero-view__portrait-offset {
