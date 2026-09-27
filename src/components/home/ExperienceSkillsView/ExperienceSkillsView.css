@@ -79,7 +79,7 @@
   margin-top: var(--space-6);
   border: 2px solid var(--color-timeline-past-mark);
   border-radius: 50%;
-  background: transparent;
+  background: var(--color-bg);
   transform: scale(1.35);
 }
 
