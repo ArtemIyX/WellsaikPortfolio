@@ -34,7 +34,7 @@ describe('AboutView', () => {
     )
     expect(wrapper.findAll('dl dt')).toHaveLength(aboutContent.facts.length)
     expect(wrapper.findAll('dl dd')).toHaveLength(aboutContent.facts.length)
-    expect(wrapper.find('h3').text()).toBe('Profile summary')
+    expect(wrapper.find('.about-view__details h3').text()).toBe('Profile summary')
     expect(wrapper.text()).toContain('Riga, Latvia')
     expect(wrapper.text()).toContain('Unreal Engine')
     expect(wrapper.text()).toContain('C++ Engineer')
