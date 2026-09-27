@@ -151,6 +151,11 @@ export interface PetProjectContent {
   id: string
   title: string
   summary: string
+  whyExists?: string
+  capability?: string
+  status?: string
+  category?: 'Rendering' | 'Networking' | 'Blueprint tooling' | 'Architecture'
+  featured?: boolean
   metadata: readonly string[]
   githubAction: HrefNavigationItem
 }
@@ -585,6 +590,11 @@ export const petProjectsContent: PetProjectsContent = {
     {
       id: 'web-user-interface',
       title: 'Web User Interface',
+      whyExists: 'Explores a maintainable bridge between web UI and Unreal runtime systems.',
+      capability: 'CEF off-screen rendering with local WebSocket transport',
+      status: 'Active plugin',
+      category: 'Blueprint tooling',
+      featured: true,
       summary:
         'Embeds CEF-powered web interfaces in Unreal Engine with off-screen rendering, local WebSocket transport, and Blueprint-friendly browser controls.',
       metadata: ['Unreal Engine', 'C++', 'CEF', 'WebSocket'],
@@ -599,6 +609,10 @@ export const petProjectsContent: PetProjectsContent = {
     {
       id: 'blueprint-subsystems',
       title: 'Blueprint Subsystems',
+      whyExists: 'Removes repetitive C++ scaffolding from subsystem experiments.',
+      capability: 'Blueprint-defined subsystem registration',
+      status: 'Reusable plugin',
+      category: 'Blueprint tooling',
       summary:
         'Lets Blueprint authors define and register Unreal Engine subsystems without writing a dedicated C++ subsystem class.',
       metadata: ['Unreal Engine', 'C++', 'Blueprint support'],
@@ -613,6 +627,10 @@ export const petProjectsContent: PetProjectsContent = {
     {
       id: 'replicated-object',
       title: 'Replicated Object',
+      whyExists: 'Provides a focused base for network-aware UObject composition.',
+      capability: 'Replicated UObjects and subobjects',
+      status: 'Reusable plugin',
+      category: 'Networking',
       summary:
         'Provides a reusable foundation for replicating network-supported UObjects and their subobjects in Unreal Engine.',
       metadata: ['Unreal Engine', 'C++', 'Networking'],
@@ -627,6 +645,10 @@ export const petProjectsContent: PetProjectsContent = {
     {
       id: 'data-serializer',
       title: 'Data Serializer',
+      whyExists: 'Makes complex data persistence available to Blueprint workflows.',
+      capability: 'Map and structure serialization',
+      status: 'Reusable plugin',
+      category: 'Architecture',
       summary:
         'Offers utilities for serializing and deserializing Unreal data, including complex structures such as maps, with Blueprint support.',
       metadata: ['Unreal Engine', 'C++', 'Blueprint support'],
@@ -641,6 +663,10 @@ export const petProjectsContent: PetProjectsContent = {
     {
       id: 'async-blueprints',
       title: 'Async Blueprints',
+      whyExists: 'Makes safe worker-thread experiments visible to gameplay authors.',
+      capability: 'Thread dispatch with game-thread handoff',
+      status: 'Experimental plugin',
+      category: 'Architecture',
       summary:
         'Adds Blueprint nodes for dispatching work to selected threads and handing execution back to the Unreal game thread.',
       metadata: ['Unreal Engine', 'C++', 'Blueprint support', 'Async tasks'],
@@ -655,6 +681,10 @@ export const petProjectsContent: PetProjectsContent = {
     {
       id: 'advanced-asset',
       title: 'Advanced Asset',
+      whyExists: 'Standardizes reusable data-asset identity and editor discovery.',
+      capability: 'Configurable asset IDs and thumbnails',
+      status: 'Reusable plugin',
+      category: 'Architecture',
       summary:
         'Extends Primary Data Assets with configurable asset IDs and editor thumbnails for reusable data-asset workflows.',
       metadata: ['Unreal Engine', 'C++', 'Primary Data Assets'],
@@ -669,6 +699,10 @@ export const petProjectsContent: PetProjectsContent = {
     {
       id: 'signal-hub',
       title: 'Signal Hub',
+      whyExists: 'Tests explicit event lifetimes across gameplay and worker threads.',
+      capability: 'Typed queued signals with diagnostics',
+      status: 'Active plugin',
+      category: 'Architecture',
       summary:
         'Routes typed in-process signals per game instance with safe subscription lifetimes, Blueprint nodes, worker-thread queuing, and delivery diagnostics.',
       metadata: ['Unreal Engine', 'C++', 'Blueprint support', 'Thread-safe queuing'],
@@ -683,6 +717,11 @@ export const petProjectsContent: PetProjectsContent = {
     {
       id: 'fragmented-inventory',
       title: 'Fragmented Inventory',
+      whyExists: 'Explores composable item state without a monolithic inventory class.',
+      capability: 'Fast Array replicated item fragments',
+      status: 'Active plugin',
+      category: 'Networking',
+      featured: true,
       summary:
         'Builds network-replicated UE5 inventories from composable item fragments, dynamic item state, configurable slots, and Blueprint-facing events.',
       metadata: ['Unreal Engine', 'C++', 'Fast Array replication', 'Blueprint support'],
@@ -697,6 +736,11 @@ export const petProjectsContent: PetProjectsContent = {
     {
       id: 'optimized-skeletal-mesh',
       title: 'Optimized Skeletal Mesh',
+      whyExists: 'Investigates high-count animated rendering under a controlled GPU path.',
+      capability: 'Batched GPU skinning without per-entity AnimBPs',
+      status: 'Experimental plugin',
+      category: 'Rendering',
+      featured: true,
       summary:
         'Renders high counts of animated skeletal meshes through a custom GPU skinning path, without requiring a component and AnimBP for every entity.',
       metadata: ['Unreal Engine 5.7', 'C++', 'GPU skinning', 'Batched rendering'],

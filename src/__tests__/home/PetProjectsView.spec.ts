@@ -19,8 +19,9 @@ describe('PetProjectsView', () => {
     expect(wrapper.findAll('article h3 .ui-link__label').map((heading) => heading.text())).toEqual(
       petProjectsContent.projects.map((project) => project.title),
     )
-    expect(wrapper.find('input').exists()).toBe(false)
-    expect(wrapper.text()).not.toMatch(/filter|pagination|carousel|loading/i)
+    expect(wrapper.findAll('button')).toHaveLength(5)
+    expect(wrapper.get('[role="status"]').text()).toContain('Showing 9 repositories')
+    expect(wrapper.text()).toContain('Filter by area')
   })
 
   it('renders supplied content rather than project-specific template text', () => {

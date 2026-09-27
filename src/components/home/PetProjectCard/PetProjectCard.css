@@ -10,6 +10,10 @@
   transform: translateY(-2px);
 }
 
+.pet-project-card--featured {
+  border-color: var(--color-accent);
+}
+
 .pet-project-card__content {
   display: flex;
   min-width: 0;
@@ -25,6 +29,16 @@
 
 .pet-project-card__summary {
   margin: var(--space-2) 0 0;
+}
+
+.pet-project-card__why,
+.pet-project-card__capability,
+.pet-project-card__status {
+  margin: var(--space-2) 0 0;
+}
+
+.pet-project-card__capability {
+  font-size: var(--font-size-small);
 }
 
 .pet-project-card__title-link,

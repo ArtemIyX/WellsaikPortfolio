@@ -19,6 +19,39 @@
   list-style: none;
 }
 
+.pet-projects-view__filters {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.pet-projects-view__filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pet-projects-view__filter-list button {
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  color: var(--color-text-muted);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-small);
+  cursor: pointer;
+}
+
+.pet-projects-view__filter-list button:hover,
+.pet-projects-view__filter-list button.pet-projects-view__filter--active {
+  background: var(--color-accent-soft);
+  color: var(--color-text);
+  border-color: var(--color-accent);
+}
+
+.pet-projects-view__filter-status {
+  margin: 0;
+}
+
 .pet-projects-view__list > li {
   display: flex;
   min-width: 0;
