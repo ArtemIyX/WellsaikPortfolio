@@ -80,6 +80,7 @@
   border: 2px solid var(--color-timeline-past-mark);
   border-radius: 50%;
   background: transparent;
+  transform: scale(1.35);
 }
 
 .experience-skills-view__experience-item[data-status='current']
