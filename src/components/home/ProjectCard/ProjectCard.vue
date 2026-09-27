@@ -17,6 +17,7 @@ const detailLabels = computed(() => ({ ...defaultProjectDetailLabels, ...props.p
     as="article"
     class="project-card"
     :class="`project-card--media-${mediaSide}`"
+    :style="project.accent ? { '--project-accent': project.accent } : undefined"
     variant="surface"
     depth-aware
     padding="none"
@@ -59,19 +60,6 @@ const detailLabels = computed(() => ({ ...defaultProjectDetailLabels, ...props.p
         </div>
         <div>
           <UiText as="dt" role="label" tone="subtle" weight="medium">{{
-            detailLabels.role
-          }}</UiText>
-          <dd>
-            <slot name="role" :detail="project.role">
-              <UiText v-if="project.role.text">{{ project.role.text }}</UiText>
-              <ul v-if="project.role.items" class="project-card__detail-list">
-                <li v-for="item in project.role.items" :key="item">{{ item }}</li>
-              </ul>
-            </slot>
-          </dd>
-        </div>
-        <div>
-          <UiText as="dt" role="label" tone="subtle" weight="medium">{{
             detailLabels.outcome
           }}</UiText>
           <dd>
@@ -84,6 +72,23 @@ const detailLabels = computed(() => ({ ...defaultProjectDetailLabels, ...props.p
           </dd>
         </div>
       </dl>
+
+      <details class="project-card__additional">
+        <summary>Implementation details</summary>
+        <dl class="project-card__additional-details">
+          <div>
+            <UiText as="dt" role="label" tone="subtle" weight="medium">{{ detailLabels.role }}</UiText>
+            <dd>
+              <slot name="role" :detail="project.role">
+                <UiText v-if="project.role.text">{{ project.role.text }}</UiText>
+                <ul v-if="project.role.items" class="project-card__detail-list">
+                  <li v-for="item in project.role.items" :key="item">{{ item }}</li>
+                </ul>
+              </slot>
+            </dd>
+          </div>
+        </dl>
+      </details>
 
       <div class="project-card__technologies">
         <UiText as="h4" role="label" tone="subtle" weight="medium">{{

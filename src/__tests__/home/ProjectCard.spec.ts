@@ -60,13 +60,13 @@ describe('ProjectCard', () => {
     })
     expect(wrapper.findAll('dt').map((term) => term.text())).toEqual([
       project.labels?.problem,
-      project.labels?.role,
       project.labels?.outcome,
+      project.labels?.role,
     ])
     expect(wrapper.findAll('dd').map((value) => value.text())).toEqual([
       'Test problemTest constraint',
-      'Test role',
       'Test outcome',
+      'Test role',
     ])
     expect(wrapper.get('.project-card__detail-list').text()).toBe('Test constraint')
     expect(wrapper.findAll('.project-card__technologies li').map((item) => item.text())).toEqual(
@@ -101,8 +101,8 @@ describe('ProjectCard', () => {
 
     expect(wrapper.findAll('dd').map((value) => value.text())).toEqual([
       'Custom problem item',
-      'Custom role',
       'Custom outcome',
+      'Custom role',
     ])
     expect(wrapper.get('.project-card__technologies').text()).toContain('Custom technologies')
   })

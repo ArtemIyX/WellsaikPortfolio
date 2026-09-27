@@ -120,6 +120,7 @@ export interface ProjectContent {
   number: string
   category: string
   title: string
+  accent?: string
   summary: string
   problem: ProjectDetailContent
   role: ProjectDetailContent
@@ -242,6 +243,7 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       number: '01',
       category: 'MMO RPG Game',
       title: 'Endless War',
+      accent: '#5eead4',
       summary: 'Client for an MMO RPG game targeting the Chinese market.',
       problem: {
         items: [
@@ -289,6 +291,7 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       number: '02',
       category: 'Multiplayer first-person hack-and-slash',
       title: 'Riftborn',
+      accent: '#a78bfa',
       summary:
         'A multiplayer first-person hack-and-slash built around three-team combat, distinct classes, weapons, custom abilities, and varied game modes.',
       problem: {
@@ -334,6 +337,7 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       number: '03',
       category: '8-player sci-fi turn-based game',
       title: 'Rockbelt',
+      accent: '#fbbf24',
       summary:
         'A completed eight-player sci-fi turn-based multiplayer game, built solo in four focused work weeks to prove that a fully finished game could be shipped quickly.',
       problem: {
