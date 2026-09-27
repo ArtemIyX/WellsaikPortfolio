@@ -142,6 +142,8 @@ export interface ProjectContent {
   liveAction: NavigationItem
   sourceAction?: NavigationItem
   caseStudyAction?: RouteNavigationItem
+  videoEmbedUrl?: string
+  confidentialityNote?: string
 }
 
 export const defaultProjectDetailLabels: ProjectDetailLabels = {
@@ -308,6 +310,7 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
         kind: 'route',
         to: { name: 'project-case-study', params: { projectId: 'endless-war-mmo-rpg' } },
       },
+      confidentialityNote: 'Client work: this page shares the public scope and engineering approach without exposing proprietary source or production data.',
     },
     {
       id: 'riftborn',
@@ -359,6 +362,7 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
         kind: 'route',
         to: { name: 'project-case-study', params: { projectId: 'riftborn' } },
       },
+      videoEmbedUrl: 'https://www.youtube.com/embed/m4f0rsE2DLQ',
     },
     {
       id: 'rockbelt',

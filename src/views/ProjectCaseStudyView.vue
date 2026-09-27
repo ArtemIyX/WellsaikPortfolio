@@ -11,6 +11,7 @@ const project = computed(() =>
 )
 const flowPaused = ref(false)
 const flowResetKey = ref(0)
+const trailerLoaded = ref(false)
 
 const updateDocumentMetadata = (): void => {
   if (!project.value) return
@@ -59,6 +60,17 @@ onBeforeUnmount(() => {
       >
 
       <div class="case-study-view__grid">
+        <section v-if="project.videoEmbedUrl" id="trailer" class="case-study-view__trailer" aria-labelledby="trailer-title">
+          <UiText id="trailer-title" as="h2" role="heading">Trailer</UiText>
+          <div v-if="trailerLoaded" class="case-study-view__video">
+            <iframe :src="project.videoEmbedUrl" title="Project trailer" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <div v-else class="case-study-view__video-facade">
+            <p>Load the trailer only when you are ready to watch.</p>
+            <button type="button" @click="trailerLoaded = true">Load trailer</button>
+          </div>
+          <p><a :href="project.videoEmbedUrl.replace('/embed/', '/watch?v=')" target="_blank" rel="noopener noreferrer">Open trailer directly</a></p>
+        </section>
         <section id="overview" aria-labelledby="overview-title">
           <UiText id="overview-title" as="h2" role="heading">Overview</UiText>
           <p>{{ project.outcome.text ?? project.outcome.items?.join(' ') }}</p>
@@ -94,6 +106,7 @@ onBeforeUnmount(() => {
           <UiText id="lessons-title" as="h2" role="heading">Lessons</UiText>
           <p>Keep the system boundary explicit, measure the expensive path, and preserve a small playable loop while technical decisions evolve.</p>
         </section>
+        <p v-if="project.confidentialityNote" class="case-study-view__confidentiality">{{ project.confidentialityNote }}</p>
       </div>
     </div>
   </main>
