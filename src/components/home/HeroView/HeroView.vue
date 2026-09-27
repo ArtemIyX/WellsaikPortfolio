@@ -116,6 +116,8 @@ defineProps<HeroViewProps>()
               aria-hidden="true"
               :width="content.imageWidth"
               :height="content.imageHeight"
+              sizes="(max-width: 52rem) 86vw, 25rem"
+              fetchpriority="high"
             />
             <img
               class="hero-view__portrait-image hero-view__portrait-image--light"
@@ -125,6 +127,7 @@ defineProps<HeroViewProps>()
               aria-hidden="true"
               :width="content.imageWidth"
               :height="content.imageHeight"
+              sizes="(max-width: 52rem) 86vw, 25rem"
             />
           </template>
         </UiBox>

@@ -35,6 +35,7 @@ const { isRevealed } = useReveal(cardElement)
         :alt="project.image.alt"
         :width="project.image.width"
         :height="project.image.height"
+        sizes="(max-width: 52rem) 100vw, 52rem"
         loading="lazy"
         decoding="async"
       />

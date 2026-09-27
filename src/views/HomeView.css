@@ -78,11 +78,41 @@
 }
 
 @media print {
+  .site-header,
+  .site-footer,
+  .cookie-consent-banner,
+  .proof-strip,
+  .hero-view__actions,
+  .about-view__actions,
+  .contact-view__actions,
+  .pet-projects-view__filters {
+    display: none !important;
+  }
+
   .home-view {
     background: Canvas;
   }
 
   .home-view::before {
     display: none;
+  }
+
+  .home-view :deep(.ui-section) {
+    padding-block: 1.5rem;
+  }
+
+  .home-view :deep(.ui-box),
+  .home-view :deep(.project-card),
+  .home-view :deep(.experience-card) {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+
+  .home-view a[href^='http']::after,
+  .home-view a[href^='mailto']::after {
+    color: #444;
+    content: ' (' attr(href) ')';
+    font-size: 0.75em;
+    overflow-wrap: anywhere;
   }
 }
