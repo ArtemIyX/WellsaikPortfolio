@@ -11,36 +11,35 @@ defineProps<ExperienceSkillsViewProps>()
   <UiSection
     id="experience"
     class="experience-skills-view"
+    reveal
     spacing="default"
     width="content"
     surface="default"
     divider="bottom"
-    labelledby="experience-title"
+    labelledby="experience-list-title"
   >
     <template v-if="content.eyebrow" #eyebrow>
       <UiText as="p" role="label" tone="accent" weight="medium">{{ content.eyebrow }}</UiText>
     </template>
-    <template #title>
-      <UiText id="experience-title" as="h2" role="heading" max-width="none">
-        {{ content.title }}
-      </UiText>
-    </template>
-    <template #intro>
-      <UiText>{{ content.introduction }}</UiText>
-    </template>
-
     <div class="experience-skills-view__layout">
       <section aria-labelledby="experience-list-title">
-        <UiText id="experience-list-title" as="h3" role="heading">{{
+        <UiText
+          id="experience-list-title"
+          as="h3"
+          role="heading"
+          class="ui-section__reveal-item"
+          :style="{ '--reveal-index': 0 }"
+          >{{
           content.experienceHeading
         }}</UiText>
         <ol class="experience-skills-view__experience-list">
           <li
-            v-for="entry in content.entries"
+            v-for="(entry, index) in content.entries"
             :key="entry.id"
-            class="experience-skills-view__experience-item"
+            class="experience-skills-view__experience-item ui-section__reveal-item"
             :data-status="entry.status"
             :aria-current="entry.status === 'current' ? 'true' : undefined"
+            :style="{ '--reveal-index': index + 1 }"
           >
             <span class="experience-skills-view__timeline-mark" aria-hidden="true"></span>
             <ExperienceCard :entry="entry" />
@@ -49,15 +48,23 @@ defineProps<ExperienceSkillsViewProps>()
       </section>
 
       <aside aria-labelledby="skills-title" class="experience-skills-view__skills">
-        <UiText id="skills-title" as="h3" role="heading">{{ content.skillsHeading }}</UiText>
+        <UiText
+          id="skills-title"
+          as="h3"
+          role="heading"
+          class="ui-section__reveal-item"
+          :style="{ '--reveal-index': content.entries.length + 1 }"
+          >{{ content.skillsHeading }}</UiText
+        >
         <div class="experience-skills-view__groups">
           <UiBox
-            v-for="group in content.skillGroups"
+            v-for="(group, index) in content.skillGroups"
             :key="group.id"
-            class="experience-skills-view__group"
+            class="experience-skills-view__group ui-section__reveal-item"
             variant="outline"
             depth-aware
             padding="medium"
+            :style="{ '--reveal-index': content.entries.length + index + 2 }"
           >
             <UiText as="h4" class="experience-skills-view__group-title" role="body" weight="medium">
               {{ group.title }}

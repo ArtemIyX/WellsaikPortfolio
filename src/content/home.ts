@@ -108,8 +108,6 @@ export interface SkillGroup {
 
 export interface ExperienceSkillsContent {
   eyebrow: string
-  title: string
-  introduction: string
   experienceHeading: string
   skillsHeading: string
   entries: readonly ExperienceEntry[]
@@ -448,9 +446,6 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
 
 export const experienceSkillsContent: ExperienceSkillsContent = {
   eyebrow: '',
-  title: 'Engineering experience grounded in shipped systems.',
-  introduction:
-    'Selected roles across Unreal Engine, multiplayer systems, simulation, mobile delivery, and full-stack product engineering.',
   experienceHeading: 'Experience',
   skillsHeading: 'Skills',
   entries: [
