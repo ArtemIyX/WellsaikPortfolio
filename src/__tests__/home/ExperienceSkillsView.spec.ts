@@ -8,8 +8,6 @@ import { experienceSkillsContent } from '@/content/home'
 const customContent: ExperienceSkillsContent = {
   ...experienceSkillsContent,
   eyebrow: 'Custom experience eyebrow',
-  title: 'Custom experience title',
-  introduction: 'Custom experience introduction',
   experienceHeading: 'Custom experience heading',
   skillsHeading: 'Custom skills heading',
   entries: [
@@ -38,11 +36,10 @@ describe('ExperienceSkillsView', () => {
     const wrapper = mount(ExperienceSkillsView, { props: { content: experienceSkillsContent } })
     const section = wrapper.get('section#experience')
 
-    expect(section.attributes('aria-labelledby')).toBe('experience-title')
+    expect(section.attributes('aria-labelledby')).toBe('experience-list-title')
     expect(section.classes()).toEqual(
       expect.arrayContaining(['ui-section--surface-default', 'ui-section--divider-bottom']),
     )
-    expect(wrapper.get('#experience-title').element.tagName).toBe('H2')
     expect(wrapper.findAll('h1')).toHaveLength(0)
     expect(wrapper.get('section[aria-labelledby="experience-list-title"] h3').text()).toBe(
       experienceSkillsContent.experienceHeading,
@@ -99,7 +96,7 @@ describe('ExperienceSkillsView', () => {
   it('renders custom props instead of hard-coded content', () => {
     const wrapper = mount(ExperienceSkillsView, { props: { content: customContent } })
 
-    expect(wrapper.text()).toContain('Custom experience title')
+    expect(wrapper.text()).toContain('Custom experience heading')
     expect(wrapper.text()).toContain('Custom first role')
     expect(wrapper.text()).toContain('Custom second role')
     expect(wrapper.text()).toContain('Custom group')
