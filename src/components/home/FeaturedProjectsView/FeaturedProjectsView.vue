@@ -11,6 +11,7 @@ defineProps<FeaturedProjectsViewProps>()
   <UiSection
     id="projects"
     class="featured-projects-view"
+    reveal
     spacing="default"
     width="content"
     divider="bottom"
@@ -29,7 +30,12 @@ defineProps<FeaturedProjectsViewProps>()
     </template>
 
     <ol class="featured-projects-view__list">
-      <li v-for="(project, index) in content.projects" :key="project.id">
+      <li
+        v-for="(project, index) in content.projects"
+        :key="project.id"
+        class="ui-section__reveal-item"
+        :style="{ '--reveal-index': index + 3 }"
+      >
         <ProjectCard :project="project" :media-side="index % 2 === 0 ? 'start' : 'end'" />
       </li>
     </ol>
