@@ -173,8 +173,12 @@
 }
 
 @keyframes case-study-flow {
-  from { transform: translateX(0); }
-  to { transform: translateX(238px); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(238px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
