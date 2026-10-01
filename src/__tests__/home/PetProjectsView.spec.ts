@@ -37,4 +37,19 @@ describe('PetProjectsView', () => {
     expect(wrapper.text()).toContain('Custom introduction')
     expect(wrapper.findAll('article')).toHaveLength(1)
   })
+
+  it('does not reapply reveal markers to cards after filtering', async () => {
+    const wrapper = mount(PetProjectsView, { props: { content: petProjectsContent } })
+    const renderingFilter = wrapper.findAll('button').find((button) => button.text() === 'Rendering')
+
+    expect(renderingFilter).toBeDefined()
+    await renderingFilter!.trigger('click')
+
+    expect(wrapper.findAll('.pet-projects-view__list > li')).not.toHaveLength(0)
+    expect(
+      wrapper
+        .findAll('.pet-projects-view__list > li')
+        .every((item) => !item.classes().includes('ui-section__reveal-item')),
+    ).toBe(true)
+  })
 })
