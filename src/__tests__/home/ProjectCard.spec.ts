@@ -106,4 +106,5 @@ describe('ProjectCard', () => {
     ])
     expect(wrapper.get('.project-card__technologies').text()).toContain('Custom technologies')
   })
+
 })

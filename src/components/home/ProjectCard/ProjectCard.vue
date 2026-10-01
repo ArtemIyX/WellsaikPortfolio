@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 import { UiBox, UiLink, UiText } from '@/components/shared'
 import { defaultProjectDetailLabels } from '@/content/home'
-import { useReveal } from '@/composables/useReveal'
 
 import type { ProjectCardProps } from './ProjectCard'
 
@@ -11,17 +10,13 @@ const props = withDefaults(defineProps<ProjectCardProps>(), { mediaSide: 'start'
 
 const titleId = `project-card-title-${props.project.id}`
 const detailLabels = computed(() => ({ ...defaultProjectDetailLabels, ...props.project.labels }))
-const cardElement = ref<HTMLElement | null>(null)
-const { isRevealed } = useReveal(cardElement)
 </script>
 
 <template>
   <UiBox
     as="article"
-    ref="cardElement"
     class="project-card"
-    :class="[`project-card--media-${mediaSide}`, { 'project-card--revealed': isRevealed }]"
-    :style="project.accent ? { '--project-accent': project.accent } : undefined"
+    :class="`project-card--media-${mediaSide}`"
     variant="surface"
     depth-aware
     padding="none"
@@ -83,7 +78,9 @@ const { isRevealed } = useReveal(cardElement)
         <summary>Implementation details</summary>
         <dl class="project-card__additional-details">
           <div>
-            <UiText as="dt" role="label" tone="subtle" weight="medium">{{ detailLabels.role }}</UiText>
+            <UiText as="dt" role="label" tone="subtle" weight="medium">{{
+              detailLabels.role
+            }}</UiText>
             <dd>
               <slot name="role" :detail="project.role">
                 <UiText v-if="project.role.text">{{ project.role.text }}</UiText>

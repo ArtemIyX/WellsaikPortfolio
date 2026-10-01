@@ -7,38 +7,13 @@
     border-color var(--duration-fast) var(--ease-standard),
     box-shadow var(--duration-fast) var(--ease-standard),
     transform var(--duration-fast) var(--ease-standard);
-  opacity: 0;
-  transform: translateY(var(--motion-reveal-distance));
-}
-
-.project-card--revealed {
-  opacity: 1;
-  transform: translateY(0);
-  transition:
-    opacity var(--duration-entrance) var(--ease-standard),
-    border-color var(--duration-fast) var(--ease-standard),
-    box-shadow var(--duration-fast) var(--ease-standard),
-    transform var(--duration-entrance) var(--ease-standard);
-}
-
-.project-card--revealed .project-card__content {
-  animation: project-content-rise var(--duration-entrance) var(--ease-standard) var(--duration-stagger) both;
-}
-
-@keyframes project-content-rise {
-  from { opacity: 0.72; transform: translateY(var(--space-2)); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .project-card:hover,
 .project-card:focus-within {
-  border-color: var(--project-accent, var(--color-accent));
-  box-shadow: 0 0.75rem 2rem color-mix(in srgb, var(--project-accent, var(--color-accent)) 12%, transparent);
-  transform: translateY(-2px);
-}
-
-.project-card--revealed:hover,
-.project-card--revealed:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 0.75rem 2rem
+    color-mix(in srgb, var(--color-accent) 12%, transparent);
   transform: translateY(-2px);
 }
 
@@ -83,7 +58,9 @@
   height: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  transition: transform var(--duration-normal) var(--ease-standard), filter var(--duration-normal) var(--ease-standard);
+  transition:
+    transform var(--duration-normal) var(--ease-standard),
+    filter var(--duration-normal) var(--ease-standard);
 }
 
 .project-card:hover img,
@@ -115,7 +92,7 @@
 
 .project-card__details > div:last-child {
   padding-left: var(--space-3);
-  border-left: 0.2rem solid var(--project-accent, var(--color-accent));
+  border-left: 0.2rem solid var(--color-accent);
 }
 
 .project-card__additional {
@@ -248,8 +225,6 @@
 
   .project-card:hover,
   .project-card:focus-within,
-  .project-card--revealed:hover,
-  .project-card--revealed:focus-within,
   .project-card:hover img,
   .project-card:focus-within img {
     transform: none;
