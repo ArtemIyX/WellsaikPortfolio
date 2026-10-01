@@ -29,9 +29,7 @@ describe('AboutView', () => {
     expect(section.classes()).toContain('ui-section--surface-muted')
     expect(wrapper.get('#about-title').element.tagName).toBe('H2')
     expect(wrapper.findAll('h1')).toHaveLength(0)
-    expect(wrapper.findAll('p')).toHaveLength(
-      aboutContent.paragraphs.length + 1 + (aboutContent.principles?.length ?? 0),
-    )
+    expect(wrapper.findAll('p')).toHaveLength(aboutContent.paragraphs.length + 1)
     expect(wrapper.findAll('dl dt')).toHaveLength(aboutContent.facts.length)
     expect(wrapper.findAll('dl dd')).toHaveLength(aboutContent.facts.length)
     expect(wrapper.find('.about-view__details h3').text()).toBe('Profile summary')

@@ -57,7 +57,6 @@ export interface AboutContent {
   paragraphs: readonly string[]
   facts: readonly AboutFact[]
   personalNote: string
-  principles?: readonly { title: string; detail: string }[]
   availability?: string
   contactAction: NavigationItem
 }

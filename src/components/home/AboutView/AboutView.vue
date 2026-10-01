@@ -19,6 +19,7 @@ const formatFactValue = (fact: AboutFact): string =>
   <UiSection
     id="about"
     class="about-view"
+    reveal
     spacing="default"
     width="content"
     surface="muted"
@@ -26,40 +27,52 @@ const formatFactValue = (fact: AboutFact): string =>
   >
     <div class="about-view__layout">
       <div class="about-view__story">
-        <UiText v-if="content.eyebrow" as="p" role="label" tone="accent" weight="medium">
+        <UiText
+          v-if="content.eyebrow"
+          as="p"
+          role="label"
+          tone="accent"
+          weight="medium"
+          class="ui-section__reveal-item"
+          :style="{ '--reveal-index': 0 }"
+        >
           {{ content.eyebrow }}
         </UiText>
-        <UiText id="about-title" as="h2" role="heading" max-width="none">
+        <UiText
+          id="about-title"
+          as="h2"
+          role="heading"
+          max-width="none"
+          class="ui-section__reveal-item"
+          :style="{ '--reveal-index': 1 }"
+        >
           {{ content.title }}
         </UiText>
-        <div class="about-view__paragraphs">
+        <div class="about-view__paragraphs ui-section__reveal-item" :style="{ '--reveal-index': 2 }">
           <UiText v-for="(paragraph, index) in content.paragraphs" :key="index" tone="muted">
             {{ paragraph }}
           </UiText>
         </div>
-        <UiText class="about-view__personal-note" tone="subtle">
+        <UiText
+          class="about-view__personal-note ui-section__reveal-item"
+          tone="subtle"
+          :style="{ '--reveal-index': 3 }"
+        >
           {{ content.personalNote }}
         </UiText>
-        <div class="about-view__principles" aria-labelledby="about-principles-title">
-          <UiText id="about-principles-title" as="h3" role="heading">How I work</UiText>
-          <ul>
-            <li v-for="principle in content.principles" :key="principle.title">
-              <UiText as="h4" role="heading">{{ principle.title }}</UiText>
-              <UiText tone="muted">{{ principle.detail }}</UiText>
-            </li>
-          </ul>
-        </div>
         <UiText
           v-if="content.availability"
           class="about-view__availability"
+          :class="'ui-section__reveal-item'"
           role="label"
           tone="positive"
           weight="medium"
+          :style="{ '--reveal-index': 4 }"
         >
           <span class="about-view__status" aria-hidden="true"></span>
           {{ content.availability }}
         </UiText>
-        <div class="about-view__actions">
+        <div class="about-view__actions ui-section__reveal-item" :style="{ '--reveal-index': 5 }">
           <UiLink
             v-if="content.contactAction.kind === 'route'"
             :to="content.contactAction.to"
@@ -79,7 +92,13 @@ const formatFactValue = (fact: AboutFact): string =>
         </div>
       </div>
 
-      <UiBox as="aside" class="about-view__details" variant="outline" padding="medium">
+      <UiBox
+        as="aside"
+        class="about-view__details ui-section__reveal-item"
+        variant="outline"
+        padding="medium"
+        :style="{ '--reveal-index': 6 }"
+      >
         <UiText as="h3" role="heading">Profile summary</UiText>
         <dl class="about-view__facts">
           <template v-for="fact in content.facts" :key="fact.label">
