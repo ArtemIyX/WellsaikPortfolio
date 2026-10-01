@@ -1,3 +1,5 @@
+import { readFile } from 'node:fs/promises'
+
 import { mount } from '@vue/test-utils'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import { afterEach, describe, expect, it } from 'vitest'
@@ -9,7 +11,11 @@ const mountHome = async () => {
     history: createMemoryHistory(),
     routes: [
       { path: '/', name: 'home', component: HomeView },
-      { path: '/projects/:projectId', name: 'project-case-study', component: { template: '<div />' } },
+      {
+        path: '/projects/:projectId',
+        name: 'project-case-study',
+        component: { template: '<div />' },
+      },
       { path: '/debug', name: 'debug', component: { template: '<div />' } },
     ],
   })
@@ -57,6 +63,13 @@ describe('HomeView', () => {
     expect(
       wrapper.get('#pet-projects').element.compareDocumentPosition(wrapper.get('#about').element),
     ).toBe(4)
+  })
+
+  it('keeps the header sticky above the home-page content layer', async () => {
+    const stylesheet = await readFile('src/views/HomeView.css', 'utf8')
+
+    expect(stylesheet).toContain('.home-view > :not(.site-header)')
+    expect(stylesheet).not.toContain('.home-view > *')
   })
 
   it('keeps one page heading and matches About navigation to its target', async () => {
