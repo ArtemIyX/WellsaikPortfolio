@@ -89,6 +89,15 @@ describe('HomeView', () => {
     expect(wrapper.get('main').findAll('main')).toHaveLength(0)
   })
 
+  it('opts every non-hero home section into scroll reveals', async () => {
+    const wrapper = await mountHome()
+
+    for (const sectionId of ['proof', 'projects', 'evidence', 'experience', 'pet-projects', 'about']) {
+      expect(wrapper.get(`#${sectionId}`).classes()).toContain('ui-section--reveal')
+    }
+    expect(wrapper.get('#hero').classes()).not.toContain('ui-section--reveal')
+  })
+
   it('provides a working skip-link target and hides the debug route', async () => {
     const wrapper = await mountHome()
 

@@ -46,10 +46,24 @@ const acceptCookiePreferences = (): void => {
     />
     <main id="main-content">
       <HeroView :content="heroContent" :theme="theme" />
-      <UiSection id="proof" class="proof-strip" spacing="compact" width="content" labelledby="proof-title">
-        <UiText id="proof-title" as="h2" role="heading" class="sr-only">Selected engineering proof</UiText>
+      <UiSection
+        id="proof"
+        class="proof-strip"
+        reveal
+        spacing="compact"
+        width="content"
+        labelledby="proof-title"
+      >
+        <UiText id="proof-title" as="h2" role="heading" class="sr-only"
+          >Selected engineering proof</UiText
+        >
         <ul class="proof-strip__list">
-          <li v-for="point in proofPoints" :key="point.label" class="proof-strip__item">
+          <li
+            v-for="(point, index) in proofPoints"
+            :key="point.label"
+            class="proof-strip__item ui-section__reveal-item"
+            :style="{ '--reveal-index': index }"
+          >
             <UiText as="strong" role="data" class="proof-strip__value">{{ point.value }}</UiText>
             <UiText as="span" role="label" weight="medium">{{ point.label }}</UiText>
             <UiText as="span" tone="subtle">{{ point.detail }}</UiText>
