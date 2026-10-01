@@ -128,7 +128,6 @@ export interface ProjectContent {
   number: string
   category: string
   title: string
-  accent?: string
   summary: string
   problem: ProjectDetailContent
   role: ProjectDetailContent
@@ -224,8 +223,10 @@ export const heroContent: HeroContent = {
   availability: 'Open to selective freelance work',
   imageSrc: '/images/portrait.webp',
   imageLightSrc: '/images/portrait_light.webp',
-  imageSrcSet: '/images/generated/portrait-480.webp 480w, /images/generated/portrait-768.webp 768w, /images/generated/portrait-1200.webp 1200w',
-  imageLightSrcSet: '/images/generated/portrait_light-480.webp 480w, /images/generated/portrait_light-768.webp 768w, /images/generated/portrait_light-1200.webp 1200w',
+  imageSrcSet:
+    '/images/generated/portrait-480.webp 480w, /images/generated/portrait-768.webp 768w, /images/generated/portrait-1200.webp 1200w',
+  imageLightSrcSet:
+    '/images/generated/portrait_light-480.webp 480w, /images/generated/portrait_light-768.webp 768w, /images/generated/portrait_light-1200.webp 1200w',
   imageAlt: `Portrait of ${homeBrandLabel}`,
   imageWidth: 1200,
   imageHeight: 1600,
@@ -254,20 +255,38 @@ export const engineeringEvidence: readonly EngineeringEvidence[] = [
   {
     id: 'scale',
     title: 'Scale',
-    detail: '10k+ replicated entities and 1k+ concurrent players shaped the MMO client architecture.',
-    action: { label: 'Read Endless War', kind: 'route', to: { name: 'project-case-study', params: { projectId: 'endless-war-mmo-rpg' } } },
+    detail:
+      '10k+ replicated entities and 1k+ concurrent players shaped the MMO client architecture.',
+    action: {
+      label: 'Read Endless War',
+      kind: 'route',
+      to: { name: 'project-case-study', params: { projectId: 'endless-war-mmo-rpg' } },
+    },
   },
   {
     id: 'profiling',
     title: 'Profiling',
-    detail: 'CPU, network, and rendering bottlenecks were treated as measured engineering problems, not guesses.',
-    action: { label: 'See systems flow', kind: 'route', to: { name: 'project-case-study', params: { projectId: 'endless-war-mmo-rpg', hash: '#architecture' } } },
+    detail:
+      'CPU, network, and rendering bottlenecks were treated as measured engineering problems, not guesses.',
+    action: {
+      label: 'See systems flow',
+      kind: 'route',
+      to: {
+        name: 'project-case-study',
+        params: { projectId: 'endless-war-mmo-rpg', hash: '#architecture' },
+      },
+    },
   },
   {
     id: 'delivery',
     title: 'Delivery',
-    detail: 'Rockbelt went from blank project to a tested, complete multiplayer game in four focused weeks.',
-    action: { label: 'Read Rockbelt', kind: 'route', to: { name: 'project-case-study', params: { projectId: 'rockbelt' } } },
+    detail:
+      'Rockbelt went from blank project to a tested, complete multiplayer game in four focused weeks.',
+    action: {
+      label: 'Read Rockbelt',
+      kind: 'route',
+      to: { name: 'project-case-study', params: { projectId: 'rockbelt' } },
+    },
   },
 ]
 
@@ -282,7 +301,6 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       number: '01',
       category: 'MMO RPG Game',
       title: 'Endless War',
-      accent: '#5eead4',
       summary: 'Client for an MMO RPG game targeting the Chinese market.',
       problem: {
         items: [
@@ -313,7 +331,8 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       },
       image: {
         src: '/images/projects/endless-war.webp',
-        srcSet: '/images/generated/endless-war-480.webp 480w, /images/generated/endless-war-768.webp 768w, /images/generated/endless-war-1200.webp 1200w',
+        srcSet:
+          '/images/generated/endless-war-480.webp 480w, /images/generated/endless-war-768.webp 768w, /images/generated/endless-war-1200.webp 1200w',
         alt: 'Gameplay preview from Endless War',
         width: 1200,
         height: 750,
@@ -330,14 +349,14 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
         kind: 'route',
         to: { name: 'project-case-study', params: { projectId: 'endless-war-mmo-rpg' } },
       },
-      confidentialityNote: 'Client work: this page shares the public scope and engineering approach without exposing proprietary source or production data.',
+      confidentialityNote:
+        'Client work: this page shares the public scope and engineering approach without exposing proprietary source or production data.',
     },
     {
       id: 'riftborn',
       number: '02',
       category: 'Multiplayer first-person hack-and-slash',
       title: 'Riftborn',
-      accent: '#a78bfa',
       summary:
         'A multiplayer first-person hack-and-slash built around three-team combat, distinct classes, weapons, custom abilities, and varied game modes.',
       problem: {
@@ -359,7 +378,8 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       },
       image: {
         src: '/images/projects/riftborn.webp',
-        srcSet: '/images/generated/riftborn-480.webp 480w, /images/generated/riftborn-768.webp 768w, /images/generated/riftborn-1200.webp 1200w',
+        srcSet:
+          '/images/generated/riftborn-480.webp 480w, /images/generated/riftborn-768.webp 768w, /images/generated/riftborn-1200.webp 1200w',
         alt: 'Gameplay preview from Riftborn',
         width: 1200,
         height: 750,
@@ -390,7 +410,6 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       number: '03',
       category: '8-player sci-fi turn-based game',
       title: 'Rockbelt',
-      accent: '#fbbf24',
       summary:
         'A completed eight-player sci-fi turn-based multiplayer game, built solo in four focused work weeks to prove that a fully finished game could be shipped quickly.',
       problem: {
@@ -411,7 +430,8 @@ export const featuredProjectsContent: FeaturedProjectsContent = {
       },
       image: {
         src: '/images/projects/rockbelt.webp',
-        srcSet: '/images/generated/rockbelt-480.webp 480w, /images/generated/rockbelt-768.webp 768w, /images/generated/rockbelt-1200.webp 1200w',
+        srcSet:
+          '/images/generated/rockbelt-480.webp 480w, /images/generated/rockbelt-768.webp 768w, /images/generated/rockbelt-1200.webp 1200w',
         alt: 'Gameplay preview from Rockbelt',
         width: 1200,
         height: 750,
@@ -799,20 +819,6 @@ export const aboutContent: AboutContent = {
   ],
   personalNote:
     'Away from development, I love to play around with game design ideas, learn about how complicated systems function, and realize grand visions in games.',
-  principles: [
-    {
-      title: 'Measure before optimizing',
-      detail: 'I profile CPU, GPU, memory, and network paths before choosing a change, then verify the result against the same scenario.',
-    },
-    {
-      title: 'Build reusable engine modules',
-      detail: 'I prefer explicit components, plugins, and subsystem boundaries that keep the next gameplay feature cheaper to build.',
-    },
-    {
-      title: 'Test under realistic scale',
-      detail: 'Multiplayer systems are evaluated with meaningful entity counts, latency, and player-facing failure modes—not only an editor happy path.',
-    },
-  ],
   contactAction: {
     label: 'Start a conversation',
     kind: 'href',
