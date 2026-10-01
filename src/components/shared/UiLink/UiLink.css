@@ -62,7 +62,10 @@
 @media (prefers-reduced-motion: reduce) {
   .ui-link--button-primary,
   .ui-link--button-secondary {
-    transition: color var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard);
+    transition:
+      color var(--duration-fast) var(--ease-standard),
+      background var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard);
   }
 
   .ui-link--button-primary:hover,

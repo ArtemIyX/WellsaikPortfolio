@@ -33,8 +33,12 @@ const titleId = `pet-project-card-title-${props.project.id}`
       </UiText>
       <UiText class="pet-project-card__summary" tone="muted">{{ project.summary }}</UiText>
       <UiText class="pet-project-card__why" tone="subtle">{{ project.whyExists }}</UiText>
-      <UiText class="pet-project-card__capability" role="label" tone="accent" weight="medium">{{ project.capability }}</UiText>
-      <UiText class="pet-project-card__status" role="label" tone="subtle">{{ project.status }}</UiText>
+      <UiText class="pet-project-card__capability" role="label" tone="accent" weight="medium">{{
+        project.capability
+      }}</UiText>
+      <UiText class="pet-project-card__status" role="label" tone="subtle">{{
+        project.status
+      }}</UiText>
       <ul class="pet-project-card__metadata" aria-label="Project metadata">
         <li v-for="item in project.metadata" :key="item">{{ item }}</li>
       </ul>

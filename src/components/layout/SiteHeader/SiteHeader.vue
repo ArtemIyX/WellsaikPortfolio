@@ -20,11 +20,13 @@ let sectionObserver: IntersectionObserver | undefined
 let progressFrame = 0
 
 const navigationHash = (item: NavigationItem): string | undefined => {
-  if (item.kind !== 'route' || typeof item.to !== 'object' || !item.to || !('hash' in item.to)) return
+  if (item.kind !== 'route' || typeof item.to !== 'object' || !item.to || !('hash' in item.to))
+    return
   return typeof item.to.hash === 'string' ? item.to.hash : undefined
 }
 
-const isNavigationItemActive = (item: NavigationItem): boolean => navigationHash(item) === `#${activeSection.value}`
+const isNavigationItemActive = (item: NavigationItem): boolean =>
+  navigationHash(item) === `#${activeSection.value}`
 
 const updateReadingProgress = (): void => {
   progressFrame = 0
@@ -166,7 +168,12 @@ onBeforeUnmount(() => {
           label="Color theme"
           @update:model-value="updateTheme"
         />
-        <UiLink class="site-header__cv-link" href="/Artem-Podorozhko-CV.pdf" new-tab variant="button-secondary">
+        <UiLink
+          class="site-header__cv-link"
+          href="/Artem-Podorozhko-CV.pdf"
+          new-tab
+          variant="button-secondary"
+        >
           CV
         </UiLink>
       </div>
@@ -225,7 +232,9 @@ onBeforeUnmount(() => {
                 <UiLink
                   v-if="item.kind === 'route'"
                   class="site-header__mobile-navigation-link"
-                  :class="{ 'site-header__mobile-navigation-link--active': isNavigationItemActive(item) }"
+                  :class="{
+                    'site-header__mobile-navigation-link--active': isNavigationItemActive(item),
+                  }"
                   :aria-current="isNavigationItemActive(item) ? 'location' : undefined"
                   :to="item.to"
                   variant="standalone"
@@ -248,7 +257,12 @@ onBeforeUnmount(() => {
             </ul>
           </nav>
 
-          <UiLink class="site-header__panel-cv" href="/Artem-Podorozhko-CV.pdf" new-tab variant="button-primary">
+          <UiLink
+            class="site-header__panel-cv"
+            href="/Artem-Podorozhko-CV.pdf"
+            new-tab
+            variant="button-primary"
+          >
             View CV
           </UiLink>
 
