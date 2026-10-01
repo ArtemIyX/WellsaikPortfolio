@@ -1,22 +1,40 @@
-import { onBeforeUnmount, onMounted, ref, type Ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, type ComponentPublicInstance, type Ref } from 'vue'
 
 export interface UseRevealOptions {
+  enabled?: boolean
   threshold?: number
   rootMargin?: string
 }
 
+type RevealTarget = HTMLElement | ComponentPublicInstance | null
+
+const resolveElement = (target: RevealTarget): HTMLElement | null => {
+  if (target instanceof HTMLElement) return target
+
+  return target?.$el instanceof HTMLElement ? target.$el : null
+}
+
 export const useReveal = (
-  target: Ref<HTMLElement | null>,
+  target: Ref<RevealTarget>,
   options: UseRevealOptions = {},
 ): { isRevealed: Readonly<Ref<boolean>> } => {
   const isRevealed = ref(false)
   let observer: IntersectionObserver | undefined
 
   onMounted(() => {
+    if (!options.enabled) return
+
     if (
       (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false) ||
-      !('IntersectionObserver' in window)
+      typeof window.IntersectionObserver !== 'function'
     ) {
+      isRevealed.value = true
+      return
+    }
+
+    const element = resolveElement(target.value)
+
+    if (!element) {
       isRevealed.value = true
       return
     }
@@ -29,7 +47,7 @@ export const useReveal = (
       },
       { threshold: options.threshold ?? 0.12, rootMargin: options.rootMargin ?? '0px 0px -8% 0px' },
     )
-    if (target.value) observer.observe(target.value)
+    observer.observe(element)
   })
 
   onBeforeUnmount(() => observer?.disconnect())

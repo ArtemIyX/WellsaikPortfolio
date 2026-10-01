@@ -1,36 +1,54 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
+import { useReveal } from '@/composables/useReveal'
+
 import type { UiSectionProps } from './UiSection'
 
 defineOptions({ inheritAttrs: false })
 
-withDefaults(defineProps<UiSectionProps>(), {
+const props = withDefaults(defineProps<UiSectionProps>(), {
   as: 'section',
   spacing: 'default',
   width: 'content',
   surface: 'transparent',
   divider: 'none',
+  reveal: false,
 })
+
+const sectionElement = ref<HTMLElement | null>(null)
+const { isRevealed } = useReveal(sectionElement, { enabled: props.reveal })
 </script>
 
 <template>
   <component
-    :is="as"
+    :is="props.as"
+    ref="sectionElement"
     v-bind="$attrs"
-    :id="id"
+    :id="props.id"
     class="ui-section"
     :class="[
-      `ui-section--spacing-${spacing}`,
-      `ui-section--width-${width}`,
-      `ui-section--surface-${surface}`,
-      `ui-section--divider-${divider}`,
+      `ui-section--spacing-${props.spacing}`,
+      `ui-section--width-${props.width}`,
+      `ui-section--surface-${props.surface}`,
+      `ui-section--divider-${props.divider}`,
+      { 'ui-section--reveal': props.reveal, 'ui-section--revealed': props.reveal && isRevealed },
     ]"
-    :aria-labelledby="labelledby"
+    :aria-labelledby="props.labelledby"
   >
     <div class="ui-section__inner">
-      <div v-if="$slots.eyebrow" class="ui-section__eyebrow"><slot name="eyebrow" /></div>
-      <div v-if="$slots.title" class="ui-section__title"><slot name="title" /></div>
-      <div v-if="$slots.intro" class="ui-section__intro"><slot name="intro" /></div>
-      <div v-if="$slots.actions" class="ui-section__actions"><slot name="actions" /></div>
+      <div v-if="$slots.eyebrow" class="ui-section__eyebrow ui-section__reveal-item">
+        <slot name="eyebrow" />
+      </div>
+      <div v-if="$slots.title" class="ui-section__title ui-section__reveal-item">
+        <slot name="title" />
+      </div>
+      <div v-if="$slots.intro" class="ui-section__intro ui-section__reveal-item">
+        <slot name="intro" />
+      </div>
+      <div v-if="$slots.actions" class="ui-section__actions ui-section__reveal-item">
+        <slot name="actions" />
+      </div>
       <div class="ui-section__content"><slot /></div>
     </div>
   </component>

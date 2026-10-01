@@ -12,4 +12,5 @@ export interface UiSectionProps {
   surface?: UiSectionSurface
   divider?: UiSectionDivider
   labelledby?: string
+  reveal?: boolean
 }

@@ -1,9 +1,11 @@
 import { defineComponent, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { ThemeSelector, UiBox, UiButton, UiLink, UiSection, UiText } from '@/components/shared'
 
 describe('shared portfolio components', () => {
+  afterEach(() => vi.unstubAllGlobals())
+
   it('renders UiButton defaults, attrs, pressed state, and loading protection', async () => {
     const onClick = vi.fn<() => void>()
     const wrapper = mount(UiButton, {
@@ -54,6 +56,66 @@ describe('shared portfolio components', () => {
     expect(wrapper.classes()).toEqual(
       expect.arrayContaining(['ui-section--surface-muted', 'ui-section--divider-bottom']),
     )
+  })
+  it('reveals an opted-in UiSection after it intersects the viewport', async () => {
+    let observedTarget: Element | undefined
+    let observerCallback: IntersectionObserverCallback | undefined
+
+    vi.stubGlobal(
+      'IntersectionObserver',
+      class {
+        constructor(callback: IntersectionObserverCallback) {
+          observerCallback = callback
+        }
+
+        disconnect(): void {}
+        observe(target: Element): void {
+          observedTarget = target
+        }
+        root = null
+        rootMargin = ''
+        thresholds = []
+        takeRecords(): IntersectionObserverEntry[] {
+          return []
+        }
+        unobserve(): void {}
+      },
+    )
+
+    const wrapper = mount(UiSection, { props: { reveal: true }, slots: { default: 'Content' } })
+
+    expect(observedTarget).toBe(wrapper.element)
+    expect(wrapper.classes()).toContain('ui-section--reveal')
+    expect(wrapper.classes()).not.toContain('ui-section--revealed')
+
+    observerCallback?.([{ isIntersecting: true } as IntersectionObserverEntry], {} as IntersectionObserver)
+    await nextTick()
+
+    expect(wrapper.classes()).toContain('ui-section--revealed')
+  })
+  it('immediately reveals an opted-in UiSection without observer support', async () => {
+    vi.stubGlobal('IntersectionObserver', undefined)
+
+    const wrapper = mount(UiSection, { props: { reveal: true }, slots: { default: 'Content' } })
+    await nextTick()
+
+    expect(wrapper.classes()).toContain('ui-section--revealed')
+  })
+  it('immediately reveals an opted-in UiSection when reduced motion is preferred', async () => {
+    vi.stubGlobal('matchMedia', () => ({ matches: true }))
+    vi.stubGlobal(
+      'IntersectionObserver',
+      class {
+        constructor(_: IntersectionObserverCallback) {
+          throw new Error('The observer should not be created for reduced motion.')
+        }
+      },
+    )
+
+    const wrapper = mount(UiSection, { props: { reveal: true }, slots: { default: 'Content' } })
+    await nextTick()
+
+    expect(wrapper.classes()).toContain('ui-section--revealed')
   })
   it('keeps UiBox a semantic, non-interactive container', () => {
     const wrapper = mount(UiBox, {

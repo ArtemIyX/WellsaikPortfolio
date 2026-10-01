@@ -48,3 +48,40 @@
 .ui-section__content {
   min-width: 0;
 }
+
+.ui-section--reveal:not(.ui-section--revealed) :deep(.ui-section__reveal-item) {
+  opacity: 0;
+  transform: translateY(var(--motion-reveal-distance));
+}
+
+.ui-section--reveal.ui-section--revealed :deep(.ui-section__reveal-item) {
+  animation: ui-section-reveal-rise var(--duration-entrance) var(--ease-standard) both;
+  animation-delay: calc(var(--reveal-index, 0) * var(--duration-stagger));
+}
+
+.ui-section__eyebrow {
+  --reveal-index: 0;
+}
+
+.ui-section__title {
+  --reveal-index: 1;
+}
+
+.ui-section__intro {
+  --reveal-index: 2;
+}
+
+.ui-section__actions {
+  --reveal-index: 3;
+}
+
+@keyframes ui-section-reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--motion-reveal-distance));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
