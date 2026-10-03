@@ -36,6 +36,8 @@ export interface ProofPoint {
   value: string
   label: string
   detail: string
+  action: RouteNavigationItem
+  analyticsId: string
 }
 
 export interface EngineeringEvidence {
@@ -69,6 +71,11 @@ export interface ExperiencePeriod {
 
 export type ExperienceStatus = 'current' | 'past'
 
+export interface ExperienceEvidence {
+  value: string
+  label: string
+}
+
 export interface ExperienceEntry {
   id: string
   status: ExperienceStatus
@@ -76,10 +83,12 @@ export interface ExperienceEntry {
   organization: string
   organizationUrl?: string
   applicationUrl?: string
+  applicationLabel?: string
   role: string
   location?: string
   engagement?: string
   summary: string
+  evidence?: readonly ExperienceEvidence[]
   achievements: readonly string[]
   technologies: readonly string[]
 }
@@ -245,10 +254,62 @@ export const heroContent: HeroContent = {
 }
 
 export const proofPoints: readonly ProofPoint[] = [
-  { value: '10k+', label: 'replicated entities', detail: 'large-scale UE5 simulation' },
-  { value: '1k+', label: 'concurrent players', detail: 'networked multiplayer systems' },
-  { value: '60 FPS', label: 'target experience', detail: 'profiling-led optimization' },
-  { value: '90 days', label: 'from blank project', detail: 'to deployed simulator' },
+  {
+    value: '10.000+',
+    label: 'Replicated entities',
+    detail: 'Large-scale MMO simulation',
+    action: {
+      label: 'View scale evidence',
+      kind: 'route',
+      to: {
+        name: 'project-case-study',
+        params: { projectId: 'endless-war-mmo-rpg' },
+        hash: '#evidence',
+      },
+    },
+    analyticsId: 'proof-replicated-entities',
+  },
+  {
+    value: '1.000+',
+    label: 'Concurrent players',
+    detail: 'Custom network solution',
+    action: {
+      label: 'View networking evidence',
+      kind: 'route',
+      to: {
+        name: 'project-case-study',
+        params: { projectId: 'endless-war-mmo-rpg' },
+        hash: '#architecture',
+      },
+    },
+    analyticsId: 'proof-concurrent-players',
+  },
+  {
+    value: 'GPU',
+    label: 'Batched skeletal rendering',
+    detail: 'Thousands of animated entities without per-entity AnimBPs',
+    action: {
+      label: 'View rendering evidence',
+      kind: 'route',
+      to: {
+        name: 'project-case-study',
+        params: { projectId: 'endless-war-mmo-rpg' },
+        hash: '#architecture',
+      },
+    },
+    analyticsId: 'proof-batched-rendering',
+  },
+  {
+    value: '90 days',
+    label: 'From-scratch delivery pipeline',
+    detail: 'Blank project to deployed simulator',
+    action: {
+      label: 'View delivery evidence',
+      kind: 'route',
+      to: { name: 'home', hash: '#experience' },
+    },
+    analyticsId: 'proof-delivery-pipeline',
+  },
 ]
 
 export const engineeringEvidence: readonly EngineeringEvidence[] = [
@@ -466,23 +527,18 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
       role: 'Unreal Engine C++ Engineer',
       location: 'China, Remote',
       summary: 'Core and Gameplay Engineer for a large-scale UE5 MMO RPG.',
+      evidence: [
+        { value: '10K+', label: 'replicated AI entities' },
+        { value: '1K+', label: 'concurrent players' },
+        { value: '60 FPS', label: 'stable simulation target' },
+      ],
       achievements: [
-        'Designed reusable Unreal Engine C++ modules, plugins, and components for use across multiple gameplay systems.',
-        'Architected performance-critical UE5 systems supporting 10,000+ replicated AI entities and 1,000+ concurrent players at a stable 60 FPS.',
-        'Designed and maintained a custom ECS framework for large-scale simulation.',
-        'Developed a custom TCP networking layer integrated with UE5 networking.',
-        'Built multithreaded gameplay systems using the UE Task Graph, including abilities and asynchronous physics queries.',
-        'Profiled and optimized CPU and network bottlenecks across gameplay and simulation systems.',
+        'Built reusable UE5 C++ modules, plugins, and components used across gameplay systems.',
+        'Architected performance-critical simulation systems for 10,000+ replicated AI entities and 1,000+ concurrent players.',
+        'Designed the custom ECS framework and TCP networking layer integrated with UE5 networking.',
+        'Profiled CPU and network bottlenecks while building multithreaded abilities and asynchronous physics queries.',
       ],
-      technologies: [
-        'Unreal Engine 5',
-        'C++',
-        'ECS',
-        'TCP Networking',
-        'UE Task Graph',
-        'Replication',
-        'Performance Profiling',
-      ],
+      technologies: ['Unreal Engine 5', 'C++', 'ECS', 'TCP Networking', 'Replication'],
     },
     {
       id: 'vic-tec',
@@ -495,11 +551,15 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
       engagement: 'Part-time contract',
       summary:
         'Independently designed and delivered a production UE5 naval training simulator in 90 days, from an empty project to deployed game.',
+      evidence: [
+        { value: '90 days', label: 'end-to-end delivery' },
+        { value: '6-DOF', label: 'vessel dynamics model' },
+        { value: 'UE5', label: 'production simulator' },
+      ],
       achievements: [
-        'Implemented the simulation architecture, gameplay, and physics entirely in C++.',
+        'Independently delivered the simulation architecture, gameplay, and physics entirely in C++.',
         'Developed a custom 6-DOF vessel dynamics and buoyancy model using Chaos Physics.',
-        'Implemented sensor and weapons simulation systems.',
-        'Delivered and optimized the application for deployment on ruggedized hardware.',
+        'Implemented sensor and weapons simulation systems and optimized deployment for ruggedized hardware.',
       ],
       technologies: [
         'Unreal Engine 5',
@@ -507,8 +567,6 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
         'Chaos Physics',
         '6-DOF Vessel Dynamics',
         'Buoyancy',
-        'Simulation Architecture',
-        'Hardware Optimization',
       ],
     },
     {
@@ -522,27 +580,21 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
       engagement: 'Part-time · Remote',
       summary:
         'Owned the entire lifecycle of a consumer-grade, cross-platform mobile application built in C# (.NET 6/7) and delivered to iOS and Android with .NET MAUI.',
+      evidence: [
+        { value: 'iOS + Android', label: 'store delivery' },
+        { value: '.NET 6/7', label: 'application platform' },
+        { value: '60 FPS', label: 'scrolling performance' },
+      ],
       achievements: [
-        'Designed the application architecture, CI/CD workflow, and App Store and Play Store release process.',
-        'Built .NET MAUI Blazor Hybrid features with custom handlers, effects, dependency injection, and Shell navigation.',
-        'Integrated native iOS and Android SDKs, including bindings and APNs/FCM push notifications.',
-        'Implemented certificate pinning, encrypted keychain and keystore storage, and OWASP MASVS compliance measures.',
-        'Improved performance through UI virtualization, incremental list loading, image caching, and memory profiling for smooth 60 FPS scrolling.',
-        'Developed typed REST clients, Web3 RPC calls, SignalR balance and transaction feeds, and store delivery pipelines with App Center and Firebase dashboards.',
+        'Owned the application architecture, CI/CD workflow, and App Store and Play Store release process.',
+        'Built .NET MAUI Blazor Hybrid features and native iOS and Android integrations, including push notifications.',
+        'Implemented certificate pinning, encrypted keychain and keystore storage, and OWASP MASVS controls.',
+        'Improved scrolling performance through UI virtualization, incremental loading, image caching, and memory profiling.',
       ],
-      technologies: [
-        'C#',
-        '.NET 6/7',
-        '.NET MAUI',
-        'Blazor Hybrid',
-        'iOS / Android',
-        'REST / SignalR',
-        'Web3 RPC',
-        'CI/CD',
-        'Firebase',
-      ],
+      technologies: ['C#', '.NET 6/7', '.NET MAUI', 'Blazor Hybrid', 'iOS / Android'],
       applicationUrl:
         'https://play.google.com/store/apps/details?id=com.blockzerowallet.app&hl=bs&pli=1',
+      applicationLabel: 'View on Google Play',
     },
     {
       id: 'coffeee-io',
@@ -554,9 +606,14 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
       location: 'Riga, Latvia',
       engagement: 'Remote',
       summary: 'Full-stack multiplayer developer.',
+      evidence: [
+        { value: '1K+', label: 'concurrent players' },
+        { value: 'UE4', label: 'multiplayer gameplay' },
+        { value: 'C# TCP', label: 'backend services' },
+      ],
       achievements: [
-        'Created production-ready experiences for an Unreal Engine 4 game.',
-        'Designed robust, scalable TCP C# microservices and authoritative game servers that maintained synchronization for over a thousand concurrent players.',
+        'Built production-ready Unreal Engine 4 gameplay experiences.',
+        'Designed C# TCP microservices and authoritative game servers that synchronized 1,000+ concurrent players.',
         'Developed custom matchmaking and live-ops telemetry for a third-person shooter.',
       ],
       technologies: [
@@ -564,10 +621,7 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
         'C++',
         'C#',
         'TCP Networking',
-        'Microservices',
         'Authoritative Game Servers',
-        'Matchmaking',
-        'Live Ops Telemetry',
       ],
     },
   ],

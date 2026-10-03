@@ -4,6 +4,7 @@ import { mount } from '@vue/test-utils'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import { afterEach, describe, expect, it } from 'vitest'
 
+import { proofPoints } from '@/content/home'
 import HomeView from '@/views/HomeView.vue'
 
 const mountHome = async () => {
@@ -109,6 +110,34 @@ describe('HomeView', () => {
       expect(wrapper.get(`#${sectionId}`).classes()).toContain('ui-section--reveal')
     }
     expect(wrapper.get('#hero').classes()).not.toContain('ui-section--reveal')
+  })
+
+  it('renders named proof links with evidence destinations and stable IDs', async () => {
+    const wrapper = await mountHome()
+    const proofLinks = wrapper.findAll('.proof-strip__surface')
+
+    expect(wrapper.get('#proof-title').text()).toBe('Selected engineering proof')
+    expect(proofLinks).toHaveLength(4)
+
+    for (const [index, point] of proofPoints.entries()) {
+      const link = proofLinks[index]
+      expect(link?.attributes('data-proof-id')).toBe(point.analyticsId)
+      expect(link?.text()).toContain(point.value)
+      expect(link?.text()).toContain(point.label)
+      expect(link?.text()).toContain(point.detail)
+      expect(link?.attributes('aria-label')).toContain(point.action.label)
+      expect(link?.element.parentElement?.getAttribute('style')).toContain(
+        `--reveal-index: ${index}`,
+      )
+    }
+
+    expect(proofLinks.map((link) => link.attributes('href'))).toEqual([
+      '/projects/endless-war-mmo-rpg#evidence',
+      '/projects/endless-war-mmo-rpg#architecture',
+      '/projects/endless-war-mmo-rpg#architecture',
+      '/#experience',
+    ])
+    expect(wrapper.findAll('.proof-strip__item[tabindex]').length).toBe(0)
   })
 
   it('provides a working skip-link target and hides the debug route', async () => {

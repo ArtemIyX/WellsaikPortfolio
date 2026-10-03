@@ -54,9 +54,12 @@ const acceptCookiePreferences = (): void => {
         width="content"
         labelledby="proof-title"
       >
-        <UiText id="proof-title" as="h2" role="heading" class="sr-only"
-          >Selected engineering proof</UiText
-        >
+        <header class="proof-strip__header ui-section__reveal-item" style="--reveal-index: 0">
+          <UiText id="proof-title" as="h2" role="heading">Selected engineering proof</UiText>
+          <UiText tone="subtle">
+            Measured outcomes and systems, linked to the work behind them.
+          </UiText>
+        </header>
         <ul class="proof-strip__list">
           <li
             v-for="(point, index) in proofPoints"
@@ -64,9 +67,23 @@ const acceptCookiePreferences = (): void => {
             class="proof-strip__item ui-section__reveal-item"
             :style="{ '--reveal-index': index }"
           >
-            <UiText as="strong" role="data" class="proof-strip__value">{{ point.value }}</UiText>
-            <UiText as="span" role="label" weight="medium">{{ point.label }}</UiText>
-            <UiText as="span" tone="subtle">{{ point.detail }}</UiText>
+            <RouterLink
+              class="proof-strip__surface"
+              :to="point.action.to"
+              :data-proof-id="point.analyticsId"
+              :aria-label="`${point.value} ${point.label}. ${point.action.label}`"
+            >
+              <UiText as="strong" role="data" class="proof-strip__value">{{ point.value }}</UiText>
+              <UiText as="span" role="label" weight="medium" class="proof-strip__label">
+                {{ point.label }}
+              </UiText>
+              <UiText as="span" tone="subtle" class="proof-strip__detail">
+                {{ point.detail }}
+              </UiText>
+              <span class="proof-strip__action">
+                <span>View evidence</span><span aria-hidden="true">→</span>
+              </span>
+            </RouterLink>
           </li>
         </ul>
       </UiSection>

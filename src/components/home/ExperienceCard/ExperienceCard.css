@@ -4,24 +4,44 @@
 
 .experience-card :deep(.ui-box__content) {
   display: grid;
-  grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr);
-  gap: var(--space-6);
+  gap: var(--space-5);
   align-items: start;
 }
 
-.experience-card__meta {
+.experience-card__header {
   display: grid;
-  align-content: start;
-  gap: var(--space-2);
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-3) var(--space-6);
   min-width: 0;
-  padding-right: var(--space-6);
-  border-right: var(--border-width) solid var(--color-border);
 }
 
-.experience-card__body {
+.experience-card__role {
+  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+  line-height: 1.25;
+  min-width: 0;
+}
+
+.experience-card__context {
+  margin-top: var(--space-1);
+}
+
+.experience-card__chronology {
+  display: grid;
+  justify-items: end;
+  gap: var(--space-1);
+  min-width: 0;
+  text-align: end;
+}
+
+.experience-card__period {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.experience-card__content {
   display: grid;
   gap: var(--space-4);
-  min-width: 0;
+  max-width: 76ch;
 }
 
 .experience-card h4,
@@ -34,88 +54,60 @@
   font-size: 1.05rem;
 }
 
-.experience-card__list-group {
+.experience-card__evidence {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.experience-card__evidence div {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.experience-card__evidence dt {
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-small);
+  line-height: 1.4;
+}
+
+.experience-card__evidence dd {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.2;
+}
+
+.experience-card__impact {
   display: grid;
   gap: var(--space-2);
 }
 
-.experience-card__list-group ul {
+.experience-card__impact ul {
   display: grid;
   gap: var(--space-2);
   margin: 0;
   padding-left: 1.25rem;
 }
 
-.experience-card__technologies {
-  display: flex !important;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-3) !important;
-  padding-left: 0 !important;
-  list-style: none;
-}
-
-.experience-card__technologies li {
-  padding: var(--space-1) var(--space-2);
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-small);
-  color: var(--color-text-muted);
-  font-size: var(--font-size-small);
+.experience-card__stack span {
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
 }
 
 @media (max-width: 41.9375rem) {
-  .experience-card :deep(.ui-box__content) {
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    column-gap: var(--space-4);
-    row-gap: var(--space-2);
+  .experience-card__header {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
   }
 
-  .experience-card__meta,
-  .experience-card__body {
-    display: contents;
+  .experience-card__chronology {
+    justify-items: start;
+    text-align: start;
   }
 
-  .experience-card__period,
-  .experience-card__organization,
-  .experience-card__location,
-  .experience-card__engagement {
-    grid-column: 1;
-  }
-
-  .experience-card__period {
-    grid-row: 1;
-  }
-
-  .experience-card__organization,
-  .experience-card__organization {
-    grid-row: 2;
-  }
-
-  .experience-card__role {
-    grid-column: 2;
-    grid-row: 1 / span 4;
-    align-self: start;
-    min-width: 0;
-    font-size: clamp(1.125rem, 6vw, 1.5rem);
-    overflow-wrap: normal;
-  }
-
-  .experience-card__location {
-    grid-row: 3;
-  }
-
-  .experience-card__engagement {
-    grid-row: 4;
-  }
-
-  .experience-card__summary,
-  .experience-card__body > a,
-  .experience-card__list-group {
-    grid-column: 1 / -1;
-  }
-
-  .experience-card__summary {
-    margin-top: var(--space-3);
-    padding-top: var(--space-5);
-    border-top: var(--border-width) solid var(--color-border);
+  .experience-card__evidence {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

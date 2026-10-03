@@ -17,82 +17,75 @@ const titleId = `experience-card-title-${props.entry.id}`
     radius="medium"
     :aria-labelledby="titleId"
   >
-    <div class="experience-card__meta">
-      <UiText as="span" class="experience-card__period" role="label" tone="accent" weight="medium">
-        {{ entry.period.label }}
-      </UiText>
-      <UiText
-        as="span"
-        class="experience-card__organization"
-        role="label"
-        tone="default"
-        weight="medium"
-      >
-        <UiLink
-          v-if="entry.organizationUrl"
-          :href="entry.organizationUrl"
-          :new-tab="true"
-          :show-external-indicator="false"
-        >
-          {{ entry.organization }}
-        </UiLink>
-        <template v-else>{{ entry.organization }}</template>
-      </UiText>
-      <UiText
-        v-if="entry.location"
-        as="span"
-        class="experience-card__location"
-        role="label"
-        tone="subtle"
-      >
-        {{ entry.location }}
-      </UiText>
-      <UiText
-        v-if="entry.engagement"
-        as="span"
-        class="experience-card__engagement"
-        role="label"
-        tone="subtle"
-      >
-        {{ entry.engagement }}
-      </UiText>
-    </div>
-    <div class="experience-card__body">
-      <UiText :id="titleId" as="h4" class="experience-card__role" role="heading" max-width="none">
-        {{ entry.role }}
-      </UiText>
-      <UiText class="experience-card__summary" tone="muted">{{ entry.summary }}</UiText>
-      <UiLink v-if="entry.applicationUrl" :href="entry.applicationUrl" :new-tab="true">
-        View application
-      </UiLink>
-      <div class="experience-card__list-group">
+    <div class="experience-card__header">
+      <div class="experience-card__identity">
         <UiText
-          :id="`${titleId}-achievements`"
-          as="span"
-          role="label"
-          tone="subtle"
+          :id="titleId"
+          as="h4"
+          class="experience-card__role"
+          role="body"
+          max-width="none"
           weight="medium"
         >
-          Achievements
+          {{ entry.role }}
+        </UiText>
+        <UiText as="p" class="experience-card__context" role="body" tone="muted" max-width="none">
+          <UiLink
+            v-if="entry.organizationUrl"
+            :href="entry.organizationUrl"
+            :new-tab="true"
+            :show-external-indicator="false"
+          >
+            {{ entry.organization }}
+          </UiLink>
+          <template v-else>{{ entry.organization }}</template>
+          <template v-if="entry.location">
+            <span aria-hidden="true"> · </span>{{ entry.location }}
+          </template>
+          <template v-if="entry.engagement">
+            <span aria-hidden="true"> · </span>{{ entry.engagement }}
+          </template>
+        </UiText>
+      </div>
+      <div class="experience-card__chronology">
+        <UiText as="p" class="experience-card__period" role="data" tone="subtle" max-width="none">
+          {{ entry.period.label }}
+        </UiText>
+        <UiText
+          v-if="entry.status === 'current'"
+          as="p"
+          class="experience-card__status"
+          role="label"
+          tone="accent"
+          weight="medium"
+          max-width="none"
+        >
+          Current
+        </UiText>
+      </div>
+    </div>
+    <div class="experience-card__content">
+      <UiText class="experience-card__summary" tone="muted">{{ entry.summary }}</UiText>
+      <dl v-if="entry.evidence?.length" class="experience-card__evidence">
+        <div v-for="item in entry.evidence" :key="item.label">
+          <dt>{{ item.label }}</dt>
+          <dd>{{ item.value }}</dd>
+        </div>
+      </dl>
+      <div class="experience-card__impact">
+        <UiText :id="`${titleId}-achievements`" as="p" role="label" tone="subtle" weight="medium">
+          Selected impact
         </UiText>
         <ul :aria-labelledby="`${titleId}-achievements`">
           <li v-for="achievement in entry.achievements" :key="achievement">{{ achievement }}</li>
         </ul>
       </div>
-      <div class="experience-card__list-group">
-        <UiText
-          :id="`${titleId}-technologies`"
-          as="span"
-          role="label"
-          tone="subtle"
-          weight="medium"
-        >
-          Technologies & practices
-        </UiText>
-        <ul class="experience-card__technologies" :aria-labelledby="`${titleId}-technologies`">
-          <li v-for="technology in entry.technologies" :key="technology">{{ technology }}</li>
-        </ul>
-      </div>
+      <UiText as="p" class="experience-card__stack" role="label" tone="muted" max-width="none">
+        <span>Core stack:</span> {{ entry.technologies.join(' · ') }}
+      </UiText>
+      <UiLink v-if="entry.applicationUrl" :href="entry.applicationUrl" :new-tab="true">
+        {{ entry.applicationLabel ?? 'View product' }}
+      </UiLink>
     </div>
   </UiBox>
 </template>

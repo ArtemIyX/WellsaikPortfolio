@@ -93,6 +93,15 @@ describe('ExperienceSkillsView', () => {
     expect(experienceSkillsContent.entries[0]?.status).toBe('current')
   })
 
+  it('keeps experience evidence concise and factual', () => {
+    for (const entry of experienceSkillsContent.entries) {
+      expect(entry.evidence).toHaveLength(3)
+      expect(entry.achievements.length).toBeGreaterThanOrEqual(3)
+      expect(entry.achievements.length).toBeLessThanOrEqual(4)
+      expect(entry.technologies.length).toBeLessThanOrEqual(5)
+    }
+  })
+
   it('renders custom props instead of hard-coded content', () => {
     const wrapper = mount(ExperienceSkillsView, { props: { content: customContent } })
 

@@ -13,6 +13,10 @@ const entry: ExperienceEntry = {
   location: 'Custom City · Remote placeholder',
   engagement: 'Custom engagement',
   summary: 'Custom summary',
+  evidence: [
+    { value: '10.000+', label: 'Custom metric' },
+    { value: '60 FPS', label: 'Custom performance target' },
+  ],
   achievements: ['Custom achievement one', 'Custom achievement two'],
   technologies: ['Custom technology one', 'Custom practice two'],
 }
@@ -26,17 +30,26 @@ describe('ExperienceCard', () => {
     expect(article.attributes('aria-labelledby')).toBe(title.attributes('id'))
     expect(article.classes()).toContain('ui-box--depth-aware')
     expect(title.text()).toBe(entry.role)
+    expect(wrapper.get('.experience-card__header').find('h4').element).toBe(title.element)
+    expect(wrapper.get('.experience-card__chronology').text()).toContain(entry.period.label)
+    expect(wrapper.find('.experience-card__status').exists()).toBe(false)
+    expect(wrapper.get('.experience-card__context').text()).toContain(entry.organization)
+    const content = wrapper.get('.experience-card__content')
+    expect(content.find('.experience-card__summary').text()).toBe(entry.summary)
+    expect(content.get('.experience-card__impact p').text()).toBe('Selected impact')
+    expect(content.findAll('.experience-card__impact li')).toHaveLength(entry.achievements.length)
+    expect(content.findAll('.experience-card__evidence dt').map((item) => item.text())).toEqual(
+      entry.evidence?.map((item) => item.label),
+    )
+    expect(content.findAll('.experience-card__evidence dd').map((item) => item.text())).toEqual(
+      entry.evidence?.map((item) => item.value),
+    )
+    expect(content.get('.experience-card__stack').text()).toContain(entry.technologies.join(' · '))
     expect(wrapper.text()).toContain(entry.period.label)
     expect(wrapper.text()).toContain(entry.organization)
     expect(wrapper.text()).toContain(entry.location)
     expect(wrapper.text()).toContain(entry.engagement)
     expect(wrapper.text()).toContain(entry.summary)
-    expect(wrapper.findAll('.experience-card__list-group:first-of-type li')).toHaveLength(
-      entry.achievements.length,
-    )
-    expect(wrapper.findAll('.experience-card__technologies li')).toHaveLength(
-      entry.technologies.length,
-    )
     expect(wrapper.findAll('button, a, [role="tab"], [hidden]').length).toBe(0)
     expect(wrapper.find('time').exists()).toBe(false)
   })
@@ -55,6 +68,12 @@ describe('ExperienceCard', () => {
     })
   })
 
+  it('shows a current-status cue for the active role', () => {
+    const wrapper = mount(ExperienceCard, { props: { entry: { ...entry, status: 'current' } } })
+
+    expect(wrapper.get('.experience-card__status').text()).toBe('Current')
+  })
+
   it('links the application when an application URL is provided', () => {
     const wrapper = mount(ExperienceCard, {
       props: {
@@ -62,13 +81,15 @@ describe('ExperienceCard', () => {
           ...entry,
           applicationUrl:
             'https://play.google.com/store/apps/details?id=com.blockzerowallet.app&hl=bs&pli=1',
+          applicationLabel: 'View on Google Play',
         },
       },
     })
 
     const applicationLink = wrapper
+      .get('.experience-card__content')
       .findAll('a')
-      .find((link) => link.text().includes('View application'))
+      .find((link) => link.text().includes('View on Google Play'))
     expect(applicationLink?.attributes()).toMatchObject({
       href: 'https://play.google.com/store/apps/details?id=com.blockzerowallet.app&hl=bs&pli=1',
       target: '_blank',
