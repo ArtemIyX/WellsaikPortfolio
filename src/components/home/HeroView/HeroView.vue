@@ -1,9 +1,28 @@
 <script setup lang="ts">
+import { onBeforeUnmount, ref } from 'vue'
+
 import { UiBox, UiLink, UiSection, UiText } from '@/components/shared'
 
 import type { HeroViewProps } from './HeroView'
 
-defineProps<HeroViewProps>()
+const props = defineProps<HeroViewProps>()
+const emailCopied = ref(false)
+let copyResetTimer = 0
+
+const copyEmail = async (): Promise<void> => {
+  if (props.content.primaryAction.kind !== 'href' || !props.content.primaryAction.href.startsWith('mailto:')) return
+  const email = props.content.primaryAction.href.slice('mailto:'.length)
+  try {
+    await navigator.clipboard?.writeText(email)
+    emailCopied.value = true
+    window.clearTimeout(copyResetTimer)
+    copyResetTimer = window.setTimeout(() => { emailCopied.value = false }, 2400)
+  } catch {
+    emailCopied.value = false
+  }
+}
+
+onBeforeUnmount(() => window.clearTimeout(copyResetTimer))
 </script>
 
 <template>
@@ -32,6 +51,7 @@ defineProps<HeroViewProps>()
             v-if="content.primaryAction.kind === 'route'"
             :to="content.primaryAction.to"
             variant="button-primary"
+            @click="copyEmail"
           >
             <template #leading>
               <svg class="hero-view__email-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -39,7 +59,7 @@ defineProps<HeroViewProps>()
                 <path d="m3.75 6 8.25 6.75L20.25 6" />
               </svg>
             </template>
-            {{ content.primaryAction.label }}
+            {{ emailCopied ? 'Email copied' : content.primaryAction.label }}
           </UiLink>
           <UiLink
             v-else
@@ -47,6 +67,7 @@ defineProps<HeroViewProps>()
             :external="content.primaryAction.external"
             :new-tab="content.primaryAction.newTab"
             variant="button-primary"
+            @click="copyEmail"
           >
             <template #leading>
               <svg class="hero-view__email-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -54,7 +75,7 @@ defineProps<HeroViewProps>()
                 <path d="m3.75 6 8.25 6.75L20.25 6" />
               </svg>
             </template>
-            {{ content.primaryAction.label }}
+            {{ emailCopied ? 'Email copied' : content.primaryAction.label }}
           </UiLink>
 
           <UiLink
@@ -90,6 +111,9 @@ defineProps<HeroViewProps>()
             {{ content.secondaryAction.label }}
           </UiLink>
         </div>
+        <p v-if="emailCopied" class="hero-view__copy-status" role="status">
+          Email address copied to clipboard.
+        </p>
 
         <UiText class="hero-view__availability" role="label" tone="positive" weight="medium">
           <span class="hero-view__status" aria-hidden="true"></span>

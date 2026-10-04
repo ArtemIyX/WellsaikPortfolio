@@ -15,7 +15,18 @@ export const useTheme = (hasCookieConsent?: Readonly<Ref<boolean>>) => {
   const canPersistTheme = (): boolean => hasCookieConsent?.value === true
 
   const setTheme = (preference: ThemePreference): void => {
-    applyTheme(preference)
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
+    const startViewTransition = (
+      document as Document & {
+        startViewTransition?: (callback: () => void) => { ready?: Promise<void> }
+      }
+    ).startViewTransition
+
+    if (startViewTransition && !reducedMotion) {
+      startViewTransition(() => applyTheme(preference))
+    } else {
+      applyTheme(preference)
+    }
     if (canPersistTheme()) writeCookie(cookieNames.theme, preference)
   }
 

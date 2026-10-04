@@ -104,6 +104,23 @@ a:hover {
   outline: 3px solid var(--color-focus);
   outline-offset: 3px;
 }
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 260ms;
+  animation-timing-function: var(--motion-ease-standard);
+}
+::view-transition-old(root) {
+  animation-name: theme-root-out;
+}
+::view-transition-new(root) {
+  animation-name: theme-root-in;
+}
+@keyframes theme-root-out {
+  to { opacity: 0; }
+}
+@keyframes theme-root-in {
+  from { opacity: 0; }
+}
 ::selection {
   background: var(--color-accent);
   color: var(--color-on-accent);
