@@ -14,7 +14,6 @@ defineProps<EngineeringEvidenceViewProps>()
     width="content"
     labelledby="evidence-title"
   >
-
     <template #title
       ><UiText id="evidence-title" as="h2" role="heading" max-width="none"
         >Engineering evidence in action</UiText

@@ -29,9 +29,8 @@ defineProps<ExperienceSkillsViewProps>()
           role="heading"
           class="ui-section__reveal-item"
           :style="{ '--reveal-index': 0 }"
-          >{{
-          content.experienceHeading
-        }}</UiText>
+          >{{ content.experienceHeading }}</UiText
+        >
         <ol class="experience-skills-view__experience-list">
           <li
             v-for="(entry, index) in content.entries"

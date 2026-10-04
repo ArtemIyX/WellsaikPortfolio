@@ -88,7 +88,10 @@ describe('shared portfolio components', () => {
     expect(wrapper.classes()).toContain('ui-section--reveal')
     expect(wrapper.classes()).not.toContain('ui-section--revealed')
 
-    observerCallback?.([{ isIntersecting: true } as IntersectionObserverEntry], {} as IntersectionObserver)
+    observerCallback?.(
+      [{ isIntersecting: true } as IntersectionObserverEntry],
+      {} as IntersectionObserver,
+    )
     await nextTick()
 
     expect(wrapper.classes()).toContain('ui-section--revealed')

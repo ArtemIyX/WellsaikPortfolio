@@ -40,7 +40,9 @@ describe('PetProjectsView', () => {
 
   it('does not reapply reveal markers to cards after filtering', async () => {
     const wrapper = mount(PetProjectsView, { props: { content: petProjectsContent } })
-    const renderingFilter = wrapper.findAll('button').find((button) => button.text() === 'Rendering')
+    const renderingFilter = wrapper
+      .findAll('button')
+      .find((button) => button.text() === 'Rendering')
 
     expect(renderingFilter).toBeDefined()
     await renderingFilter!.trigger('click')

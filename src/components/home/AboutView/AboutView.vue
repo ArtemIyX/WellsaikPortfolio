@@ -48,7 +48,10 @@ const formatFactValue = (fact: AboutFact): string =>
         >
           {{ content.title }}
         </UiText>
-        <div class="about-view__paragraphs ui-section__reveal-item" :style="{ '--reveal-index': 2 }">
+        <div
+          class="about-view__paragraphs ui-section__reveal-item"
+          :style="{ '--reveal-index': 2 }"
+        >
           <UiText v-for="(paragraph, index) in content.paragraphs" :key="index" tone="muted">
             {{ paragraph }}
           </UiText>
