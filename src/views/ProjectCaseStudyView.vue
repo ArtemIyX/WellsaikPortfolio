@@ -35,6 +35,14 @@ onBeforeUnmount(() => {
         <span>{{ project.title }}</span>
       </nav>
 
+      <nav class="case-study-view__progress" aria-label="Case study sections">
+        <a href="#overview">Overview</a>
+        <a href="#constraints">Constraints</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#lessons">Lessons</a>
+      </nav>
+
       <header class="case-study-view__header">
         <UiText as="p" role="label" tone="accent" weight="medium">{{ project.category }}</UiText>
         <UiText as="h1" role="heading" max-width="none">{{ project.title }}</UiText>
