@@ -56,7 +56,7 @@
 
 .ui-link--button-primary:active,
 .ui-link--button-secondary:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.98);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { ThemeSelector, UiLink } from '@/components/shared'
 import type { ThemePreference } from '@/composables/useTheme'
@@ -14,10 +14,14 @@ const emit = defineEmits<{ 'update:theme': [value: ThemePreference] }>()
 const menuOpen = ref(false)
 const menuTrigger = ref<HTMLButtonElement | null>(null)
 const mobilePanel = ref<HTMLElement | null>(null)
+const navigationElement = ref<HTMLElement | null>(null)
 const activeSection = ref('hero')
 const readingProgress = ref(0)
+const showBackToTop = ref(false)
+const activeIndicator = ref({ left: 0, width: 0, visible: false })
 let sectionObserver: IntersectionObserver | undefined
 let progressFrame = 0
+let resizeObserver: ResizeObserver | undefined
 
 const navigationHash = (item: NavigationItem): string | undefined => {
   if (item.kind !== 'route' || typeof item.to !== 'object' || !item.to || !('hash' in item.to))
@@ -28,10 +32,31 @@ const navigationHash = (item: NavigationItem): string | undefined => {
 const isNavigationItemActive = (item: NavigationItem): boolean =>
   navigationHash(item) === `#${activeSection.value}`
 
+const activeSectionLabel = computed(
+  () => props.items.find((item) => navigationHash(item) === `#${activeSection.value}`)?.label ?? 'Home',
+)
+
+const updateActiveIndicator = (): void => {
+  const nav = navigationElement.value
+  const activeLink = nav?.querySelector<HTMLElement>('.site-header__navigation-link--active')
+  if (!nav || !activeLink) {
+    activeIndicator.value.visible = false
+    return
+  }
+  const navRect = nav.getBoundingClientRect()
+  const linkRect = activeLink.getBoundingClientRect()
+  activeIndicator.value = {
+    left: linkRect.left - navRect.left,
+    width: linkRect.width,
+    visible: true,
+  }
+}
+
 const updateReadingProgress = (): void => {
   progressFrame = 0
   const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
   readingProgress.value = scrollableHeight > 0 ? Math.min(window.scrollY / scrollableHeight, 1) : 0
+  showBackToTop.value = window.scrollY > window.innerHeight * 0.8
 }
 
 const scheduleReadingProgress = (): void => {
@@ -40,6 +65,8 @@ const scheduleReadingProgress = (): void => {
 }
 
 const updateTheme = (value: ThemePreference): void => emit('update:theme', value)
+
+const scrollToTop = (): void => window.scrollTo({ top: 0, behavior: 'smooth' })
 
 const openMenu = async (): Promise<void> => {
   menuOpen.value = true
@@ -89,8 +116,14 @@ watch(menuOpen, (isOpen) => {
   document.body.classList.toggle('site-header-menu-open', isOpen)
 })
 
+watch(activeSection, () => void nextTick(updateActiveIndicator))
+
 onMounted(() => {
   window.addEventListener('resize', handleViewportResize)
+  resizeObserver = typeof window.ResizeObserver === 'function'
+    ? new ResizeObserver(updateActiveIndicator)
+    : undefined
+  if (navigationElement.value) resizeObserver?.observe(navigationElement.value)
   const sections = props.items
     .map(navigationHash)
     .filter((hash): hash is string => Boolean(hash))
@@ -100,6 +133,7 @@ onMounted(() => {
   if (typeof window.IntersectionObserver !== 'function') {
     window.addEventListener('scroll', scheduleReadingProgress, { passive: true })
     updateReadingProgress()
+    updateActiveIndicator()
     return
   }
 
@@ -115,11 +149,13 @@ onMounted(() => {
   sections.forEach((section) => sectionObserver?.observe(section))
   window.addEventListener('scroll', scheduleReadingProgress, { passive: true })
   updateReadingProgress()
+  updateActiveIndicator()
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', handleViewportResize)
   sectionObserver?.disconnect()
+  resizeObserver?.disconnect()
   window.removeEventListener('scroll', scheduleReadingProgress)
   if (progressFrame) window.cancelAnimationFrame(progressFrame)
   document.body.classList.remove('site-header-menu-open')
@@ -135,7 +171,16 @@ onBeforeUnmount(() => {
       </UiLink>
 
       <div class="site-header__desktop-controls">
-        <nav class="site-header__navigation" aria-label="Primary navigation">
+        <nav ref="navigationElement" class="site-header__navigation" aria-label="Primary navigation">
+          <span
+            class="site-header__active-indicator"
+            aria-hidden="true"
+            :style="{
+              width: `${activeIndicator.width}px`,
+              transform: `translateX(${activeIndicator.left}px)`,
+              opacity: activeIndicator.visible ? 1 : 0,
+            }"
+          ></span>
           <ul class="site-header__navigation-list">
             <li v-for="item in items" :key="item.label">
               <UiLink
@@ -184,15 +229,23 @@ onBeforeUnmount(() => {
         type="button"
         aria-controls="mobile-navigation-panel"
         :aria-expanded="menuOpen"
-        aria-label="Open navigation menu"
+        :aria-label="`Open navigation menu. Current section: ${activeSectionLabel}`"
         @click="openMenu"
       >
-        <span>Menu</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M4 8h16M4 16h16" />
-        </svg>
+        <span class="site-header__menu-label">{{ activeSectionLabel }}</span>
+        <span class="site-header__menu-icon" aria-hidden="true"><i></i><i></i></span>
       </button>
     </div>
+
+    <button
+      v-if="showBackToTop"
+      class="site-header__back-to-top"
+      type="button"
+      aria-label="Back to top"
+      @click="scrollToTop"
+    >
+      ↑
+    </button>
 
     <Transition name="site-header-panel">
       <div v-if="menuOpen" class="site-header__mobile-layer">
