@@ -23,6 +23,10 @@
   animation: hero-entrance var(--duration-entrance) var(--ease-standard) both;
 }
 
+.hero-view__copy::before {
+  animation: hero-rule-entrance var(--motion-duration-reveal) var(--motion-ease-enter) both;
+}
+
 .hero-view__copy > :nth-child(2) {
   animation-delay: var(--duration-stagger);
 }
@@ -44,6 +48,19 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes hero-rule-entrance {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: left;
   }
 }
 
@@ -117,6 +134,8 @@
   inset: var(--space-6) calc(var(--space-6) * -1) calc(var(--space-6) * -1) var(--space-6);
   background: var(--color-accent-soft);
   border: var(--border-width) solid var(--color-accent);
+  transform: translate3d(calc(var(--pointer-x, 0) * 0.25rem), calc(var(--pointer-y, 0) * 0.25rem), 0);
+  transition: transform 500ms var(--motion-ease-standard);
 }
 
 .hero-view__portrait {
@@ -184,5 +203,20 @@
 
   .hero-view__actions :deep(.ui-link) {
     justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-view__copy > *,
+  .hero-view__copy::before,
+  .hero-view__portrait-wrap {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-view__portrait-offset {
+    transform: none;
+    transition: none;
   }
 }

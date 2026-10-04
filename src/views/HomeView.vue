@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+
 import {
   AboutView,
-  EngineeringEvidenceView,
   ExperienceSkillsView,
   FeaturedProjectsView,
   HeroView,
@@ -13,7 +14,6 @@ import { useCookieConsent } from '@/composables/useCookieConsent'
 import { useTheme } from '@/composables/useTheme'
 import {
   aboutContent,
-  engineeringEvidence,
   experienceSkillsContent,
   featuredProjectsContent,
   heroContent,
@@ -29,6 +29,54 @@ import {
 const { hasAcceptedCookies, shouldShowCookieBanner, acceptCookies, rejectCookies } =
   useCookieConsent()
 const { theme, setTheme } = useTheme(hasAcceptedCookies)
+const homeElement = ref<HTMLElement | null>(null)
+const activeSection = ref('hero')
+let sectionObserver: IntersectionObserver | undefined
+let pointerFrame = 0
+
+const updatePointerField = (event: PointerEvent): void => {
+  if (event.pointerType !== 'mouse' || document.documentElement.dataset.motion === 'reduced') return
+  if (pointerFrame) cancelAnimationFrame(pointerFrame)
+  pointerFrame = requestAnimationFrame(() => {
+    const x = Math.max(-1, Math.min(1, (event.clientX / window.innerWidth - 0.5) * 2))
+    const y = Math.max(-1, Math.min(1, (event.clientY / window.innerHeight - 0.5) * 2))
+    homeElement.value?.style.setProperty('--pointer-x', x.toFixed(3))
+    homeElement.value?.style.setProperty('--pointer-y', y.toFixed(3))
+    pointerFrame = 0
+  })
+}
+
+const resetPointerField = (): void => {
+  homeElement.value?.style.setProperty('--pointer-x', '0')
+  homeElement.value?.style.setProperty('--pointer-y', '0')
+}
+
+onMounted(() => {
+  const sections = ['hero', 'proof', 'projects', 'experience', 'pet-projects', 'about']
+    .map((id) => document.getElementById(id))
+    .filter((section): section is HTMLElement => Boolean(section))
+  if (typeof window.IntersectionObserver === 'function') {
+    sectionObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
+        if (visible?.target.id) activeSection.value = visible.target.id
+      },
+      { rootMargin: '-18% 0px -62% 0px', threshold: [0, 0.2, 0.5] },
+    )
+    sections.forEach((section) => sectionObserver?.observe(section))
+  }
+  homeElement.value?.addEventListener('pointermove', updatePointerField, { passive: true })
+  homeElement.value?.addEventListener('pointerleave', resetPointerField, { passive: true })
+})
+
+onBeforeUnmount(() => {
+  sectionObserver?.disconnect()
+  if (pointerFrame) cancelAnimationFrame(pointerFrame)
+  homeElement.value?.removeEventListener('pointermove', updatePointerField)
+  homeElement.value?.removeEventListener('pointerleave', resetPointerField)
+})
 
 const acceptCookiePreferences = (): void => {
   acceptCookies()
@@ -37,7 +85,7 @@ const acceptCookiePreferences = (): void => {
 </script>
 
 <template>
-  <div class="home-view">
+  <div ref="homeElement" class="home-view" :data-active-section="activeSection">
     <SiteHeader
       :theme="theme"
       :items="homeNavigation"
@@ -45,6 +93,12 @@ const acceptCookiePreferences = (): void => {
       @update:theme="setTheme"
     />
     <main id="main-content">
+      <div class="home-view__signal" aria-hidden="true">
+        <svg viewBox="0 0 1000 520" preserveAspectRatio="none">
+          <path d="M24 32 C220 160 340 76 500 240 S780 360 976 488" />
+          <circle cx="24" cy="32" r="5" />
+        </svg>
+      </div>
       <HeroView :content="heroContent" :theme="theme" />
       <UiSection
         id="proof"
@@ -55,7 +109,7 @@ const acceptCookiePreferences = (): void => {
         labelledby="proof-title"
       >
         <header class="proof-strip__header ui-section__reveal-item" style="--reveal-index: 0">
-          <UiText id="proof-title" as="h2" role="heading">Selected engineering proof</UiText>
+          <UiText id="proof-title" as="h2" role="heading">Engineering</UiText>
           <UiText tone="subtle">
             Measured outcomes and systems, linked to the work behind them.
           </UiText>
@@ -88,7 +142,6 @@ const acceptCookiePreferences = (): void => {
         </ul>
       </UiSection>
       <FeaturedProjectsView :content="featuredProjectsContent" />
-      <EngineeringEvidenceView :items="engineeringEvidence" />
       <ExperienceSkillsView :content="experienceSkillsContent" />
       <PetProjectsView :content="petProjectsContent" />
       <AboutView :content="aboutContent" />

@@ -3,6 +3,11 @@
   isolation: isolate;
   min-height: 100svh;
   background: var(--page-background);
+  --pointer-x: 0;
+  --pointer-y: 0;
+  --signal-x: 50%;
+  --signal-y: 18%;
+  --signal-strength: 0.08;
 }
 
 .home-view::before {
@@ -17,6 +22,59 @@
   mask-image: var(--page-grid-mask);
   content: '';
   pointer-events: none;
+  transform: translate3d(calc(var(--pointer-x) * 0.25rem), calc(var(--pointer-y) * 0.25rem), 0);
+  transition: transform 700ms var(--motion-ease-standard);
+}
+
+.home-view::after {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(
+    circle at var(--signal-x) var(--signal-y),
+    color-mix(in srgb, var(--color-accent) calc(var(--signal-strength) * 100%), transparent),
+    transparent 23rem
+  );
+  content: '';
+  opacity: 0.9;
+  pointer-events: none;
+  transition: opacity var(--motion-duration-navigation) var(--motion-ease-standard);
+}
+
+.home-view__signal {
+  position: fixed;
+  inset: 5rem 0 0;
+  z-index: 0;
+  opacity: 0.32;
+  pointer-events: none;
+  transform: translate3d(calc(var(--pointer-x) * 0.5rem), calc(var(--pointer-y) * 0.5rem), 0);
+  transition: transform 900ms var(--motion-ease-standard), opacity 320ms var(--motion-ease-standard);
+}
+
+.home-view__signal svg { width: 100%; height: 100%; }
+
+.home-view__signal path {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-dasharray: 2 18;
+  stroke-linecap: round;
+  stroke-width: 1.25;
+  animation: home-signal-travel var(--motion-duration-ambient) linear var(--motion-ambient-cycles);
+}
+
+.home-view__signal circle {
+  fill: var(--color-accent);
+  filter: drop-shadow(0 0 0.4rem var(--color-accent));
+}
+
+.home-view[data-active-section='proof'] { --signal-x: 33%; --signal-y: 30%; --signal-strength: 0.12; }
+.home-view[data-active-section='projects'] { --signal-x: 68%; --signal-y: 43%; --signal-strength: 0.1; }
+.home-view[data-active-section='experience'] { --signal-x: 31%; --signal-y: 62%; --signal-strength: 0.08; }
+.home-view[data-active-section='pet-projects'] { --signal-x: 72%; --signal-y: 76%; --signal-strength: 0.1; }
+.home-view[data-active-section='about'] { --signal-x: 50%; --signal-y: 92%; --signal-strength: 0.06; }
+
+@keyframes home-signal-travel {
+  to { stroke-dashoffset: -80; }
 }
 
 .home-view > :not(.site-header) {
@@ -77,8 +135,10 @@
   width: var(--border-width);
   background: var(--color-accent);
   content: '';
+  opacity: 1;
   transform: scaleY(0);
   transform-origin: center;
+  transition: opacity var(--proof-hover-duration) var(--proof-ease-enter);
 }
 
 .proof-strip__item:first-child::before {
@@ -128,6 +188,10 @@
   z-index: 1;
   background-color: color-mix(in srgb, var(--color-surface) 72%, var(--color-accent-soft));
   box-shadow: 0 0.75rem 1.5rem color-mix(in srgb, var(--color-accent) 14%, transparent);
+}
+
+.proof-strip__item:has(.proof-strip__surface:hover, .proof-strip__surface:focus-visible)::before {
+  opacity: 0;
 }
 
 .proof-strip__action {
@@ -213,6 +277,17 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .home-view::before,
+  .home-view::after,
+  .home-view__signal {
+    transform: none;
+    transition: none;
+  }
+
+  .home-view__signal path {
+    animation: none;
+  }
+
   .proof-strip__item,
   .proof-strip__surface,
   .proof-strip__action > span:last-child {
@@ -228,6 +303,7 @@
   }
 
   .proof-strip__item::before {
+    transition: none;
     transform: scaleY(1);
   }
 
