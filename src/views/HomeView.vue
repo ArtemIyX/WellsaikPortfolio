@@ -94,12 +94,6 @@ const acceptCookiePreferences = (): void => {
       @update:theme="setTheme"
     />
     <main id="main-content">
-      <div class="home-view__signal" aria-hidden="true">
-        <svg viewBox="0 0 1000 520" preserveAspectRatio="none">
-          <path d="M24 32 C220 160 340 76 500 240 S780 360 976 488" />
-          <circle cx="24" cy="32" r="5" />
-        </svg>
-      </div>
       <HeroView :content="heroContent" :theme="theme" />
       <UiSection
         id="proof"
