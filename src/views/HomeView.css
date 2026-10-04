@@ -223,6 +223,11 @@
   line-height: 1;
 }
 
+.proof-metric {
+  display: inline-block;
+  min-width: 4ch;
+}
+
 .proof-strip__item :deep(.ui-text--label) {
   color: var(--color-text);
 }

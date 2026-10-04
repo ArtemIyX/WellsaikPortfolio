@@ -7,6 +7,7 @@ import {
   FeaturedProjectsView,
   HeroView,
   PetProjectsView,
+  ProofMetric,
 } from '@/components/home'
 import { CookieConsentBanner, SiteFooter, SiteHeader } from '@/components/layout'
 import { UiSection, UiText } from '@/components/shared'
@@ -127,7 +128,13 @@ const acceptCookiePreferences = (): void => {
               :data-proof-id="point.analyticsId"
               :aria-label="`${point.value} ${point.label}. ${point.action.label}`"
             >
-              <UiText as="strong" role="data" class="proof-strip__value">{{ point.value }}</UiText>
+              <UiText as="strong" role="data" class="proof-strip__value">
+                <ProofMetric
+                  :value="point.value"
+                  :numeric-value="point.numericValue"
+                  :numeric-suffix="point.numericSuffix"
+                />
+              </UiText>
               <UiText as="span" role="label" weight="medium" class="proof-strip__label">
                 {{ point.label }}
               </UiText>

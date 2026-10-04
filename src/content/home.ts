@@ -34,17 +34,12 @@ export interface HeroContent {
 
 export interface ProofPoint {
   value: string
+  numericValue?: number
+  numericSuffix?: string
   label: string
   detail: string
   action: RouteNavigationItem
   analyticsId: string
-}
-
-export interface EngineeringEvidence {
-  id: string
-  title: string
-  detail: string
-  action: RouteNavigationItem
 }
 
 export interface AboutFact {
@@ -256,6 +251,8 @@ export const heroContent: HeroContent = {
 export const proofPoints: readonly ProofPoint[] = [
   {
     value: '10.000+',
+    numericValue: 10000,
+    numericSuffix: '+',
     label: 'Replicated entities',
     detail: 'Large-scale MMO simulation',
     action: {
@@ -271,6 +268,8 @@ export const proofPoints: readonly ProofPoint[] = [
   },
   {
     value: '1.000+',
+    numericValue: 1000,
+    numericSuffix: '+',
     label: 'Concurrent players',
     detail: 'Custom network solution',
     action: {
@@ -301,6 +300,8 @@ export const proofPoints: readonly ProofPoint[] = [
   },
   {
     value: '90 days',
+    numericValue: 90,
+    numericSuffix: ' days',
     label: 'From-scratch delivery pipeline',
     detail: 'Blank project to deployed simulator',
     action: {
@@ -309,45 +310,6 @@ export const proofPoints: readonly ProofPoint[] = [
       to: { name: 'home', hash: '#experience' },
     },
     analyticsId: 'proof-delivery-pipeline',
-  },
-]
-
-export const engineeringEvidence: readonly EngineeringEvidence[] = [
-  {
-    id: 'scale',
-    title: 'Scale',
-    detail:
-      '10k+ replicated entities and 1k+ concurrent players shaped the MMO client architecture.',
-    action: {
-      label: 'Read Endless War',
-      kind: 'route',
-      to: { name: 'project-case-study', params: { projectId: 'endless-war-mmo-rpg' } },
-    },
-  },
-  {
-    id: 'profiling',
-    title: 'Profiling',
-    detail:
-      'CPU, network, and rendering bottlenecks were treated as measured engineering problems, not guesses.',
-    action: {
-      label: 'See systems flow',
-      kind: 'route',
-      to: {
-        name: 'project-case-study',
-        params: { projectId: 'endless-war-mmo-rpg', hash: '#architecture' },
-      },
-    },
-  },
-  {
-    id: 'delivery',
-    title: 'Delivery',
-    detail:
-      'Rockbelt went from blank project to a tested, complete multiplayer game in four focused weeks.',
-    action: {
-      label: 'Read Rockbelt',
-      kind: 'route',
-      to: { name: 'project-case-study', params: { projectId: 'rockbelt' } },
-    },
   },
 ]
 
