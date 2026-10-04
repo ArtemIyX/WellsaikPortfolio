@@ -121,6 +121,26 @@ a:hover {
 @keyframes theme-root-in {
   from { opacity: 0; }
 }
+.route-enter-active,
+.route-leave-active {
+  transition:
+    opacity var(--motion-duration-navigation) var(--motion-ease-standard),
+    transform var(--motion-duration-navigation) var(--motion-ease-standard);
+}
+.route-enter-from {
+  opacity: 0;
+  transform: translateY(var(--motion-distance-short));
+}
+.route-leave-to {
+  opacity: 0;
+  transform: translateY(calc(-1 * var(--motion-distance-short)));
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-enter-active,
+  .route-leave-active {
+    transition: none;
+  }
+}
 ::selection {
   background: var(--color-accent);
   color: var(--color-on-accent);

@@ -5,5 +5,9 @@ useMotionPreference()
 </script>
 
 <template>
-  <RouterView />
+  <RouterView v-slot="{ Component, route }">
+    <Transition name="route" mode="out-in">
+      <component :is="Component" :key="route.fullPath" />
+    </Transition>
+  </RouterView>
 </template>
