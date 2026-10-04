@@ -1,10 +1,39 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+
 import { UiBox, UiSection, UiText } from '@/components/shared'
 
 import ExperienceCard from '../ExperienceCard/ExperienceCard.vue'
 import type { ExperienceSkillsViewProps } from './ExperienceSkillsView'
 
 defineProps<ExperienceSkillsViewProps>()
+const experienceList = ref<HTMLOListElement | null>(null)
+const timelineProgress = ref(0)
+const activeEntry = ref('')
+let entryObserver: IntersectionObserver | undefined
+
+onMounted(() => {
+  const entries = Array.from(
+    experienceList.value?.querySelectorAll<HTMLElement>('[data-entry-id]') ?? [],
+  )
+  if (typeof window.IntersectionObserver !== 'function') return
+  entryObserver = new IntersectionObserver(
+    (observations) => {
+      const visible = observations
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
+      if (visible?.target instanceof HTMLElement) {
+        activeEntry.value = visible.target.dataset.entryId ?? ''
+        const index = entries.indexOf(visible.target)
+        timelineProgress.value = entries.length > 1 ? (index / (entries.length - 1)) * 100 : 100
+      }
+    },
+    { rootMargin: '-25% 0px -55% 0px', threshold: [0, 0.2, 0.5] },
+  )
+  entries.forEach((entry) => entryObserver?.observe(entry))
+})
+
+onBeforeUnmount(() => entryObserver?.disconnect())
 </script>
 
 <template>
@@ -31,12 +60,18 @@ defineProps<ExperienceSkillsViewProps>()
           :style="{ '--reveal-index': 0 }"
           >{{ content.experienceHeading }}</UiText
         >
-        <ol class="experience-skills-view__experience-list">
+        <ol
+          ref="experienceList"
+          class="experience-skills-view__experience-list"
+          :style="{ '--timeline-progress': `${timelineProgress}%` }"
+        >
           <li
             v-for="(entry, index) in content.entries"
             :key="entry.id"
             class="experience-skills-view__experience-item ui-section__reveal-item"
             :data-status="entry.status"
+            :data-entry-id="entry.id"
+            :data-active="activeEntry === entry.id ? 'true' : undefined"
             :aria-current="entry.status === 'current' ? 'true' : undefined"
             :style="{ '--reveal-index': index + 1 }"
           >

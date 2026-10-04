@@ -61,6 +61,32 @@
   width: 100%;
 }
 
+.pet-project-list-move,
+.pet-project-list-enter-active,
+.pet-project-list-leave-active {
+  transition:
+    opacity var(--motion-duration-navigation) var(--motion-ease-standard),
+    transform var(--motion-duration-navigation) var(--motion-ease-enter);
+}
+
+.pet-project-list-enter-from,
+.pet-project-list-leave-to {
+  opacity: 0;
+  transform: translateY(var(--motion-distance-short));
+}
+
+.pet-project-list-leave-active {
+  position: absolute;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pet-project-list-move,
+  .pet-project-list-enter-active,
+  .pet-project-list-leave-active {
+    transition: none;
+  }
+}
+
 @media (max-width: 72rem) {
   .pet-projects-view__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));

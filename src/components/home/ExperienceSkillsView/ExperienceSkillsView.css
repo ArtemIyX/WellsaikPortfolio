@@ -48,6 +48,20 @@
   list-style: none;
 }
 
+.experience-skills-view__experience-list::after {
+  position: absolute;
+  z-index: 0;
+  top: calc(var(--space-6) + (var(--timeline-marker-size) / 2) - (var(--timeline-rail-width) / 2));
+  left: calc((var(--timeline-marker-size) - var(--timeline-rail-width)) / 2);
+  width: var(--timeline-rail-width);
+  height: var(--timeline-progress, 0%);
+  background: var(--color-accent);
+  content: '';
+  opacity: 0.75;
+  pointer-events: none;
+  transition: height var(--motion-duration-narrative) var(--motion-ease-enter);
+}
+
 .experience-skills-view__experience-list::before {
   position: absolute;
   z-index: 0;
@@ -95,6 +109,21 @@
   border-color: var(--color-timeline-current);
   background: var(--color-timeline-current);
   box-shadow: 0 0 0 0.25rem var(--color-timeline-current-halo);
+}
+
+.experience-skills-view__experience-item[data-active='true']
+  .experience-skills-view__timeline-mark {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 0.25rem var(--color-timeline-current-halo);
+}
+
+.experience-skills-view__experience-item[data-status='current']
+  .experience-skills-view__timeline-mark {
+  animation: experience-current-pulse 1.2s var(--motion-ease-enter) 2;
+}
+
+@keyframes experience-current-pulse {
+  50% { box-shadow: 0 0 0 0.5rem transparent; }
 }
 
 .experience-skills-view__experience-item > .experience-card,
@@ -203,6 +232,7 @@
   .experience-skills-view__timeline-mark {
     border-color: CanvasText;
     box-shadow: none;
+    animation: none;
   }
 
   .experience-skills-view__experience-item[data-status='current']

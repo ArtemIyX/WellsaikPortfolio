@@ -65,7 +65,7 @@ const selectFilter = (filter: (typeof filters)[number]): void => {
       </p>
     </div>
 
-    <ol class="pet-projects-view__list">
+    <TransitionGroup name="pet-project-list" tag="ol" class="pet-projects-view__list">
       <li
         v-for="(project, index) in visibleProjects"
         :key="project.id"
@@ -74,7 +74,7 @@ const selectFilter = (filter: (typeof filters)[number]): void => {
       >
         <PetProjectCard :project="project" />
       </li>
-    </ol>
+    </TransitionGroup>
   </UiSection>
 </template>
 
