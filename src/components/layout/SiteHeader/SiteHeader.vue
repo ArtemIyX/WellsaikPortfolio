@@ -166,9 +166,19 @@ onBeforeUnmount(() => {
   <header class="site-header" :style="{ '--reading-progress': readingProgress }">
     <UiLink class="site-header__skip-link" href="#main-content">Skip to main content</UiLink>
     <div class="site-header__inner">
-      <UiLink class="site-header__brand" :to="{ name: 'home' }" variant="standalone">
-        {{ brandLabel }}
-      </UiLink>
+      <div class="site-header__brand-group">
+        <UiLink class="site-header__brand" :to="{ name: 'home' }" variant="standalone">
+          {{ brandLabel }}
+        </UiLink>
+        <UiLink
+          class="site-header__cv-link"
+          href="/Artem-Podorozhko-CV.pdf"
+          new-tab
+          variant="button-secondary"
+        >
+          CV
+        </UiLink>
+      </div>
 
       <div class="site-header__desktop-controls">
         <nav ref="navigationElement" class="site-header__navigation" aria-label="Primary navigation">
@@ -213,14 +223,6 @@ onBeforeUnmount(() => {
           label="Color theme"
           @update:model-value="updateTheme"
         />
-        <UiLink
-          class="site-header__cv-link"
-          href="/Artem-Podorozhko-CV.pdf"
-          new-tab
-          variant="button-secondary"
-        >
-          CV
-        </UiLink>
       </div>
 
       <button

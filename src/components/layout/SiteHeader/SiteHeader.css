@@ -39,6 +39,13 @@
   text-decoration: none;
 }
 
+.site-header__brand-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
 .site-header__brand {
   align-items: center;
   color: var(--color-text);
