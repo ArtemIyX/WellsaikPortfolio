@@ -3,6 +3,7 @@ export type UiSectionSpacing = 'compact' | 'default' | 'hero'
 export type UiSectionWidth = 'full' | 'content' | 'reading'
 export type UiSectionSurface = 'transparent' | 'default' | 'muted'
 export type UiSectionDivider = 'none' | 'top' | 'bottom' | 'both'
+export type UiSectionReveal = boolean | 'rise' | 'wipe' | 'none'
 
 export interface UiSectionProps {
   as?: UiSectionElement
@@ -12,5 +13,5 @@ export interface UiSectionProps {
   surface?: UiSectionSurface
   divider?: UiSectionDivider
   labelledby?: string
-  reveal?: boolean
+  reveal?: UiSectionReveal
 }

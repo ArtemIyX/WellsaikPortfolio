@@ -13,12 +13,14 @@
   right: 0;
   bottom: -1px;
   left: 0;
-  width: var(--reading-progress, 0%);
+  width: 100%;
   height: 2px;
   background: var(--color-accent);
   content: '';
   pointer-events: none;
-  transition: width var(--duration-fast) linear;
+  transform: scaleX(var(--reading-progress, 0));
+  transform-origin: left center;
+  transition: transform var(--duration-fast) linear;
 }
 
 .site-header__inner {

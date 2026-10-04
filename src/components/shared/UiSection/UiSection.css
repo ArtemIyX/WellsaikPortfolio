@@ -54,9 +54,17 @@
   transform: translateY(var(--motion-reveal-distance));
 }
 
+.ui-section--reveal-wipe:not(.ui-section--revealed) :deep(.ui-section__reveal-item) {
+  transform: translateX(calc(-1 * var(--motion-distance-medium)));
+}
+
 .ui-section--reveal.ui-section--revealed :deep(.ui-section__reveal-item) {
   animation: ui-section-reveal-rise var(--duration-entrance) var(--ease-standard) both;
   animation-delay: calc(var(--reveal-index, 0) * var(--duration-stagger));
+}
+
+.ui-section--reveal-wipe.ui-section--revealed :deep(.ui-section__reveal-item) {
+  animation-name: ui-section-reveal-wipe;
 }
 
 .ui-section__eyebrow {
@@ -83,5 +91,25 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes ui-section-reveal-wipe {
+  from {
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--motion-distance-medium)));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-section--reveal:not(.ui-section--revealed) :deep(.ui-section__reveal-item),
+  .ui-section--reveal.ui-section--revealed :deep(.ui-section__reveal-item) {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }

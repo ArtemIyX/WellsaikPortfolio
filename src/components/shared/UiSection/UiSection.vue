@@ -17,7 +17,9 @@ const props = withDefaults(defineProps<UiSectionProps>(), {
 })
 
 const sectionElement = ref<HTMLElement | null>(null)
-const { isRevealed } = useReveal(sectionElement, { enabled: props.reveal })
+const revealEnabled = props.reveal !== false && props.reveal !== 'none'
+const revealVariant = props.reveal === true ? 'rise' : props.reveal
+const { isRevealed } = useReveal(sectionElement, { enabled: revealEnabled })
 </script>
 
 <template>
@@ -32,7 +34,11 @@ const { isRevealed } = useReveal(sectionElement, { enabled: props.reveal })
       `ui-section--width-${props.width}`,
       `ui-section--surface-${props.surface}`,
       `ui-section--divider-${props.divider}`,
-      { 'ui-section--reveal': props.reveal, 'ui-section--revealed': props.reveal && isRevealed },
+      {
+        'ui-section--reveal': revealEnabled,
+        'ui-section--revealed': revealEnabled && isRevealed,
+        [`ui-section--reveal-${revealVariant}`]: revealEnabled && revealVariant,
+      },
     ]"
     :aria-labelledby="props.labelledby"
   >

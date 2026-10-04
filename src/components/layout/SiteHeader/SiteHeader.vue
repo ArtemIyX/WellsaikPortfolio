@@ -31,7 +31,7 @@ const isNavigationItemActive = (item: NavigationItem): boolean =>
 const updateReadingProgress = (): void => {
   progressFrame = 0
   const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
-  readingProgress.value = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0
+  readingProgress.value = scrollableHeight > 0 ? Math.min(window.scrollY / scrollableHeight, 1) : 0
 }
 
 const scheduleReadingProgress = (): void => {
@@ -127,7 +127,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <header class="site-header" :style="{ '--reading-progress': `${readingProgress}%` }">
+  <header class="site-header" :style="{ '--reading-progress': readingProgress }">
     <UiLink class="site-header__skip-link" href="#main-content">Skip to main content</UiLink>
     <div class="site-header__inner">
       <UiLink class="site-header__brand" :to="{ name: 'home' }" variant="standalone">

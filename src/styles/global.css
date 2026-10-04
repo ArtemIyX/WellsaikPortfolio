@@ -35,6 +35,26 @@ body {
   min-height: 100svh;
   isolation: isolate;
 }
+:root[data-motion='reduced'] *,
+:root[data-motion='reduced'] *::before,
+:root[data-motion='reduced'] *::after {
+  --motion-duration-feedback: 0.01ms;
+  --motion-duration-hover: 0.01ms;
+  --motion-duration-reveal: 0.01ms;
+  --motion-duration-navigation: 0.01ms;
+  --motion-duration-narrative: 0.01ms;
+  --motion-duration-ambient: 0.01ms;
+  --motion-stagger-short: 0ms;
+  --motion-stagger-medium: 0ms;
+  --motion-distance-short: 0;
+  --motion-distance-medium: 0;
+  --motion-distance-reveal: 0;
+}
+[data-motion-debug='true'] [data-motion-layer],
+[data-motion-debug='true'] .ui-section__reveal-item {
+  outline: 1px dashed var(--color-focus);
+  outline-offset: 2px;
+}
 button,
 input,
 textarea,
