@@ -21,14 +21,17 @@ export const useMotionPreference = (): MotionPreference => {
   let handleVisibilityChange: (() => void) | undefined
 
   const mode = computed<MotionMode>(() =>
-    document.documentElement.dataset.motion === 'reduced' || systemReduced.value ? 'reduced' : 'full',
+    document.documentElement.dataset.motion === 'reduced' || systemReduced.value
+      ? 'reduced'
+      : 'full',
   )
   const reduced = computed(() => mode.value === 'reduced')
 
   const updateCapabilities = (): void => {
     finePointer.value = window.matchMedia?.('(hover: hover) and (pointer: fine)').matches ?? false
     reducedData.value =
-      (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData ?? false
+      (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData ??
+      false
   }
 
   onMounted(() => {
@@ -50,7 +53,8 @@ export const useMotionPreference = (): MotionPreference => {
 
   onBeforeUnmount(() => {
     if (mediaQuery && onMediaChange) mediaQuery.removeEventListener('change', onMediaChange)
-    if (handleVisibilityChange) document.removeEventListener('visibilitychange', handleVisibilityChange)
+    if (handleVisibilityChange)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
     window.removeEventListener('resize', updateCapabilities)
   })
 

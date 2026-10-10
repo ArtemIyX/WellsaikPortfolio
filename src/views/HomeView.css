@@ -41,11 +41,31 @@
   transition: opacity var(--motion-duration-navigation) var(--motion-ease-standard);
 }
 
-.home-view[data-active-section='proof'] { --signal-x: 33%; --signal-y: 30%; --signal-strength: 0.12; }
-.home-view[data-active-section='projects'] { --signal-x: 68%; --signal-y: 43%; --signal-strength: 0.1; }
-.home-view[data-active-section='experience'] { --signal-x: 31%; --signal-y: 62%; --signal-strength: 0.08; }
-.home-view[data-active-section='pet-projects'] { --signal-x: 72%; --signal-y: 76%; --signal-strength: 0.1; }
-.home-view[data-active-section='about'] { --signal-x: 50%; --signal-y: 92%; --signal-strength: 0.06; }
+.home-view[data-active-section='proof'] {
+  --signal-x: 33%;
+  --signal-y: 30%;
+  --signal-strength: 0.12;
+}
+.home-view[data-active-section='projects'] {
+  --signal-x: 68%;
+  --signal-y: 43%;
+  --signal-strength: 0.1;
+}
+.home-view[data-active-section='experience'] {
+  --signal-x: 31%;
+  --signal-y: 62%;
+  --signal-strength: 0.08;
+}
+.home-view[data-active-section='pet-projects'] {
+  --signal-x: 72%;
+  --signal-y: 76%;
+  --signal-strength: 0.1;
+}
+.home-view[data-active-section='about'] {
+  --signal-x: 50%;
+  --signal-y: 92%;
+  --signal-strength: 0.06;
+}
 
 .home-view > :not(.site-header) {
   position: relative;

@@ -35,11 +35,14 @@ onMounted(() => {
     animate()
     return
   }
-  observer = new IntersectionObserver(([entry]) => {
-    if (!entry?.isIntersecting) return
-    animate()
-    observer?.disconnect()
-  }, { threshold: 0.5 })
+  observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry?.isIntersecting) return
+      animate()
+      observer?.disconnect()
+    },
+    { threshold: 0.5 },
+  )
   observer.observe(metricElement.value)
 })
 

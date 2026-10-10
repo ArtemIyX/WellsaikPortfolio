@@ -123,7 +123,9 @@
 }
 
 @keyframes experience-current-pulse {
-  50% { box-shadow: 0 0 0 0.5rem transparent; }
+  50% {
+    box-shadow: 0 0 0 0.5rem transparent;
+  }
 }
 
 .experience-skills-view__experience-item > .experience-card,
@@ -250,7 +252,10 @@
   }
 
   .experience-skills-view__experience-item > .experience-card,
-  .experience-skills-view__experience-item:has(.experience-card:hover, .experience-card:focus-within)
+  .experience-skills-view__experience-item:has(
+      .experience-card:hover,
+      .experience-card:focus-within
+    )
     > .experience-card {
     transform: none;
   }
@@ -258,7 +263,10 @@
   .experience-skills-view__timeline-mark,
   .experience-skills-view__experience-item[data-status='current']
     .experience-skills-view__timeline-mark,
-  .experience-skills-view__experience-item:has(.experience-card:hover, .experience-card:focus-within)
+  .experience-skills-view__experience-item:has(
+      .experience-card:hover,
+      .experience-card:focus-within
+    )
     .experience-skills-view__timeline-mark {
     transform: scale(var(--timeline-marker-rest-scale));
   }

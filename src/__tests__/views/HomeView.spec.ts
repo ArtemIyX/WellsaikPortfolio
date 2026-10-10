@@ -77,7 +77,7 @@ describe('HomeView', () => {
     const wrapper = await mountHome()
 
     expect(wrapper.get('main').findAll('h1')).toHaveLength(1)
-    expect(wrapper.get('main').findAll('h2')).toHaveLength(5)
+    expect(wrapper.get('main').findAll('h2')).toHaveLength(4)
     expect(wrapper.get('#projects').findAll('article')).toHaveLength(3)
     expect(wrapper.get('#experience').findAll('article')).toHaveLength(4)
     expect(wrapper.get('#pet-projects').findAll('article')).toHaveLength(9)
@@ -106,14 +106,7 @@ describe('HomeView', () => {
   it('opts every non-hero home section into scroll reveals', async () => {
     const wrapper = await mountHome()
 
-    for (const sectionId of [
-      'proof',
-      'projects',
-      'evidence',
-      'experience',
-      'pet-projects',
-      'about',
-    ]) {
+    for (const sectionId of ['proof', 'projects', 'experience', 'pet-projects', 'about']) {
       expect(wrapper.get(`#${sectionId}`).classes()).toContain('ui-section--reveal')
     }
     expect(wrapper.get('#hero').classes()).not.toContain('ui-section--reveal')
@@ -123,7 +116,7 @@ describe('HomeView', () => {
     const wrapper = await mountHome()
     const proofLinks = wrapper.findAll('.proof-strip__surface')
 
-    expect(wrapper.get('#proof-title').text()).toBe('Selected engineering proof')
+    expect(wrapper.get('#proof-title').text()).toBe('Engineering')
     expect(proofLinks).toHaveLength(4)
 
     for (const [index, point] of proofPoints.entries()) {

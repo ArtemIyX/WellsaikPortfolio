@@ -10,13 +10,19 @@ const emailCopied = ref(false)
 let copyResetTimer = 0
 
 const copyEmail = async (): Promise<void> => {
-  if (props.content.primaryAction.kind !== 'href' || !props.content.primaryAction.href.startsWith('mailto:')) return
+  if (
+    props.content.primaryAction.kind !== 'href' ||
+    !props.content.primaryAction.href.startsWith('mailto:')
+  )
+    return
   const email = props.content.primaryAction.href.slice('mailto:'.length)
   try {
     await navigator.clipboard?.writeText(email)
     emailCopied.value = true
     window.clearTimeout(copyResetTimer)
-    copyResetTimer = window.setTimeout(() => { emailCopied.value = false }, 2400)
+    copyResetTimer = window.setTimeout(() => {
+      emailCopied.value = false
+    }, 2400)
   } catch {
     emailCopied.value = false
   }

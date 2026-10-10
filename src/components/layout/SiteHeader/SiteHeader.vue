@@ -17,7 +17,6 @@ const mobilePanel = ref<HTMLElement | null>(null)
 const navigationElement = ref<HTMLElement | null>(null)
 const activeSection = ref('hero')
 const readingProgress = ref(0)
-const showBackToTop = ref(false)
 const activeIndicator = ref({ left: 0, width: 0, visible: false })
 let sectionObserver: IntersectionObserver | undefined
 let progressFrame = 0
@@ -33,7 +32,8 @@ const isNavigationItemActive = (item: NavigationItem): boolean =>
   navigationHash(item) === `#${activeSection.value}`
 
 const activeSectionLabel = computed(
-  () => props.items.find((item) => navigationHash(item) === `#${activeSection.value}`)?.label ?? 'Home',
+  () =>
+    props.items.find((item) => navigationHash(item) === `#${activeSection.value}`)?.label ?? 'Home',
 )
 
 const updateActiveIndicator = (): void => {
@@ -56,7 +56,6 @@ const updateReadingProgress = (): void => {
   progressFrame = 0
   const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
   readingProgress.value = scrollableHeight > 0 ? Math.min(window.scrollY / scrollableHeight, 1) : 0
-  showBackToTop.value = window.scrollY > window.innerHeight * 0.8
 }
 
 const scheduleReadingProgress = (): void => {
@@ -65,8 +64,6 @@ const scheduleReadingProgress = (): void => {
 }
 
 const updateTheme = (value: ThemePreference): void => emit('update:theme', value)
-
-const scrollToTop = (): void => window.scrollTo({ top: 0, behavior: 'smooth' })
 
 const openMenu = async (): Promise<void> => {
   menuOpen.value = true
@@ -110,6 +107,7 @@ const handlePanelKeydown = (event: KeyboardEvent): void => {
 
 const handleViewportResize = (): void => {
   if (window.innerWidth > 672 && menuOpen.value) void closeMenu(false)
+  scheduleReadingProgress()
 }
 
 watch(menuOpen, (isOpen) => {
@@ -120,9 +118,10 @@ watch(activeSection, () => void nextTick(updateActiveIndicator))
 
 onMounted(() => {
   window.addEventListener('resize', handleViewportResize)
-  resizeObserver = typeof window.ResizeObserver === 'function'
-    ? new ResizeObserver(updateActiveIndicator)
-    : undefined
+  resizeObserver =
+    typeof window.ResizeObserver === 'function'
+      ? new ResizeObserver(updateActiveIndicator)
+      : undefined
   if (navigationElement.value) resizeObserver?.observe(navigationElement.value)
   const sections = props.items
     .map(navigationHash)
@@ -181,7 +180,11 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="site-header__desktop-controls">
-        <nav ref="navigationElement" class="site-header__navigation" aria-label="Primary navigation">
+        <nav
+          ref="navigationElement"
+          class="site-header__navigation"
+          aria-label="Primary navigation"
+        >
           <span
             class="site-header__active-indicator"
             aria-hidden="true"
@@ -238,16 +241,6 @@ onBeforeUnmount(() => {
         <span class="site-header__menu-icon" aria-hidden="true"><i></i><i></i></span>
       </button>
     </div>
-
-    <button
-      v-if="showBackToTop"
-      class="site-header__back-to-top"
-      type="button"
-      aria-label="Back to top"
-      @click="scrollToTop"
-    >
-      ↑
-    </button>
 
     <Transition name="site-header-panel">
       <div v-if="menuOpen" class="site-header__mobile-layer">

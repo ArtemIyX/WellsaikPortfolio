@@ -12,7 +12,7 @@ const router = createRouter({
     { path: '/debug', name: 'debug', component: DebugView },
   ],
   scrollBehavior(to) {
-    if (to.hash) return { el: to.hash }
+    if (to.hash) return { el: to.hash, behavior: 'smooth' }
 
     return { top: 0 }
   },

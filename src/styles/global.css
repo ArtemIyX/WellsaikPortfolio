@@ -116,10 +116,14 @@ a:hover {
   animation-name: theme-root-in;
 }
 @keyframes theme-root-out {
-  to { opacity: 0; }
+  to {
+    opacity: 0;
+  }
 }
 @keyframes theme-root-in {
-  from { opacity: 0; }
+  from {
+    opacity: 0;
+  }
 }
 .route-enter-active,
 .route-leave-active {
