@@ -4,6 +4,10 @@ import { cookieNames, readCookie, writeCookie } from './cookies'
 
 export type ThemePreference = 'light' | 'dark'
 
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (callback: () => void) => { ready?: Promise<void> }
+}
+
 export const useTheme = (hasCookieConsent?: Readonly<Ref<boolean>>) => {
   const theme = ref<ThemePreference>('light')
 
@@ -16,14 +20,14 @@ export const useTheme = (hasCookieConsent?: Readonly<Ref<boolean>>) => {
 
   const setTheme = (preference: ThemePreference): void => {
     const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
-    const startViewTransition = (
-      document as Document & {
-        startViewTransition?: (callback: () => void) => { ready?: Promise<void> }
-      }
-    ).startViewTransition
+    const viewTransitionDocument = document as ViewTransitionDocument
 
-    if (startViewTransition && !reducedMotion) {
-      startViewTransition(() => applyTheme(preference))
+    if (typeof viewTransitionDocument.startViewTransition === 'function' && !reducedMotion) {
+      try {
+        viewTransitionDocument.startViewTransition(() => applyTheme(preference))
+      } catch {
+        applyTheme(preference)
+      }
     } else {
       applyTheme(preference)
     }

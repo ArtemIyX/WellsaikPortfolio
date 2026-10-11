@@ -161,6 +161,37 @@ describe('HomeView', () => {
     expect(document.cookie).not.toContain('portfolio-theme=dark')
   })
 
+  it('keeps native view-transition theme changes bound to the document', async () => {
+    type ViewTransitionDocument = Document & {
+      startViewTransition?: (callback: () => void) => { ready?: Promise<void> }
+    }
+    const viewTransitionDocument = document as ViewTransitionDocument
+    const originalStartViewTransition = viewTransitionDocument.startViewTransition
+    let callbackThis: Document | undefined
+    let wrapper: Awaited<ReturnType<typeof mountHome>> | undefined
+
+    viewTransitionDocument.startViewTransition = function (this: Document, callback) {
+      callbackThis = this
+      callback()
+      return {}
+    }
+
+    try {
+      wrapper = await mountHome()
+      await wrapper.get('[aria-label="Color theme: Dark"]').trigger('click')
+
+      expect(callbackThis).toBe(document)
+      expect(document.documentElement.dataset.theme).toBe('dark')
+    } finally {
+      wrapper?.unmount()
+      if (originalStartViewTransition) {
+        viewTransitionDocument.startViewTransition = originalStartViewTransition
+      } else {
+        delete viewTransitionDocument.startViewTransition
+      }
+    }
+  })
+
   it('persists the theme only after accepting cookies', async () => {
     const wrapper = await mountHome()
 
