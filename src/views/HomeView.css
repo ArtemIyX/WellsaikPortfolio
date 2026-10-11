@@ -153,7 +153,6 @@
   transform: translateY(0);
   transition:
     transform var(--proof-exit-duration) cubic-bezier(0.7, 0, 0.84, 0),
-    background-color var(--duration-normal) var(--ease-standard),
     box-shadow var(--duration-normal) var(--ease-standard);
 }
 
@@ -176,7 +175,6 @@
 .proof-strip__surface:hover,
 .proof-strip__surface:focus-visible {
   z-index: 1;
-  background-color: color-mix(in srgb, var(--color-surface) 72%, var(--color-accent-soft));
   box-shadow: 0 0.75rem 1.5rem color-mix(in srgb, var(--color-accent) 14%, transparent);
 }
 
@@ -208,9 +206,19 @@
 }
 
 .proof-strip__value {
+  display: inline-block;
   color: var(--color-accent);
   font-size: clamp(1.4rem, 3vw, 2.1rem);
   line-height: 1;
+  transform-origin: left center;
+  transition: transform var(--proof-exit-duration) cubic-bezier(0.7, 0, 0.84, 0);
+}
+
+.proof-strip__surface:hover .proof-strip__value,
+.proof-strip__surface:focus-visible .proof-strip__value {
+  transform: scale(1.05);
+  transition-duration: var(--proof-hover-duration);
+  transition-timing-function: var(--proof-ease-enter);
 }
 
 .proof-metric {
@@ -276,6 +284,7 @@
   .home-view::after,
   .proof-strip__item,
   .proof-strip__surface,
+  .proof-strip__value,
   .proof-strip__action > span:last-child {
     animation: none;
     transition: none;
@@ -295,6 +304,11 @@
 
   .proof-strip__surface:hover,
   .proof-strip__surface:focus-visible {
+    transform: none;
+  }
+
+  .proof-strip__surface:hover .proof-strip__value,
+  .proof-strip__surface:focus-visible .proof-strip__value {
     transform: none;
   }
 }

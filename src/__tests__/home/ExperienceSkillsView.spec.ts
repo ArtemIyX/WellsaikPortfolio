@@ -110,6 +110,12 @@ describe('ExperienceSkillsView', () => {
     expect(experienceSkillsContent.entries[0]?.status).toBe('current')
   })
 
+  it('places game tools and delivery directly after Unreal Engine', () => {
+    const groupIds = experienceSkillsContent.skillGroups.map((group) => group.id)
+
+    expect(groupIds.indexOf('game-tools-delivery')).toBe(groupIds.indexOf('unreal-engine') + 1)
+  })
+
   it('keeps experience evidence concise and factual', () => {
     for (const entry of experienceSkillsContent.entries) {
       expect(entry.evidence).toHaveLength(3)

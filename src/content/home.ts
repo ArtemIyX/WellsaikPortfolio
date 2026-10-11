@@ -614,6 +614,17 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
       ],
     },
     {
+      id: 'game-tools-delivery',
+      title: 'Game Tools & Delivery',
+      items: [
+        { name: 'Git' },
+        { name: 'Steamworks' },
+        { name: 'Blender' },
+        { name: 'Build automation / CI' },
+        { name: 'Profiling & optimization' },
+      ],
+    },
+    {
       id: 'web-game-ui',
       title: 'Web Game UI',
       items: [{ name: 'Vue.js / TypeScript' }, { name: 'HTML / CSS' }, { name: 'Protobuf / JSON' }],
@@ -625,17 +636,6 @@ export const experienceSkillsContent: ExperienceSkillsContent = {
         { name: 'C# / ASP.NET / Entity Framework' },
         { name: 'Rust / Tauri' },
         { name: 'C++' },
-      ],
-    },
-    {
-      id: 'game-tools-delivery',
-      title: 'Game Tools & Delivery',
-      items: [
-        { name: 'Git' },
-        { name: 'Steamworks' },
-        { name: 'Blender' },
-        { name: 'Build automation / CI' },
-        { name: 'Profiling & optimization' },
       ],
     },
     {

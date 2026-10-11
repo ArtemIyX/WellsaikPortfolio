@@ -62,6 +62,12 @@
   --color-positive: #0f766e;
   --color-warning: #b45309;
   --color-danger: #b42318;
+  --color-skill-languages: #2563eb;
+  --color-skill-unreal: #0f766e;
+  --color-skill-web: #7c3aed;
+  --color-skill-backend: #c2410c;
+  --color-skill-tools: #15803d;
+  --color-skill-practices: #be123c;
   --page-background:
     linear-gradient(to bottom, rgba(247, 249, 252, 0.94), #e8edf4),
     radial-gradient(circle at 50% 0%, rgba(15, 107, 120, 0.1), transparent 28%);
@@ -97,6 +103,12 @@
   --color-positive: #5eead4;
   --color-warning: #fbbf24;
   --color-danger: #fb7185;
+  --color-skill-languages: #60a5fa;
+  --color-skill-unreal: #2dd4bf;
+  --color-skill-web: #a78bfa;
+  --color-skill-backend: #fb923c;
+  --color-skill-tools: #4ade80;
+  --color-skill-practices: #fb7185;
   --page-background:
     linear-gradient(to bottom, rgba(9, 14, 23, 0.93), #05080d),
     radial-gradient(circle at 50% 0%, rgba(94, 234, 212, 0.1), transparent 28%);
@@ -132,6 +144,12 @@
     --color-positive: #5eead4;
     --color-warning: #fbbf24;
     --color-danger: #fb7185;
+    --color-skill-languages: #60a5fa;
+    --color-skill-unreal: #2dd4bf;
+    --color-skill-web: #a78bfa;
+    --color-skill-backend: #fb923c;
+    --color-skill-tools: #4ade80;
+    --color-skill-practices: #fb7185;
     --page-background:
       linear-gradient(to bottom, rgba(9, 14, 23, 0.93), #05080d),
       radial-gradient(circle at 50% 0%, rgba(94, 234, 212, 0.1), transparent 28%);

@@ -19,6 +19,15 @@
   font-size: clamp(1.25rem, 1.8vw, 1.5rem);
   line-height: 1.25;
   min-width: 0;
+  transform-origin: left center;
+  transition: transform var(--motion-duration-feedback) var(--motion-ease-exit);
+}
+
+.experience-card:hover .experience-card__role,
+.experience-card:focus-within .experience-card__role {
+  transform: scale(1.05);
+  transition-duration: var(--motion-duration-hover);
+  transition-timing-function: var(--motion-ease-enter);
 }
 
 .experience-card__context {
@@ -94,6 +103,17 @@
 .experience-card__stack span {
   color: var(--color-text);
   font-weight: var(--font-weight-medium);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-card__role {
+    transition: none;
+  }
+
+  .experience-card:hover .experience-card__role,
+  .experience-card:focus-within .experience-card__role {
+    transform: none;
+  }
 }
 
 @media (max-width: 41.9375rem) {
