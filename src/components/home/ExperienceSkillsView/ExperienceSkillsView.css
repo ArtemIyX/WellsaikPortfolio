@@ -174,31 +174,235 @@
 }
 
 .experience-skills-view__group {
+  --skill-accent: var(--color-accent);
+  --skill-accent-soft: color-mix(in srgb, var(--skill-accent) 13%, transparent);
+  --skill-accent-strong: color-mix(in srgb, var(--skill-accent) 28%, transparent);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: grid;
   gap: var(--space-3);
+  border-color: color-mix(in srgb, var(--skill-accent) 42%, var(--color-border));
+  box-shadow: 0 0.75rem 2rem color-mix(in srgb, var(--skill-accent) 5%, transparent);
+  transition:
+    border-color var(--experience-exit-duration) var(--experience-ease-exit),
+    box-shadow var(--experience-exit-duration) var(--experience-ease-exit),
+    transform var(--experience-exit-duration) var(--experience-ease-exit);
 }
 
-.experience-skills-view__group h4 {
-  margin: 0;
+.experience-skills-view__group::before,
+.experience-skills-view__group::after {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  content: '';
+}
+
+.experience-skills-view__group :deep(.ui-box__content) {
+  position: relative;
+  z-index: 1;
+}
+
+.experience-skills-view__group::before {
+  inset: 0 auto 0 0;
+  width: 0.25rem;
+  background: var(--skill-accent);
+  opacity: 0.8;
+  transform-origin: center;
+  animation: skill-card-idle-rail 7s var(--motion-ease-standard) infinite;
+}
+
+.experience-skills-view__group::after {
+  top: -3rem;
+  right: -3rem;
+  width: 8rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--skill-accent-soft);
+  filter: blur(1.5rem);
+  opacity: 0.75;
+  animation: skill-card-idle-glow 7s var(--motion-ease-standard) infinite;
+}
+
+.experience-skills-view__group:nth-child(2) {
+  --skill-accent: var(--color-positive);
+}
+
+.experience-skills-view__group:nth-child(3) {
+  --skill-accent: var(--color-warning);
+}
+
+.experience-skills-view__group:nth-child(4) {
+  --skill-accent: var(--color-danger);
+}
+
+.experience-skills-view__group:nth-child(5) {
+  --skill-accent: var(--color-focus);
+}
+
+.experience-skills-view__group:nth-child(6) {
+  --skill-accent: var(--color-accent-hover);
+}
+
+.experience-skills-view__group:hover,
+.experience-skills-view__group:focus-within {
+  border-color: var(--skill-accent);
+  box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--skill-accent) 14%, transparent);
+  transform: translateY(-0.5rem);
+  transition-duration: var(--experience-hover-duration);
+  transition-timing-function: var(--experience-ease-enter);
+}
+
+.experience-skills-view__group:hover::before,
+.experience-skills-view__group:focus-within::before {
+  opacity: 1;
+  transform: scaleY(1.18);
+}
+
+.experience-skills-view__group:hover::after,
+.experience-skills-view__group:focus-within::after {
+  animation-play-state: paused;
+  opacity: 1;
+}
+
+.experience-skills-view__group-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-width: 0;
+  padding-inline-start: var(--space-2);
 }
 
 .experience-skills-view__group-title {
+  margin: 0;
   font-size: 1.25rem;
   line-height: 1.25;
-  padding-bottom: var(--space-2);
 }
 
-.experience-skills-view__group ul {
+.experience-skills-view__group-count {
+  flex: 0 0 auto;
+  color: var(--skill-accent);
+  font-size: var(--font-size-small);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.08em;
+}
+
+.experience-skills-view__skill-list {
   display: grid;
-  gap: var(--space-2);
+  gap: var(--space-1);
   margin: 0;
-  padding-left: 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.experience-skills-view__skill-item {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-small);
+  color: var(--color-text-muted);
+  transition:
+    background-color var(--experience-exit-duration) var(--experience-ease-exit),
+    border-color var(--experience-exit-duration) var(--experience-ease-exit),
+    color var(--experience-exit-duration) var(--experience-ease-exit),
+    transform var(--experience-exit-duration) var(--experience-ease-exit);
+}
+
+.experience-skills-view__skill-item:nth-child(2n) {
+  --skill-item-delay: 180ms;
+}
+
+.experience-skills-view__skill-item:nth-child(3n) {
+  --skill-item-delay: 360ms;
+}
+
+.experience-skills-view__skill-item:nth-child(4n) {
+  --skill-item-delay: 540ms;
+}
+
+.experience-skills-view__skill-item:hover,
+.experience-skills-view__skill-item:focus-within {
+  border-color: var(--skill-accent-strong);
+  background: var(--skill-accent-soft);
+  color: var(--color-text);
+  transform: translateX(0.35rem);
+  transition-duration: var(--experience-hover-duration);
+  transition-timing-function: var(--experience-ease-enter);
+}
+
+.experience-skills-view__skill-marker {
+  flex: 0 0 auto;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-top: 0.2rem;
+  border: 1px solid var(--skill-accent);
+  border-radius: 50%;
+  background: var(--color-surface);
+  box-shadow: 0 0 0 0 var(--skill-accent-strong);
+  transform: scale(0.9);
+  transition:
+    background-color var(--experience-exit-duration) var(--experience-ease-exit),
+    box-shadow var(--experience-exit-duration) var(--experience-ease-exit),
+    transform var(--experience-exit-duration) var(--experience-ease-exit);
+  animation: skill-item-idle 5.5s var(--motion-ease-standard) var(--skill-item-delay, 0ms) infinite;
+}
+
+.experience-skills-view__skill-item:hover .experience-skills-view__skill-marker,
+.experience-skills-view__skill-item:focus-within .experience-skills-view__skill-marker {
+  background: var(--skill-accent);
+  box-shadow: 0 0 0 0.25rem var(--skill-accent-strong);
+  transform: scale(1.15);
+  transition-duration: var(--experience-hover-duration);
+  transition-timing-function: var(--experience-ease-enter);
 }
 
 .experience-skills-view__skill {
   display: inline-flex;
   flex-wrap: wrap;
   gap: var(--space-1);
+}
+
+@keyframes skill-card-idle-rail {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scaleY(0.8);
+  }
+
+  50% {
+    opacity: 0.95;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes skill-card-idle-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translate3d(0, 0, 0) scale(0.9);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: translate3d(-0.5rem, 0.5rem, 0) scale(1.08);
+  }
+}
+
+@keyframes skill-item-idle {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+
+  50% {
+    box-shadow: 0 0 0 0.18rem var(--skill-accent-soft);
+  }
 }
 
 @media (max-width: 60rem) {
@@ -243,12 +447,43 @@
     background: Highlight;
     box-shadow: none;
   }
+
+  .experience-skills-view__group {
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+
+  .experience-skills-view__group::before {
+    background: Highlight;
+    animation: none;
+  }
+
+  .experience-skills-view__group::after {
+    display: none;
+  }
+
+  .experience-skills-view__skill-item {
+    color: CanvasText;
+  }
+
+  .experience-skills-view__skill-marker {
+    border-color: CanvasText;
+    background: Canvas;
+    box-shadow: none;
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .experience-skills-view__experience-item > .experience-card,
-  .experience-skills-view__timeline-mark {
+  .experience-skills-view__timeline-mark,
+  .experience-skills-view__group,
+  .experience-skills-view__skill-item,
+  .experience-skills-view__skill-marker,
+  .experience-skills-view__group::before,
+  .experience-skills-view__group::after {
     transition: none;
+    animation: none;
   }
 
   .experience-skills-view__experience-item > .experience-card,
@@ -269,5 +504,18 @@
     )
     .experience-skills-view__timeline-mark {
     transform: scale(var(--timeline-marker-rest-scale));
+  }
+
+  .experience-skills-view__group:hover,
+  .experience-skills-view__group:focus-within,
+  .experience-skills-view__skill-item:hover,
+  .experience-skills-view__skill-item:focus-within {
+    transform: none;
+  }
+
+  .experience-skills-view__skill-marker,
+  .experience-skills-view__skill-item:hover .experience-skills-view__skill-marker,
+  .experience-skills-view__skill-item:focus-within .experience-skills-view__skill-marker {
+    transform: scale(0.9);
   }
 }

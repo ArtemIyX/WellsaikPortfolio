@@ -78,7 +78,30 @@ describe('ExperienceSkillsView', () => {
     )
     const skillGroups = wrapper.findAll('.experience-skills-view__group')
     expect(skillGroups).toHaveLength(experienceSkillsContent.skillGroups.length)
-    expect(skillGroups.every((group) => group.classes().includes('ui-box--depth-aware'))).toBe(true)
+    expect(
+      skillGroups.every(
+        (group) =>
+          group.classes().includes('ui-box--depth-aware') &&
+          group.classes().includes('ui-box--surface') &&
+          group.attributes('data-skill-group') !== undefined,
+      ),
+    ).toBe(true)
+    expect(wrapper.findAll('.experience-skills-view__group-heading')).toHaveLength(
+      experienceSkillsContent.skillGroups.length,
+    )
+    expect(
+      wrapper.findAll('.experience-skills-view__group-count').map((item) => item.text()),
+    ).toEqual(
+      experienceSkillsContent.skillGroups.map((group) =>
+        String(group.items.length).padStart(2, '0'),
+      ),
+    )
+    expect(wrapper.findAll('.experience-skills-view__skill-item')).toHaveLength(
+      experienceSkillsContent.skillGroups.reduce((total, group) => total + group.items.length, 0),
+    )
+    expect(wrapper.findAll('.experience-skills-view__skill-marker')).toHaveLength(
+      experienceSkillsContent.skillGroups.reduce((total, group) => total + group.items.length, 0),
+    )
     expect(wrapper.findAll('[role="tablist"], [role="progressbar"], [data-carousel]').length).toBe(
       0,
     )

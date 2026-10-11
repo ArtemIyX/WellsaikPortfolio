@@ -95,16 +95,33 @@ onBeforeUnmount(() => entryObserver?.disconnect())
             v-for="(group, index) in content.skillGroups"
             :key="group.id"
             class="experience-skills-view__group ui-section__reveal-item"
-            variant="outline"
+            variant="surface"
             depth-aware
             padding="medium"
+            radius="medium"
+            :data-skill-group="group.id"
             :style="{ '--reveal-index': content.entries.length + index + 2 }"
           >
-            <UiText as="h4" class="experience-skills-view__group-title" role="body" weight="medium">
-              {{ group.title }}
-            </UiText>
-            <ul>
-              <li v-for="item in group.items" :key="item.name">
+            <div class="experience-skills-view__group-heading">
+              <UiText
+                as="h4"
+                class="experience-skills-view__group-title"
+                role="body"
+                weight="medium"
+              >
+                {{ group.title }}
+              </UiText>
+              <span class="experience-skills-view__group-count" aria-hidden="true">
+                {{ String(group.items.length).padStart(2, '0') }}
+              </span>
+            </div>
+            <ul class="experience-skills-view__skill-list">
+              <li
+                v-for="item in group.items"
+                :key="item.name"
+                class="experience-skills-view__skill-item"
+              >
+                <span class="experience-skills-view__skill-marker" aria-hidden="true"></span>
                 <span class="experience-skills-view__skill">
                   <UiText as="span" role="label">{{ item.name }}</UiText>
                   <UiText v-if="item.level" as="span" role="label" tone="muted">
